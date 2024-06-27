@@ -29,7 +29,7 @@ const consoleLogFormat = format.combine(
   timestamp({ format: 'DD MMM, YYYY - HH:mm:ss:ms' }),
   format.colorize(),
   format.printf(({ level, message, timestamp }) => {
-    return `${level}: ${message}`;
+    return `${level}: ${message}: ${timestamp}`;
   })
 );
 

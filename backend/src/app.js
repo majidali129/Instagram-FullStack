@@ -1,8 +1,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 
 import { logger } from './loggers/logger.js';
+import userRouter from '../src/routes/user.routes.js';
 
 export const app = express();
 
@@ -25,5 +27,9 @@ app.use(
   })
 );
 
-app.use(express.json({ limit: '60kb' }));
+app.use(express.json());
 app.use(bodyParser.json());
+app.use(cookieParser());
+
+// routes
+app.use('/api/v1/users', userRouter);
