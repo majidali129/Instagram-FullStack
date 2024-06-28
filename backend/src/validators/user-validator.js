@@ -1,6 +1,6 @@
 import { body } from 'express-validator';
 
-export const registerUserValidator = [
+export const registerUserValidator = () => [
   body('name')
     .isString()
     .notEmpty()
@@ -16,16 +16,36 @@ export const registerUserValidator = [
     .isEmail()
     .withMessage('please enter a valid email address'),
   body('password').isString().notEmpty().withMessage('password is required'),
-  body('avatar').isString().notEmpty().trim().withMessage('avatar is required'),
 ];
 
 export const loginUserValidator = [
   body('email')
-    .isString()
+    .optional()
     .notEmpty()
     .trim()
     .withMessage('email is required')
     .isEmail()
     .withMessage('please enter a valid email address'),
-  body('password').isString().notEmpty().trim().withMessage('password is required'),
+  body('password').notEmpty().trim().withMessage('password is required'),
 ];
+
+export const userChangeCurrentPasswordValidator = () => {
+  return [
+    body('oldPassword').notEmpty().withMessage('Old password is required'),
+    body('newPassword').notEmpty().withMessage('New password is required'),
+  ];
+};
+
+export const userForgotPasswordValidator = () => {
+  return [
+    body('email')
+      .notEmpty()
+      .withMessage('Email is required')
+      .isEmail()
+      .withMessage('Email is invalid'),
+  ];
+};
+
+export const userResetForgottenPasswordValidator = () => {
+  return [body('newPassword').notEmpty().withMessage('Password is required')];
+};

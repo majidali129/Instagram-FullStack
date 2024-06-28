@@ -1,6 +1,8 @@
 import mongoose, { Schema } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
+import { USER_TEMPORARY_TOKEN_EXPIRY } from '../constants.js';
 
 const reservationHistorySchema = Schema(
   {
@@ -42,12 +44,28 @@ const userSchema = Schema(
     },
     refreshToken: String,
     registerationDate: Date,
+    isEmailVerified: {
+      type: Boolean,
+      default: false,
+    },
     reservationHistory: [
       {
         type: reservationHistorySchema,
         default: [],
       },
     ],
+    forgotPasswordToken: {
+      type: String,
+    },
+    forgotPasswordExpiry: {
+      type: Date,
+    },
+    emailVerificationToken: {
+      type: String,
+    },
+    emailVerificationExpiry: {
+      type: Date,
+    },
   },
   { timestamps: true }
 );
@@ -84,6 +102,19 @@ userSchema.methods.generateRefreshToken = async function () {
       expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
     }
   );
+};
+
+userSchema.methods.generateTemporaryToken = function () {
+  const unHashedToken = crypto.randomBytes(20).toString('hex');
+
+  const hashedToken = crypto
+    .createHash('sha256')
+    .update(unHashedToken)
+    .digest('hex');
+
+  const tokenExpiry = Date.now() + USER_TEMPORARY_TOKEN_EXPIRY;
+
+  return { unHashedToken, hashedToken, tokenExpiry };
 };
 
 export const User = mongoose.model('User', userSchema);
