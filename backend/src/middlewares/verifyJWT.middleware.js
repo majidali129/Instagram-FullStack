@@ -14,18 +14,27 @@ export const verifyJWT = asyncHandler(async (req, res, next) => {
       token = req.cookies.accessToken || req.headers.authorization.split(' ')[1];
     }
 
-    if (!token) return next(new apiError(401, 'invalid access token'));
+    if (!token)
+      return next(
+        new apiError(401, 'invalid access token. please login to get access')
+      );
 
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     const user = await User.findById(decoded._id).select(
       '-password -refreshToken -emailVerificationToken -emailVerificationExpiry'
     );
-    if (!user) return next(new apiError(401, 'invalid access token'));
+    if (!user)
+      return next(
+        new apiError(401, 'invalid access token.  please login to get access')
+      );
 
     req.user = user;
     next();
   } catch (error) {
     console.log(error);
-    throw new apiError(401, error?.message || 'Invalid access token');
+    throw new apiError(
+      401,
+      error?.message || 'Invalid access token.  please login to get access'
+    );
   }
 });

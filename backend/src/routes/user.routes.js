@@ -34,7 +34,7 @@ router.route('/verify-email/:verificationToken').get(verifyEmail);
 
 router
   .route('/forgot-password')
-  .post(userForgotPasswordValidator, validate, forgotPassword);
+  .post(userForgotPasswordValidator(), validate, forgotPassword);
 router
   .route('/reset-password/:resetToken')
   .post(userResetForgottenPasswordValidator(), validate, resetForgottenPassword);

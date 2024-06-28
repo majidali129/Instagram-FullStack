@@ -5,7 +5,16 @@ import { apiResponse } from '../utils/apiResponse.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 import { User } from '../models/user.model.js';
 import { uploadToCloudinary } from '../utils/uploadToCloudinary.js';
-import { emailVerificationMailgenContent, sendEmail } from '../utils/mail.js';
+import {
+  emailVerificationMailgenContent,
+  forgotPasswordMailgenContent,
+  sendEmail,
+} from '../utils/mail.js';
+
+const cookieOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
+};
 
 const generateAccessRefreshToken = async (userId) => {
   try {
@@ -176,11 +185,6 @@ const loginUser = asyncHandler(async (req, res, next) => {
     '-password -refreshToken -emailVerificationToken -emailVerificationExpiry'
   );
 
-  const cookieOptions = {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-  };
-
   res
     .status(200)
     .cookie('accessToken', accessToken, cookieOptions)
@@ -260,9 +264,10 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
   const { oldPassword, newPassword } = req.body;
 
   const user = await User.findById(req.user?._id);
+  console.log(user);
 
   // check the old password
-  const isPasswordValid = await user.isPasswordCorrect(oldPassword);
+  const isPasswordValid = await user.isPasswordCorrect(oldPassword, user.password);
 
   if (!isPasswordValid) {
     throw new apiError(400, 'Invalid old password');
@@ -285,7 +290,7 @@ const updateProfile = asyncHandler(async (req, res, next) => {
     return next(
       new apiError(
         400,
-        'here you are not allow to update password. please viset /users/update-password to update password accordingly'
+        'here you are not allow to update password. please viset /users/change-password to update password accordingly'
       )
     );
 
@@ -327,15 +332,10 @@ const logoutUser = asyncHandler(async (req, res, next) => {
     { new: true }
   );
 
-  const options = {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-  };
-
   return res
     .status(200)
-    .clearCookie('accessToken', options)
-    .clearCookie('refreshToken', options)
+    .clearCookie('accessToken', cookieOptions)
+    .clearCookie('refreshToken', cookieOptions)
     .json(new apiResponse(200, {}, 'User logged out'));
 });
 export {

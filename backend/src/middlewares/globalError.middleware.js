@@ -3,6 +3,7 @@ import { apiError } from '../utils/apiError.js';
 import { logger } from '../loggers/logger.js';
 
 export const globalErrorHandler = (err, req, res, next) => {
+  console.log(err);
   let error = err;
 
   if (!(error instanceof apiError)) {
