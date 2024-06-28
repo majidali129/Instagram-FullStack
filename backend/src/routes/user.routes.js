@@ -13,13 +13,14 @@ import {
 } from '../controllers/auth.controller.js';
 import { upload } from '../middlewares/multer.middleware.js';
 import { verifyJWT } from '../middlewares/verifyJWT.middleware.js';
+import { validate } from '../validators/validate.validator.js';
 
 const router = express.Router();
 
 router
   .route('/register')
-  .post(registerUserValidator, upload.single('avatar'), registerUser);
-router.route('/login').post(loginUserValidator, loginUser);
+  .post(registerUserValidator, validate, upload.single('avatar'), registerUser);
+router.route('/login').post(loginUserValidator, validate, loginUser);
 
 router.use(verifyJWT);
 
