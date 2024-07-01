@@ -37,10 +37,11 @@ const generateAccessRefreshToken = async (userId) => {
 };
 
 const registerUser = asyncHandler(async (req, res, next) => {
-  const { email, name } = req.body;
+  const { email, username } = req.body;
+  console.log(req.body);
 
   const existingUser = await User.findOne({
-    $or: [{ email }, { name }],
+    $or: [{ email }, { username }],
   });
 
   if (existingUser)

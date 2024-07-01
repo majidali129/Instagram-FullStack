@@ -4,35 +4,28 @@ import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import { USER_TEMPORARY_TOKEN_EXPIRY } from '../constants.js';
 
-const reservationHistorySchema = Schema(
-  {
-    ticketId: {
-      type: Schema.Types.ObjectId,
-      ref: 'Ticket',
-    },
-    movieId: {
-      type: Schema.Types.ObjectId,
-      ref: 'Movie',
-    },
-    theaterId: {
-      type: Schema.Types.ObjectId,
-      ref: 'Theater',
-    },
-    showTime: Date,
-    seates: [String],
-  },
-  { timestamps: true }
-);
-
 const userSchema = Schema(
   {
-    name: {
+    username: {
       type: String,
       required: true,
+      unique: true,
+      lowercase: true,
+      index: true,
+      trim: true,
+      minLength: [8, 'username must be 8 characters long'],
+    },
+    fullName: {
+      type: String,
+      required: true,
+      index: true,
     },
     email: {
       type: String,
       required: true,
+      lowercase: true,
+      unique: true,
+      trim: true,
     },
     password: {
       type: String,
@@ -43,17 +36,10 @@ const userSchema = Schema(
       required: true,
     },
     refreshToken: String,
-    registerationDate: Date,
     isEmailVerified: {
       type: Boolean,
       default: false,
     },
-    reservationHistory: [
-      {
-        type: reservationHistorySchema,
-        default: [],
-      },
-    ],
     forgotPasswordToken: {
       type: String,
     },

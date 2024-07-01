@@ -1,15 +1,16 @@
 import { body } from 'express-validator';
 
 export const registerUserValidator = () => [
-  body('name')
-    .isString()
+  body('username')
     .notEmpty()
     .trim()
     .withMessage('user name is required')
-    .isLength({ min: 6, max: 15 })
-    .withMessage('user name must be equal or grater than 6 characters'),
+    .isLength({ min: 8, max: 15 })
+    .withMessage(
+      'user name must be equal or grater than 8 characters and less than 15 characters'
+    ),
+  body('fullName').notEmpty().trim().withMessage('full name is required'),
   body('email')
-    .isString()
     .notEmpty()
     .trim()
     .withMessage('email is required')
@@ -19,6 +20,15 @@ export const registerUserValidator = () => [
 ];
 
 export const loginUserValidator = [
+  body('username')
+    .optional()
+    .notEmpty()
+    .trim()
+    .withMessage('user name is required')
+    .isLength({ min: 8, max: 15 })
+    .withMessage(
+      'user name must be equal or grater than 8 characters and less than 15 characters'
+    ),
   body('email')
     .optional()
     .notEmpty()
