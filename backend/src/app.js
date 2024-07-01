@@ -5,6 +5,8 @@ import morgan from 'morgan';
 
 import { logger } from './loggers/logger.js';
 import userRouter from '../src/routes/user.routes.js';
+import movieRouter from '../src/routes/movie.routes.js';
+import theaterRouter from '../src/routes/theater.routes.js';
 import { globalErrorHandler } from './middlewares/globalError.middleware.js';
 
 export const app = express();
@@ -34,5 +36,7 @@ app.use(cookieParser());
 
 // routes
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/movies', movieRouter);
+app.use('/api/v1/theater', theaterRouter);
 
 app.use(globalErrorHandler);

@@ -180,7 +180,6 @@ const loginUser = asyncHandler(async (req, res, next) => {
     return next(new apiError(400, 'email or password is invalid'));
 
   const { accessToken, refreshToken } = await generateAccessRefreshToken(user._id);
-  console.log(accessToken, refreshToken);
   const loggedInUser = await User.findById(user._id).select(
     '-password -refreshToken -emailVerificationToken -emailVerificationExpiry'
   );

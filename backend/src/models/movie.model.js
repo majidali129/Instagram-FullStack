@@ -31,6 +31,7 @@ const movieSchema = Schema(
       required: true,
       default: 0,
     },
+    coverImage: String,
   },
   { timestamps: true }
 );
