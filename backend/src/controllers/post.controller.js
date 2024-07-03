@@ -4,7 +4,7 @@ import { uploadToCloudinary } from '../utils/uploadToCloudinary.js';
 import { apiResponse } from '../utils/apiResponse.js';
 import { Post } from '../models/posts.model.js';
 import { Comment } from '../models/comment.model.js';
-import mongoose from 'mongoose';
+import { Like } from '../models/like.model.js';
 
 const createPost = asyncHandler(async (req, res, next) => {
   const { caption } = req.body;
@@ -89,4 +89,70 @@ const getPostDetails = asyncHandler(async (req, res, next) => {
   res.status(200).json(new apiResponse(200, post, 'Post fetched successfully'));
 });
 
-export { createPost, updatePost, deletePost, getAllPosts, getPostDetails };
+const togglePostLike = asyncHandler(async (req, res, next) => {
+  const { postId } = req.body;
+  let message;
+
+  const post = await Post.findById(postId);
+  if (!post) return next(new apiError(404, 'post not found for that ID'));
+
+  const likedPost = await Like.findOne({
+    post: postId,
+    user: req.user._id,
+  });
+
+  if (likedPost) {
+    await Like.findByIdAndDelete(likedPost._id);
+    message = 'Post unliked successfully';
+    post.likes.splice(post.likes.indexOf(likedPost._id));
+  } else {
+    const like = await Like.create({ post: postId, user: req.user._id });
+    message = 'Post liked successfully';
+    post.likes.push(like._id);
+  }
+
+  await post.save();
+
+  res.status(201).json(new apiResponse(201, null, message));
+});
+
+const getAllPostsByUser = asyncHandler(async (req, res, next) => {
+  const likedPosts = await Like.find({
+    user: req.user._id,
+  })
+    .populate('post')
+    .populate({
+      path: 'user',
+      select: '_id username fullName email image',
+    });
+
+  const createdPosts = await Post.find({
+    user: req.user._id,
+  }).populate('user');
+
+  if (!likedPosts.length)
+    return next(new apiError(404, "This user have'nt liked any post yet"));
+
+  res.status(200).json(
+    new apiResponse(
+      200,
+      {
+        totalLikedPosts: likedPosts.length,
+        likedPosts,
+        userOwnPosts: createdPosts.length,
+        createdPosts,
+      },
+      'All posts liked by this user fetched successfully'
+    )
+  );
+});
+
+export {
+  createPost,
+  updatePost,
+  deletePost,
+  getAllPosts,
+  getPostDetails,
+  togglePostLike,
+  getAllPostsByUser,
+};

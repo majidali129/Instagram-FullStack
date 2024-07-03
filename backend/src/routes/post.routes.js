@@ -3,7 +3,9 @@ import {
   createPost,
   deletePost,
   getAllPosts,
+  getAllPostsByUser,
   getPostDetails,
+  togglePostLike,
   updatePost,
 } from '../controllers/post.controller.js';
 import {
@@ -13,7 +15,10 @@ import {
 import { validate } from '../validators/validate.validator.js';
 import { upload } from '../middlewares/multer.middleware.js';
 import { verifyJWT } from '../middlewares/verifyJWT.middleware.js';
-import { mongodbPathIdValidator } from '../validators/mongodb.validator.js';
+import {
+  mongodbBodyIdValidator,
+  mongodbPathIdValidator,
+} from '../validators/mongodb.validator.js';
 
 const router = express.Router();
 
@@ -22,6 +27,11 @@ router
   .route('/')
   .get(getAllPosts)
   .post(upload.single('image'), createPostValidator(), validate, createPost);
+router.route('/user-data').get(getAllPostsByUser);
+
+router
+  .route('/toggleLike')
+  .post(mongodbBodyIdValidator('postId'), validate, togglePostLike);
 router
   .route('/:postId')
   .get(mongodbPathIdValidator('postId'), validate, getPostDetails)

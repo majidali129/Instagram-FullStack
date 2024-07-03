@@ -2,10 +2,6 @@ import mongoose, { Schema } from 'mongoose';
 
 const MessageSchema = Schema(
   {
-    messageId: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-    },
     chatId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Chat',
