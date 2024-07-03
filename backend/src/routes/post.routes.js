@@ -32,6 +32,7 @@ router.route('/user-data').get(getAllPostsByUser);
 router
   .route('/toggleLike')
   .post(mongodbBodyIdValidator('postId'), validate, togglePostLike);
+
 router
   .route('/:postId')
   .get(mongodbPathIdValidator('postId'), validate, getPostDetails)

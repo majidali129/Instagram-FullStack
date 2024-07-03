@@ -50,4 +50,6 @@ router
   .post(userChangeCurrentPasswordValidator(), validate, changeCurrentPassword);
 router.route('/resend-email-verification').post(resendEmailVerification);
 
+// router.route('/toggle-follow-user').post(toggleFollowUser);
+
 export default router;

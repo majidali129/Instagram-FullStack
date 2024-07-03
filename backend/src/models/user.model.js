@@ -35,6 +35,13 @@ const userSchema = Schema(
       type: String,
       required: true,
     },
+    followers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        default: [],
+      },
+    ],
     refreshToken: String,
     isEmailVerified: {
       type: Boolean,

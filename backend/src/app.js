@@ -7,6 +7,7 @@ import { logger } from './loggers/logger.js';
 import userRouter from '../src/routes/user.routes.js';
 import postRouter from '../src/routes/post.routes.js';
 import commentRouter from '../src/routes/comment.routes.js';
+import feedRouter from '../src/routes/feed.routes.js';
 import { globalErrorHandler } from './middlewares/globalError.middleware.js';
 
 export const app = express();
@@ -38,5 +39,6 @@ app.use(cookieParser());
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/comments', commentRouter);
+app.use('/api/v1/feeds', feedRouter);
 
 app.use(globalErrorHandler);
