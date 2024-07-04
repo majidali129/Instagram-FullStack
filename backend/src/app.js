@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
+import cors from 'cors';
 
 import { logger } from './loggers/logger.js';
 import userRouter from '../src/routes/user.routes.js';
@@ -13,6 +14,15 @@ import { globalErrorHandler } from './middlewares/globalError.middleware.js';
 export const app = express();
 
 const morganFormat = ':method :url :status :response-time ms';
+
+const corsOptions = {
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+  credentials: true,
+  optionsSuccessStatus: true,
+};
+
+app.use(cors(corsOptions));
 
 // COMMON MIDDLEWARES
 app.use(

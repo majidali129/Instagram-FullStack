@@ -2,12 +2,12 @@ import mongoose, { Schema } from 'mongoose';
 
 const NotificationSchema = Schema({
   recipientId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
   senderId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
@@ -17,13 +17,14 @@ const NotificationSchema = Schema({
     required: true,
   },
   postId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Post',
     required: false,
   },
   isRead: {
     type: Boolean,
     default: false,
+    index: true,
   },
   createdAt: {
     type: Date,
@@ -31,4 +32,4 @@ const NotificationSchema = Schema({
   },
 });
 
-export const Notification = ('Notification', NotificationSchema);
+export const Notification = mongoose.model('Notification', NotificationSchema);
