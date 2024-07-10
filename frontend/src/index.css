@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  * {
+    @apply text-white;
+  }
+}
+
+@layer utilities {
+  /* .nav-list > a.active {
+    @apply transition-all duration-300 ease-in-out rounded-sm sm:rounded-md bg-zinc-900;
+  } */
+  .logo {
+    @apply text-3xl italic font-bold tracking-wider;
+    font-family: "Dancing Script", cursive;
+  }
+}
