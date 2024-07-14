@@ -24,7 +24,9 @@ const FeedCard = ({ image }) => {
             </span>
           </div>
         </div>
-        <figure className=" rounded-md h-[320px] max-h-[400px] sm:rounded-[15px] ">
+
+        <figure className=" rounded-md  sm:rounded-[15px] ">
+          {/* <figure className=" rounded-md h-[320px] max-h-[400px] sm:rounded-[15px] "> */}
           <img
             src={image}
             alt="post cover photo"

@@ -89,7 +89,7 @@ const Sidebar = () => {
           </li>
         </ul>
       </aside>
-      <aside className="block row-span-full px-3.5 py-4 space-y-3 bg-zinc-900 sm:hidden">
+      <aside className="block row-span-full px-3.5 py-6 sm:py-4 space-y-3 bg-zinc-900 sm:hidden">
         <Logo />
         <ul className="space-y-2">
           <li>

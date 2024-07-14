@@ -6,7 +6,7 @@ import { MdNotifications } from "react-icons/md";
 const Header = () => {
   const [query, setQuery] = useState("");
   return (
-    <nav className="flex items-center justify-between h-full px-4 bg-inherit rounded-tr-md">
+    <nav className="flex items-center justify-between h-full md:px-4 px-2 bg-zinc-900 rounded-tr-md">
       <form
         action=""
         className="flex items-center px-2 border rounded-md gap-x-2 border-zinc-800"
