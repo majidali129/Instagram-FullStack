@@ -34,7 +34,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-              to="#"
+              to="/explore"
               className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100 "
             >
               <span>

@@ -38,7 +38,3 @@
   border-radius: 8px;
   z-index: 51;
 }
-
-.pointer-events-none {
-  pointer-events: none;
-}
