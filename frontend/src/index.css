@@ -6,14 +6,20 @@
   * {
     @apply text-white;
   }
+  body {
+    @apply bg-zinc-800;
+  }
 }
 
 @layer utilities {
-  .logo {
-    @apply text-3xl italic font-bold tracking-wider;
+  .logo-text {
     font-family: "Dancing Script", cursive;
   }
+  .text-gray {
+    @apply text-sm opacity-50;
+  }
 }
+/* text-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] */
 
 .modal-overlay {
   position: fixed;
