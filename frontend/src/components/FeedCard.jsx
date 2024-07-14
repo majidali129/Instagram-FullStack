@@ -1,5 +1,9 @@
 import Avatar from "../shared/Avatar";
-import { BsThreeDots } from "react-icons/bs";
+import { BsEmojiSmileFill, BsThreeDots } from "react-icons/bs";
+import { FaComment } from "react-icons/fa";
+import { IoIosBookmark, IoMdHeart } from "react-icons/io";
+import { BsFillSendFill } from "react-icons/bs";
+
 import { Link } from "react-router-dom";
 
 const FeedCard = ({ image }) => {
@@ -28,22 +32,48 @@ const FeedCard = ({ image }) => {
           />
         </figure>
 
-        <div className="px-1.5">
+        <div className="px-1.5 space-y-2">
           <div className="actions flex items-center justify-between">
-            <div className="space-x-1.5 *:cursor-pointer">
-              <span>like</span>
-              <span>comment</span>
-              <span>share</span>
+            <div className="space-x-1.5 *:cursor-pointer flex items-center">
+              <span>
+                <IoMdHeart />
+              </span>
+              <span>
+                <FaComment />
+              </span>
+              <span>
+                <BsFillSendFill />
+              </span>
             </div>
-            <div className="cursor-pointer">bookmark</div>
+            <div className="cursor-pointer">
+              <IoIosBookmark />
+            </div>
           </div>
           <div>
             <p className="space-x-1.5">
-              <span className="font-semibold">3,232</span>
-              <span className="opacity-50">comments</span>
+              <span className="font-semibold">332</span>
+              <span className="opacity-50">Likes</span>
+            </p>
+            <p className="space-x-1.5">
+              <span className="font-semibold">username</span>
+              <span className="opacity-50">Lorem ipsum dolor sit amet.</span>
+            </p>
+            <p className="space-x-1.5">
+              <span className="opacity-50"> view all {40} comments</span>
             </p>
           </div>
-          <p className="opacity-50 text-sm">created at</p>
+          <form className="flex items-center justify-between gap-x-2 w-full ">
+            <input
+              type="text"
+              name="comment"
+              id=""
+              className="bg-inherit w-full py-2 px-1.5 placeholder:opacity-50 outline-none border-none"
+              placeholder="Add a comment..."
+            />
+            <span className="opacity-50">
+              <BsEmojiSmileFill />
+            </span>
+          </form>
         </div>
       </div>
     </Link>
