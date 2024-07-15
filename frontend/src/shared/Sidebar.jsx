@@ -1,6 +1,5 @@
 import Avatar from "./Avatar";
 import Logo from "./Logo";
-import UserProfile from "./UserProfile";
 import { NavLink } from "react-router-dom";
 import { MdOutlineExplore } from "react-icons/md";
 import { BiSolidMoviePlay } from "react-icons/bi";
@@ -8,6 +7,7 @@ import { RiAddBoxFill } from "react-icons/ri";
 import { IoMdHeart } from "react-icons/io";
 import { BsBookmarkStarFill } from "react-icons/bs";
 import { IoMdHome } from "react-icons/io";
+import UserProfileCard from "./UserProfileCard";
 
 const Sidebar = () => {
   return (
@@ -18,7 +18,7 @@ const Sidebar = () => {
       >
         <Logo />
         {/* user profile */}
-        <UserProfile />
+        <UserProfileCard />
         {/* Links */}
         <ul className="space-y-2 border-b border-b-zinc-700 py-3 md:*:text-xl text-lg">
           <li>
@@ -104,21 +104,11 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-              to="#"
+              to="/explore"
               className="flex items-center justify-center py-1.5  opacity-50 hover:opacity-100 "
             >
               <span>
                 <MdOutlineExplore className="w-7 h-7" />
-              </span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/activities"
-              className="flex items-center justify-center py-1.5  opacity-50 hover:opacity-100 "
-            >
-              <span>
-                <IoMdHeart className="w-7 h-7" />
               </span>
             </NavLink>
           </li>
@@ -150,6 +140,16 @@ const Sidebar = () => {
               <span>
                 <RiAddBoxFill className="w-6 h-6" />
               </span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/profile/majidali129"
+              className="flex items-center justify-center py-1.5  opacity-50 hover:opacity-100 "
+            >
+              <div className="w-7 h-7 border rounded-full">
+                <img src="lskd" alt="." />
+              </div>
             </NavLink>
           </li>
         </ul>

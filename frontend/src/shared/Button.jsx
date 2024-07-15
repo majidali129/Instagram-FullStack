@@ -7,10 +7,10 @@ const Button = forwardRef(
   ) => {
     return (
       <button
-        className={` px-4 text-lg py-2 w-fit flex items-center justify-center gap-x-2 rounded-sm shadow-[#63c4f13e_0px_8px_24px] ${
+        className={` px-4 text-lg py-2 w-fit flex items-center justify-center gap-x-2 rounded-sm  ${
           varient === "primary"
-            ? "bg-gradient-to-r from-indigo-500 to-cyan-500"
-            : "bg-zinc-100 text-zinc-900"
+            ? "bg-gradient-to-r from-indigo-500 to-cyan-500 shadow-[#63c4f13e_0px_8px_24px]"
+            : "bg-zinc-700 text-zinc-50 shadow-[#63c4f122_0px_8px_24px]"
         } ${className}`}
         onClick={onClick}
         type={type}

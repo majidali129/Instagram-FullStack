@@ -8,7 +8,7 @@ import Reels from "./Reels";
 
 const AppLayout = () => {
   return (
-    <section className="grid sm:grid-cols-[200px_1fr] grid-cols-[60px_1fr] w-full h-[100vh]">
+    <section className="grid sm:grid-cols-[230px_1fr] grid-cols-[60px_1fr] w-full h-[100vh]">
       <Sidebar />
       <div className="border-l border-l-zinc-700 bg-zinc-950 grid grid-rows-[60px_1fr] sm:grid-rows-[70px_1fr]">
         <Header />

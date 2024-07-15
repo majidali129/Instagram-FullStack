@@ -1,6 +1,6 @@
 import Avatar from "./Avatar";
 
-const UserProfile = () => {
+const UserProfileCard = () => {
   return (
     <div className="flex flex-col items-center justify-center py-3 space-y-2 border-b border-b-zinc-700">
       <Avatar />
@@ -29,4 +29,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default UserProfileCard;

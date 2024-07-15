@@ -33,6 +33,10 @@
   .text-link {
     @apply text-blue-400;
   }
+
+  .active-tab {
+    @apply opacity-100  !border-b-2;
+  }
 }
 /* text-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] */
 

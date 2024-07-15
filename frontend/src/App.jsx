@@ -11,7 +11,10 @@ import Login from "./components/Login";
 import ResetPassword from "./components/ResetPassword";
 import UpdatePassword from "./components/UpdatePassword";
 import UpdateProfile from "./components/UpdateProfile";
-import UserProfile from "./shared/UserProfile";
+import About from "./pages/About";
+import UserSavedPosts from "./components/UserSavedPosts";
+import UserPosts from "./components/Posts";
+import UserReels from "./components/UserReels";
 
 export default function App() {
   return (
@@ -22,7 +25,11 @@ export default function App() {
         <Route path="reels" element={<Reels />} />
         <Route path="bookmarks" element={<Saved />} />
         <Route path="add-post" element={<CreatePostForm />} />
-        <Route path="profile/:username" element={<UserProfile />} />
+        <Route path="profile/:username" element={<About />}>
+          <Route index element={<UserPosts />} />
+          <Route path="saved" element={<UserSavedPosts />} />
+          <Route path="reels" element={<UserReels />} />
+        </Route>
       </Route>
       <Route element={<Auth />}>
         <Route path="accounts/emailsignup" element={<SignUp />} />
