@@ -13,10 +13,11 @@ const AppLayout = () => {
       <div className="border-l border-l-zinc-700 bg-zinc-950 grid grid-rows-[60px_1fr] sm:grid-rows-[70px_1fr]">
         <Header />
         <div className="sm:h-[calc(100vh-70px)] h-[calc(100vh-60px)] px-2 sm:px-4 overflow-y-scroll">
-          {/* <Feeds /> */}
-          {/* <Saved /> */}
-          {/* <Explore /> */}
-          <Reels />
+          {/* <Feeds />
+          <Saved />
+          <Explore /> */}
+          {/* <Reels /> */}
+          <Outlet />
         </div>
       </div>
     </section>

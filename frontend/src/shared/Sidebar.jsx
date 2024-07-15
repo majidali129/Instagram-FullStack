@@ -20,16 +20,16 @@ const Sidebar = () => {
         {/* user profile */}
         <UserProfile />
         {/* Links */}
-        <ul className="space-y-2 border-b border-b-zinc-700 py-3">
+        <ul className="space-y-2 border-b border-b-zinc-700 py-3 md:*:text-xl text-lg">
           <li>
             <NavLink
               to="/"
               className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100 "
             >
               <span>
-                <IoMdHome className="w-6 h-6" />
+                <IoMdHome className="w-7 h-7" />
               </span>
-              <h3>Home</h3>
+              <span>Home</span>
             </NavLink>
           </li>
           <li>
@@ -38,20 +38,9 @@ const Sidebar = () => {
               className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100 "
             >
               <span>
-                <MdOutlineExplore className="w-6 h-6" />
+                <MdOutlineExplore className="w-7 h-7" />
               </span>
-              <h3>Explore</h3>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/activities"
-              className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100 "
-            >
-              <span>
-                <IoMdHeart className="w-6 h-6" />
-              </span>
-              <h3>Activity</h3>
+              <span>Explore</span>
             </NavLink>
           </li>
           <li>
@@ -60,9 +49,9 @@ const Sidebar = () => {
               className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100 "
             >
               <span>
-                <BsBookmarkStarFill className="w-6 h-6" />
+                <BsBookmarkStarFill className="w-7 h-7" />
               </span>
-              <h3>Saved</h3>
+              <span>Saved</span>
             </NavLink>
           </li>
           <li>
@@ -71,9 +60,9 @@ const Sidebar = () => {
               className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100 "
             >
               <span>
-                <BiSolidMoviePlay className="w-6 h-6" />
+                <BiSolidMoviePlay className="w-7 h-7" />
               </span>
-              <h3>Reels</h3>
+              <span>Reels</span>
             </NavLink>
           </li>
           <li>
@@ -82,9 +71,20 @@ const Sidebar = () => {
               className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100 "
             >
               <span>
-                <RiAddBoxFill className="w-6 h-6" />
+                <RiAddBoxFill className="w-7 h-7" />
               </span>
-              <h3>Create</h3>
+              <span>Create</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/profile/majidali129"
+              className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100 "
+            >
+              <div className="w-7 h-7 border rounded-full">
+                <img src="lskd" alt="." />
+              </div>
+              <span>Profile</span>
             </NavLink>
           </li>
         </ul>
@@ -98,7 +98,7 @@ const Sidebar = () => {
               className="flex items-center justify-center py-1.5  opacity-50 hover:opacity-100 "
             >
               <span>
-                <IoMdHome className="w-6 h-6" />
+                <IoMdHome className="w-7 h-7" />
               </span>
             </NavLink>
           </li>
@@ -108,7 +108,7 @@ const Sidebar = () => {
               className="flex items-center justify-center py-1.5  opacity-50 hover:opacity-100 "
             >
               <span>
-                <MdOutlineExplore className="w-6 h-6" />
+                <MdOutlineExplore className="w-7 h-7" />
               </span>
             </NavLink>
           </li>
@@ -118,7 +118,7 @@ const Sidebar = () => {
               className="flex items-center justify-center py-1.5  opacity-50 hover:opacity-100 "
             >
               <span>
-                <IoMdHeart className="w-6 h-6" />
+                <IoMdHeart className="w-7 h-7" />
               </span>
             </NavLink>
           </li>

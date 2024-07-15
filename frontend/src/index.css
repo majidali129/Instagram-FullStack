@@ -9,14 +9,29 @@
   body {
     @apply bg-zinc-800;
   }
+  h1 {
+    @apply text-5xl;
+  }
+  h2 {
+    @apply text-4xl;
+  }
+  h3 {
+    @apply text-2xl;
+  }
+  h4 {
+    @apply text-xl;
+  }
 }
 
 @layer utilities {
   .logo-text {
     font-family: "Dancing Script", cursive;
   }
-  .text-gray {
+  .text-light {
     @apply text-sm opacity-50;
+  }
+  .text-link {
+    @apply text-blue-400;
   }
 }
 /* text-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] */

@@ -5,7 +5,7 @@ const Saved = () => {
     <section className="space-y-4  h-auto py-1">
       {/* SAVED POSTS LIST */}
       <div className="Feeds space-y-3 py-2 h-full">
-        <h3>Saved Posts</h3>
+        <h2>Saved Posts</h2>
         <ul className="grid grid-cols-1 sm:grid-cols-3 sm:gap-3 gap-y-4 lg:grid-cols-6   justify-items-center lg:gap-y-4 ">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((el) => (
             <li className="">
