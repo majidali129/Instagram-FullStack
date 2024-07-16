@@ -150,14 +150,16 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li>
+          <Modal.Open opens="create-post">
             <NavLink
-              to="/add-post"
+              to="#"
               className="flex items-center justify-center py-1.5  opacity-50 hover:opacity-100 "
             >
               <span>
                 <RiAddBoxFill className="w-6 h-6" />
               </span>
             </NavLink>
+          </Modal.Open>
           </li>
           <li>
             <NavLink

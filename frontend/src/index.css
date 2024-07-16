@@ -19,7 +19,7 @@
     @apply text-xl;
   }
   h4 {
-    @apply text-[1.1rem];
+    @apply text-[.9rem] md:text-[1.1rem];
   }
 }
 
@@ -57,11 +57,13 @@ aside::-webkit-scrollbar,
   display: none;
 }
 .content::-webkit-scrollbar,
-.reels::-webkit-scrollbar {
+.reels::-webkit-scrollbar,
+.results::-webkit-scrollbar {
   display: none;
 }
 .content,
-.reels {
+.reels,
+.results {
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;

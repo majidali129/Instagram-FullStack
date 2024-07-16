@@ -67,7 +67,7 @@ const CreatePost = () => {
   }, [isUploaded]);
 
   return (
-    <section className="bg-zinc-900 min-h-96 w-[350px] md:w-[400px] top-3 relative">
+    <section className="bg-zinc-900 *:rounded rounded  min-h-96 w-[340px] md:w-[400px] top-3 relative">
       {/* Upload file */}
       <Form className="shadow-none" onSubmit={onSubmit}>
         <>
@@ -75,7 +75,7 @@ const CreatePost = () => {
           ref={uploaderRef}
           className={`file-uploader ${isUploaded ? "hidden" : ""}`}
         >
-          <header className="border-b border-b-zinc-700 h-12 flex items-center justify-center">
+          <header className="border-b  border-b-zinc-700 h-12 flex items-center justify-center">
             <h4>Create Post</h4>
           </header>
           <div className=" h-[calc((384px-48px)-50px)] w-full bg-inherit flex flex-col items-center justify-evenly">
@@ -114,7 +114,7 @@ const CreatePost = () => {
               <img
                 src={URL.createObjectURL(userPost)}
                 alt="Uploaded preview"
-                className="mb-4 max-h-60  mx-auto object-cover"
+                className="mb-4 max-h-60 rounded  mx-auto object-cover"
               />
             )}
           </div>
@@ -124,13 +124,13 @@ const CreatePost = () => {
                 value={caption}
                 onChange={handleCaptionChange}
                 placeholder="Write your caption..."
-                className="w-full rounded-sm bg-zinc-700 outline-none border-none mt-2 px-2 py-2"
+                className="w-full rounded-sm bg-zinc-800 outline-none border-none mt-2 px-2 py-2"
               ></textarea>
             </div>
           )}
           {caption && (
             <div className="flex justify-end">
-              <Button disabled={submiting} type="submit">{submiting? 'Uploading...': 'Upload'}</Button>
+              <Button varient="primary" className="px-10 max-sm:w-full" disabled={submiting} type="submit">{submiting? 'Uploading...': 'Upload'}</Button>
             </div>
           )}
         </div>

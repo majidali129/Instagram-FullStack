@@ -33,7 +33,7 @@ const ModalOverlay = ({ children, isOpen, onClose }) => {
     className="fixed inset-0 backdrop-blur-[2px]"
     onClick={onClose}
   ></div>
-  <div className="relative z-50 rounded-lg shadow-lg">
+  <div className="relative z-50 rounded-lg shadow-lg ">
     {children}
   </div>
   <button
