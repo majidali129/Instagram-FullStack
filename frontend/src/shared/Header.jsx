@@ -3,6 +3,7 @@ import { BiSearch } from "react-icons/bi";
 import { MdNotifications } from "react-icons/md";
 import { Modal, ModalProvider } from "./Modal";
 import Search from "./Search";
+import Notifications from "../components/Notifications";
 
 const Header = () => {
   const [query, setQuery] = useState("");
@@ -12,7 +13,7 @@ const Header = () => {
     <ModalProvider>
       <>
 
-    <nav className="flex items-center justify-between h-full md:px-4 px-2 bg-zinc-900 rounded-tr-md">
+    <nav className="flex items-center justify-between h-full md:px-5 px-2 bg-zinc-900 rounded-tr-md">
       <Modal.Open opens="search">
       <form
         action=""
@@ -42,7 +43,7 @@ const Header = () => {
       </div>
     </nav>
           <Modal.Window name="notifications">
-            <h2>Notifications</h2>
+            <Notifications />
           </Modal.Window>
           </>
     </ModalProvider>

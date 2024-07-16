@@ -58,12 +58,14 @@ aside::-webkit-scrollbar,
 }
 .content::-webkit-scrollbar,
 .reels::-webkit-scrollbar,
-.results::-webkit-scrollbar {
+.results::-webkit-scrollbar,
+.notifications::-webkit-scrollbar {
   display: none;
 }
 .content,
 .reels,
-.results {
+.results,
+.notifications {
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
