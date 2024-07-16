@@ -34,11 +34,11 @@ export default function App() {
       <Route element={<Auth />}>
         <Route path="accounts/emailsignup" element={<SignUp />} />
         <Route path="accounts/login" element={<Login />} />
-        <Route path="accounts/password/reset/" element={<ResetPassword />} /> //
-        user well provide email, get password reset mail from server
+        <Route path="accounts/password/reset/" element={<ResetPassword />} />
+        {/* user well provide email, get password reset mail from server */}
         <Route path="accounts/update-password" element={<UpdatePassword />} />
         <Route path="accounts/update-profile" element={<UpdateProfile />} />
-        //
+
       </Route>
     </Routes>
   );

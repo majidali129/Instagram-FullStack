@@ -46,7 +46,7 @@ const Login = () => {
         </CustomLink>
 
         <p className="space-x-1">
-          <span>Don't have an account?</span>
+          <span>Don&apost have an account?</span>
           <Link to="/accounts/emailsignup" className="text-blue-400">
             Sign Up
           </Link>

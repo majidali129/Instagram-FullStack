@@ -1,10 +1,6 @@
 import Header from "../shared/Header";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../shared/Sidebar";
-import Feeds from "./Feeds";
-import Saved from "./Saved";
-import Explore from "./Explore";
-import Reels from "./Reels";
 
 const AppLayout = () => {
   return (

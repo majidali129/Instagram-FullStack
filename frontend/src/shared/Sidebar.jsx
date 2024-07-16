@@ -1,17 +1,17 @@
-import Avatar from "./Avatar";
 import Logo from "./Logo";
 import { NavLink } from "react-router-dom";
 import { MdOutlineExplore } from "react-icons/md";
 import { BiSolidMoviePlay } from "react-icons/bi";
 import { RiAddBoxFill } from "react-icons/ri";
-import { IoMdHeart } from "react-icons/io";
 import { BsBookmarkStarFill } from "react-icons/bs";
 import { IoMdHome } from "react-icons/io";
 import UserProfileCard from "./UserProfileCard";
+import { Modal, ModalProvider } from "./Modal";
+import SignUp from "../components/SignUP";
 
 const Sidebar = () => {
   return (
-    <>
+    <ModalProvider>
       <aside
         border
         className="hidden px-3.5 py-4 space-y-3 row-span-full bg-zinc-900 sm:block"
@@ -66,8 +66,9 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li>
+          <Modal.Open opens="create-post">
             <NavLink
-              to="/add-post"
+              to="#"
               className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100 "
             >
               <span>
@@ -75,6 +76,7 @@ const Sidebar = () => {
               </span>
               <span>Create</span>
             </NavLink>
+          </Modal.Open>
           </li>
           <li>
             <NavLink
@@ -154,7 +156,11 @@ const Sidebar = () => {
           </li>
         </ul>
       </aside>
-    </>
+
+      <Modal.Window name="create-post">
+        <SignUp />
+      </Modal.Window>
+    </ModalProvider>
   );
 };
 
