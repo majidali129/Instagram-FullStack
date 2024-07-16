@@ -37,7 +37,7 @@ const ModalOverlay = ({ children, isOpen, onClose }) => {
     {children}
   </div>
   <button
-      className="absolute top-5 right-5 p-2 rounded-full bg-zinc-800 "
+      className="absolute top-5 right-5 p-1 md:p-1.5 rounded-full bg-zinc-800 "
       onClick={onClose}
     >
         <RiCloseLargeLine className="w-7 h-7 " />

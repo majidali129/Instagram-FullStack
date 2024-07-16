@@ -13,13 +13,13 @@
     @apply text-5xl;
   }
   h2 {
-    @apply text-4xl;
+    @apply text-2xl md:text-3xl;
   }
   h3 {
-    @apply text-2xl;
+    @apply text-xl;
   }
   h4 {
-    @apply text-xl;
+    @apply text-[1.1rem];
   }
 }
 
@@ -38,22 +38,31 @@
     @apply opacity-100  !border-b-2;
   }
 }
-/* text-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] */
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 50;
+input[type="file"] {
+  visibility: hidden;
+  height: 0px;
+  padding: 0;
+  opacity: 0;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
 }
 
-.modal-content {
-  position: relative;
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  z-index: 51;
+aside::-webkit-scrollbar,
+.content::-webkit-scrollbar {
+  display: none;
+}
+.content::-webkit-scrollbar,
+.reels::-webkit-scrollbar {
+  display: none;
+}
+.content,
+.reels {
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

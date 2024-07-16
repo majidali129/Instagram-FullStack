@@ -6,11 +6,14 @@ import { Modal, ModalProvider } from "./Modal";
 
 const Header = () => {
   const [query, setQuery] = useState("");
+
+
   return (
     <>
     <ModalProvider>
 
     <nav className="flex items-center justify-between h-full md:px-4 px-2 bg-zinc-900 rounded-tr-md">
+      <Modal.Open opens="search">
       <form
         action=""
         className="flex items-center px-2 border rounded-md gap-x-2 border-zinc-800"
@@ -19,7 +22,9 @@ const Header = () => {
         <input
           type="text"
           name="query"
+          readOnly
           id=""
+          autoComplete={false}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search..."
@@ -27,6 +32,12 @@ const Header = () => {
           />
         {!query && <MdMic className="w-6 h-6 opacity-60" />}
       </form>
+      </Modal.Open>
+      <Modal.Window name="search">
+        <ul>
+          <h4>Search form</h4>
+        </ul>
+      </Modal.Window>
       <div className="actions">
         <Modal.Open opens="notifications">
         <MdNotifications className="w-6 h-6 hover:cursor-pointer" />

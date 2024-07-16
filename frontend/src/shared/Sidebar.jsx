@@ -1,33 +1,40 @@
 import Logo from "./Logo";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { MdOutlineExplore } from "react-icons/md";
 import { BiSolidMoviePlay } from "react-icons/bi";
 import { RiAddBoxFill } from "react-icons/ri";
 import { BsBookmarkStarFill } from "react-icons/bs";
 import { IoMdHome } from "react-icons/io";
 import UserProfileCard from "./UserProfileCard";
+import { SlLogout } from "react-icons/sl";
 import { Modal, ModalProvider } from "./Modal";
-import SignUp from "../components/SignUP";
+import CreatePost from "../components/CreatePost";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    setTimeout(() => {
+      navigate('/accounts/login')
+    },1200)
+  }
   return (
     <ModalProvider>
       <aside
         border
-        className="hidden px-3.5 py-4 space-y-3 row-span-full bg-zinc-900 sm:block"
+        className="hidden px-3.5 py-4 space-y-3 row-span-full bg-zinc-900 sm:block overflow-y-scroll"
       >
         <Logo />
         {/* user profile */}
         <UserProfileCard />
         {/* Links */}
-        <ul className="space-y-2 border-b border-b-zinc-700 py-3 md:*:text-xl text-lg">
+        <ul className="space-y-2 border-b border-b-zinc-700 py-3 md:*:text-[1rem] ">
           <li>
             <NavLink
               to="/"
               className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100 "
             >
               <span>
-                <IoMdHome className="w-7 h-7" />
+                <IoMdHome className="w-6 h-6" />
               </span>
               <span>Home</span>
             </NavLink>
@@ -38,7 +45,7 @@ const Sidebar = () => {
               className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100 "
             >
               <span>
-                <MdOutlineExplore className="w-7 h-7" />
+                <MdOutlineExplore className="w-6 h-6" />
               </span>
               <span>Explore</span>
             </NavLink>
@@ -49,7 +56,7 @@ const Sidebar = () => {
               className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100 "
             >
               <span>
-                <BsBookmarkStarFill className="w-7 h-7" />
+                <BsBookmarkStarFill className="w-6 h-5" />
               </span>
               <span>Saved</span>
             </NavLink>
@@ -60,7 +67,7 @@ const Sidebar = () => {
               className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100 "
             >
               <span>
-                <BiSolidMoviePlay className="w-7 h-7" />
+                <BiSolidMoviePlay className="w-6 h-6" />
               </span>
               <span>Reels</span>
             </NavLink>
@@ -72,7 +79,7 @@ const Sidebar = () => {
               className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100 "
             >
               <span>
-                <RiAddBoxFill className="w-7 h-7" />
+                <RiAddBoxFill className="w-6 h-6" />
               </span>
               <span>Create</span>
             </NavLink>
@@ -83,13 +90,21 @@ const Sidebar = () => {
               to="/profile/majidali129"
               className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100 "
             >
-              <div className="w-7 h-7 border rounded-full">
+              <div className="w-6 h-6 border rounded-full">
                 <img src="lskd" alt="." />
               </div>
               <span>Profile</span>
             </NavLink>
           </li>
         </ul>
+            <button
+              onClick={handleLogout}
+            >
+              <div  className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100">
+              <SlLogout className="w-5 h-5 rotate-180"/>
+              <span>Log Out</span>
+              </div>
+            </button>
       </aside>
       <aside className="block row-span-full px-3.5 py-6 sm:py-4 space-y-3 bg-zinc-900 sm:hidden">
         <Logo />
@@ -100,7 +115,7 @@ const Sidebar = () => {
               className="flex items-center justify-center py-1.5  opacity-50 hover:opacity-100 "
             >
               <span>
-                <IoMdHome className="w-7 h-7" />
+                <IoMdHome className="w-6 h-6" />
               </span>
             </NavLink>
           </li>
@@ -110,7 +125,7 @@ const Sidebar = () => {
               className="flex items-center justify-center py-1.5  opacity-50 hover:opacity-100 "
             >
               <span>
-                <MdOutlineExplore className="w-7 h-7" />
+                <MdOutlineExplore className="w-6 h-6" />
               </span>
             </NavLink>
           </li>
@@ -149,7 +164,7 @@ const Sidebar = () => {
               to="/profile/majidali129"
               className="flex items-center justify-center py-1.5  opacity-50 hover:opacity-100 "
             >
-              <div className="w-7 h-7 border rounded-full">
+              <div className="w-6 h-6 border rounded-full">
                 <img src="lskd" alt="." />
               </div>
             </NavLink>
@@ -158,7 +173,7 @@ const Sidebar = () => {
       </aside>
 
       <Modal.Window name="create-post">
-        <SignUp />
+        <CreatePost />
       </Modal.Window>
     </ModalProvider>
   );

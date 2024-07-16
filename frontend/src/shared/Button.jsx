@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import PropTypes from 'prop-types'
 
 const Button = forwardRef(
   (
@@ -22,6 +23,19 @@ const Button = forwardRef(
     );
   }
 );
+
+Button.propTypes = {
+  onClick: PropTypes.func,
+  varient: PropTypes.string,
+  disabled: PropTypes.bool,
+  type: PropTypes.string,
+  className: PropTypes.string,
+  children: PropTypes.element
+}
+
+
+Button.displayName = 'Button'
+
 
 export default Button;
 

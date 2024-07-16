@@ -8,7 +8,7 @@ const About = () => {
     <section className="  py-3  space-y-10">
       {/* Profile Info */}
       <div className="flex border-b border-b-zinc-700 py-4 flex-col md:flex-row  items-center gap-x-10 xl:gap-x-28 max-md:gap-y-3 space-y-3 justify-center">
-        <div className="lg:w-40 lg:h-40 w-28 h-28 border rounded-full">
+        <div className="lg:w-36 lg:h-36 w-28 h-28 border rounded-full">
           <img src="" alt="" />
         </div>
         <div className="space-y-6 md:space-y-4">
