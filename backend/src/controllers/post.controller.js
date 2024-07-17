@@ -128,10 +128,13 @@ const getAllPostsByUser = asyncHandler(async (req, res, next) => {
 
   const createdPosts = await Post.find({
     user: req.user._id,
-  }).populate('user');
+  }).populate({
+    path: 'user',
+    select: '-password -refreshToken',
+  });
 
-  if (!likedPosts.length)
-    return next(new apiError(404, "This user have'nt liked any post yet"));
+  // if (!likedPosts.length)
+  //   return next(new apiError(404, "This user have'nt liked any post yet"));
 
   res.status(200).json(
     new apiResponse(
@@ -142,7 +145,7 @@ const getAllPostsByUser = asyncHandler(async (req, res, next) => {
         userOwnPosts: createdPosts.length,
         createdPosts,
       },
-      'All posts liked by this user fetched successfully'
+      'All posts created & liked by this user fetched successfully'
     )
   );
 });

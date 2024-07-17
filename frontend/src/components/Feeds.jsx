@@ -3,6 +3,8 @@ import Stories from "./Stories";
 import { FaPlayCircle } from "react-icons/fa";
 
 const Feeds = () => {
+  // const [loading, error, data] = useFetch('http://127.0.0.1:8000/api/v1/posts/')
+
   return (
     <section className="space-y-4  h-auto py-1">
       <div className="stories space-y-5">

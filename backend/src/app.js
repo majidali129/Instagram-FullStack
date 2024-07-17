@@ -19,10 +19,13 @@ const corsOptions = {
   origin: 'http://localhost:5173',
   methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   credentials: true,
-  optionsSuccessStatus: true,
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
+
+// Handle preflight requests
+// app.options('*', cors(corsOptions));
 
 // COMMON MIDDLEWARES
 app.use(

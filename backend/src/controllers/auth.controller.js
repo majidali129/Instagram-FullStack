@@ -173,6 +173,7 @@ const resendEmailVerification = asyncHandler(async (req, res, next) => {
 
 const loginUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
+  console.log(req.body);
   const user = await User.findOne({ email });
   if (!user) return next(new apiError(404, 'user not found. please signup first'));
 

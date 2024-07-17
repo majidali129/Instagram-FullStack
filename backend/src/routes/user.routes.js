@@ -1,4 +1,5 @@
 import express from 'express';
+
 import {
   loginUserValidator,
   registerUserValidator,
@@ -25,11 +26,11 @@ import { validate } from '../validators/validate.validator.js';
 const router = express.Router();
 
 router
-  .route('/register')
+  .route('/')
   .post(upload.single('avatar'), registerUserValidator(), validate, registerUser);
 
 router.route('/login').post(loginUserValidator, validate, loginUser);
-router.route('/refresh-token').post(loginUserValidator, validate, loginUser);
+// router.route('/refresh-token').post(loginUserValidator, validate, loginUser);
 router.route('/verify-email/:verificationToken').get(verifyEmail);
 
 router

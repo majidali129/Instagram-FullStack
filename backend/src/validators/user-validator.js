@@ -36,7 +36,7 @@ export const loginUserValidator = [
     .withMessage('email is required')
     .isEmail()
     .withMessage('please enter a valid email address'),
-  body('password').notEmpty().trim().withMessage('password is required'),
+  body('password').optional().notEmpty().trim().withMessage('password is required'),
 ];
 
 export const userChangeCurrentPasswordValidator = () => {

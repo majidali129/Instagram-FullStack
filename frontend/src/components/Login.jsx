@@ -5,13 +5,29 @@ import Input from "../shared/Input";
 import Button from "../shared/Button";
 import { FaFacebookSquare } from "react-icons/fa";
 import CustomLink from "../shared/Link";
+import { loginUser } from "../api/services/user-service";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false)
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true)
+      const response = await loginUser({email, password})
+      console.log(response)
+      setLoading(false)
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
+    }
+  }
   return (
     <section className="h-full flex items-center justify-center">
-      <Form className="md:px-8 px-4 py-12 text-center">
+      <Form className="md:px-8 px-4 py-12 text-center" onSubmit={onSubmit}>
+        <>
         <h3 className="italic  font-semibold text-2xl mb-4 md:mb-8">
           Snapgram
         </h3>
@@ -31,15 +47,17 @@ const Login = () => {
             placeholder="Password"
           />
         </div>
-        <Button type="submit" varient="primary" className="!w-full">
-          Sign Up
+        <Button disabled={loading} type="submit" varient="primary" className="!w-full disabled:cursor-wait">
+          Login
         </Button>
         <p className="py-1.5 opacity-60 text-[.9rem">OR</p>
         <Button varient="primary" className="!w-full py-2.5">
+          <>
           <span>
             <FaFacebookSquare className="w-6 h-6" />
           </span>
           <span className="-mt-1">Log in with Facebook</span>
+          </>
         </Button>
         <CustomLink>
           <Link to="/accounts/password/reset/">Forgot Password</Link>
@@ -51,6 +69,7 @@ const Login = () => {
             Sign Up
           </Link>
         </p>
+        </>
       </Form>
     </section>
   );

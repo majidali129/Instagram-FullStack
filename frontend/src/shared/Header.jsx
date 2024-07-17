@@ -4,9 +4,12 @@ import { MdNotifications } from "react-icons/md";
 import { Modal, ModalProvider } from "./Modal";
 import Search from "./Search";
 import Notifications from "../components/Notifications";
+import Button from "./Button";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [query, setQuery] = useState("");
+  const navigate = useNavigate()
 
 
   return (
@@ -36,7 +39,9 @@ const Header = () => {
       <Modal.Window name="search">
         <Search />
       </Modal.Window>
-      <div className="actions">
+      <div className="actions flex items-center gap-x-4">
+        <Button varient="primary" className="!py-1" onClick={() => navigate('/accounts/emailsignup')}>Sign Up</Button>
+        <Button varient="primary" className="!py-1" onClick={() => navigate('/accounts/login')}>Login</Button>
         <Modal.Open opens="notifications">
         <MdNotifications className="w-6 h-6 hover:cursor-pointer" />
         </Modal.Open>
