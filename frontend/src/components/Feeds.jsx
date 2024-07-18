@@ -1,19 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 import FeedCard from "./FeedCard";
 import Stories from "./Stories";
 import { FaPlayCircle } from "react-icons/fa";
-import { getAllPosts } from "../api/services/post-service";
+// import { getAllPosts } from "../api/services/post-service";
 
 const Feeds = () => {
-  // const [loading, error, data] = useFetch('http://127.0.0.1:8000/api/v1/posts/')
-  const {data, isLoading} = useQuery({
-    queryKey: ['posts'],
-    queryFn: getAllPosts()
-  })
+  // const {isLoading, data} = useQuery({
+  //   queryKey: ['posts'],
+  //   queryFn: getAllPosts
+  // })
 
-  if(isLoading) return <h3>Loading ...</h3>
-  // if(data) console.log(data)
-  console.log(data)
+  // if(isLoading) return <h3>Loading ...</h3>
+  // console.log(data.posts)
   return (
     <section className="space-y-4  h-auto py-1">
       <div className="stories space-y-5">

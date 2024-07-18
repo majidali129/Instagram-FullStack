@@ -22,9 +22,8 @@ const getPost = async (param) => {
 
 const getAllPosts = async () => {
   try {
-    const response = await api.get("/posts");
-    console.log(response);
-    return response;
+    const { data } = await api.get("/posts");
+    return data.data;
   } catch (error) {
     console.error("Error while fetching posts", error);
     throw error;
