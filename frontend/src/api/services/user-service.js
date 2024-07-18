@@ -22,16 +22,6 @@ const loginUser = async (payload) => {
   }
 };
 
-// const loginUser = async (payload) => {
-//   try {
-//     const response = await api.post("/users/login", payload);
-//     return response;
-//   } catch (error) {
-//     console.error("Error while logging in the user", error);
-//     throw error;
-//   }
-// };
-
 const getAllUsers = async () => {
   try {
     const response = await api.get();

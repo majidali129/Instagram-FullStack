@@ -3,7 +3,7 @@ import { BiSearch } from "react-icons/bi";
 import { MdNotifications } from "react-icons/md";
 import { Modal, ModalProvider } from "./Modal";
 import Search from "./Search";
-import Notifications from "../components/Notifications";
+import Notifications from "./Notifications";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 
@@ -28,7 +28,6 @@ const Header = () => {
           name="query"
           readOnly
           id=""
-          autoComplete={false}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search..."

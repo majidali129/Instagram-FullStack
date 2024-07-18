@@ -1,20 +1,37 @@
 import { Route, Routes } from "react-router-dom";
-import AppLayout from "./components/AppLayout";
-import Feeds from "./components/Feeds";
-import Explore from "./components/Explore";
-import Reels from "./components/Reels";
-import CreatePostForm from "./components/CreatePostForm";
-import Saved from "./components/Saved";
-import SignUp from "./components/SignUP";
-import Auth from "./pages/Auth";
-import Login from "./components/Login";
-import ResetPassword from "./components/ResetPassword";
-import UpdatePassword from "./components/UpdatePassword";
-import UpdateProfile from "./components/UpdateProfile";
-import About from "./pages/About";
-import UserSavedPosts from "./components/UserSavedPosts";
-import UserPosts from "./components/Posts";
-import UserReels from "./components/UserReels";
+// import AppLayout from "./shared/AppLayout";
+// import AppLayout from './shared/AppLayout'
+// import Feeds from "./pages/Feeds";
+// import Explore from "./pages/Explore";
+// import Reels from "./pages/Reels";
+// import BookMarks from "./pages/Bookmarks";
+// import AuthLayout from './shared/AuthLayout'
+// import Login from "./features/authentication/Login";
+// import SignUp from "./features/authentication/SignUp";
+// import ResetPassword from "./features/authentication/ResetPassword";
+// import UpdatePassword from "./features/authentication/UpdatePassword";
+// import UpdateProfile from "./features/authentication/UpdateProfile";
+// import About from "./pages/About";
+// import UserSavedPosts from "./features/posts/UserSavedPosts";
+// import UserPosts from "./features/posts/UserPosts";
+// import UserReels from "./features/reels/UserReels";
+// import CreatePost from "./features/posts/CreatePost";
+import AppLayout from './ui/AppLayout'
+import AuthLayout from './ui/AuthLayout'
+import Feeds from './pages/Feeds'
+import Reels from './pages/Reels'
+import Explore from './pages/Explore'
+import BookMarks from './pages/Bookmarks'
+import About from './pages/About'
+import CreatePost from './features/posts/CreatePost'
+import UserPosts from './features/posts/UserPosts'
+import UserSavedPosts from './features/posts/UserSavedPosts'
+import UserReels from './features/reels/UserReels'
+import SignUp from './features/authentication/SignUP'
+import Login from './features/authentication/Login'
+import ResetPassword from './features/authentication/ResetPassword'
+import UpdatePassword from './features/authentication/UpdatePassword'
+import UpdateProfile from './features/authentication/UpdateProfile'
 
 export default function App() {
   return (
@@ -23,15 +40,15 @@ export default function App() {
         <Route index element={<Feeds />} />
         <Route path="explore" element={<Explore />} />
         <Route path="reels" element={<Reels />} />
-        <Route path="bookmarks" element={<Saved />} />
-        <Route path="add-post" element={<CreatePostForm />} />
+        <Route path="bookmarks" element={<BookMarks />} />
+        <Route path="add-post" element={<CreatePost />} />
         <Route path="profile/:username" element={<About />}>
           <Route index element={<UserPosts />} />
           <Route path="saved" element={<UserSavedPosts />} />
           <Route path="reels" element={<UserReels />} />
         </Route>
       </Route>
-      <Route element={<Auth />}>
+      <Route element={<AuthLayout />}>
         <Route path="accounts/emailsignup" element={<SignUp />} />
         <Route path="accounts/login" element={<Login />} />
         <Route path="accounts/password/reset/" element={<ResetPassword />} />

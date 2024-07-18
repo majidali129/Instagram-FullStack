@@ -1,7 +1,16 @@
+import { getReels } from "../../api/services/reels-service";
 import Reel from "./Reel";
-const Reels = () => {
+import {useQuery} from '@tanstack/react-query'
+const ReelList = () => {
+  const {data, isLoading, error} = useQuery({
+    queryKey: ['reels'],
+    queryFn: getReels
+  })
+  console.log(data)
+  console.log(isLoading)
+  console.log(error)
   return (
-    <div className="h-full w-full flex justify-center">
+    <div className="flex justify-center w-full h-full">
       <ul className="w-full h-full snap-y  snap-mandatory overflow-scroll reels space-y-2 transition-all duration-200 !scroll-my-4 scroll-p-4 ">
         <li className="snap-center ">
           <Reel video="../../public/video.mp4" />
@@ -26,4 +35,4 @@ const Reels = () => {
   );
 };
 
-export default Reels;
+export default ReelList;

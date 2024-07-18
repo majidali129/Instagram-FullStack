@@ -1,10 +1,11 @@
 import { NavLink, Outlet } from "react-router-dom";
-import Button from "../shared/Button";
-import { Modal, ModalProvider } from "../shared/Modal";
+import Button from "../ui/Button";
+import { Modal, ModalProvider } from "../ui/Modal";
 
 const About = () => {
   return (
     <ModalProvider >
+      <>
     <section className="  py-3  space-y-10">
       {/* Profile Info */}
       <div className="flex border-b border-b-zinc-700 py-4 flex-col md:flex-row  items-center gap-x-10 xl:gap-x-28 max-md:gap-y-3 space-y-3 justify-center">
@@ -58,6 +59,7 @@ const About = () => {
     <Modal.Window name="edit-profile">
       <h2>Edit Profile Form</h2>
     </Modal.Window>
+    </>
     </ModalProvider>
   );
 };

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Form from "../shared/Form";
-import Input from "../shared/Input";
-import Button from "../shared/Button";
+import Form from "../../ui/Form";
+import Input from "../../ui/Input";
+import Button from "../../ui/Button";
 
 const UpdateProfile = () => {
   const [email, setEmail] = useState("");

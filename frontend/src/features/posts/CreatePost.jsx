@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import Form from "../shared/Form";
-import Button from "../shared/Button";
-import { useModalContext } from "../shared/Modal";
+import Form from "../../ui/Form";
+import Button from "../../ui/Button";
+import { useModalContext } from "../../ui/Modal";
 import { BsCloudUpload } from "react-icons/bs";
 
 const CreatePost = () => {

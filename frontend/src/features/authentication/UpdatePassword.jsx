@@ -1,14 +1,37 @@
 import { useState } from "react";
-import Form from "../shared/Form";
-import Input from "../shared/Input";
-import Button from "../shared/Button";
+import Form from "../../ui/Form";
+import Input from "../../ui/Input";
+import Button from "../../ui/Button";
+import { updatePassword } from "../../api/services/user-service";
+import {useMutation, useQueryClient} from '@tanstack/react-query'
 
 const UpdatePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const queryClient = useQueryClient()
+
+  const {mutate, isPending} = useMutation({
+    mutationKey: ['user'],
+    mutationFn: updatePassword,
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ['user']})
+    }
+  })
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    console.log({oldPassword, newPassword})
+    mutate({oldPassword, newPassword}, {
+      onSettled: () => {
+        setNewPassword('')
+        setOldPassword('')
+      }
+    })
+  }
+
   return (
     <section className="h-full flex items-center justify-center">
-      <Form className="md:px-8 px-4 py-12 text-center">
+      <Form className="md:px-8 px-4 py-12 text-center" onSubmit={onSubmit}>
         <h3 className="italic  font-semibold text-2xl mb-4 md:mb-8">
           Snapgram
         </h3>
@@ -28,8 +51,8 @@ const UpdatePassword = () => {
             placeholder="New Password"
           />
         </div>
-        <Button type="submit" varient="primary" className="!w-full">
-          Update Password
+        <Button disabled={isPending} type="submit" varient="primary" className="!w-full">
+          {isPending? 'Updating': 'Update Password'}
         </Button>
       </Form>
     </section>

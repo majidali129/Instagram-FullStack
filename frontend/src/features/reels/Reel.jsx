@@ -4,12 +4,59 @@ import { BsThreeDots } from "react-icons/bs";
 import { FaRegComment } from "react-icons/fa";
 import { GoBookmark } from "react-icons/go";
 import { Link } from "react-router-dom";
-import Avatar from "../shared/Avatar";
+import Avatar from "../../ui/Avatar";
 import { FaMusic } from "react-icons/fa";
 import { useState } from "react";
+import PropTypes from 'prop-types'
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getReel, getReelComments, likeReel, saveReel, uploadReel } from "../../api/services/reels-service";
 
 const Reel = ({ video }) => {
   const [showCaption, setShowCaption] = useState(false);
+  const queryClient = useQueryClient()
+
+  const {data, isLoading, error} = useQuery({
+    queryKey: ['reel'],
+    queryFn: getReel
+  })
+  // const {data, isLoading, error} = useQuery({
+  //   queryKey: ['reel'],
+  //   queryFn: getReelComments
+  // })
+
+  const {mutate, isPending} = useMutation({
+    mutationKey: ['reel'],
+    mutationFn: likeReel, // it need reelID
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ['reel']})
+      alert('Video liked successfully')
+    }
+  })
+  // const {mutate, isPending} = useMutation({
+  //   mutationKey: ['reel'],
+  //   mutationFn: commentOnReel, // it need reelID
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries({queryKey: ['reel']})
+  //     alert('comment added successfully')
+  //   }
+  // })
+  // const {mutate, isPending} = useMutation({
+  //   mutationKey: ['reel'],
+  //   mutationFn: saveReel, // it need reelID
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries({queryKey: ['reel']})
+  //     alert('reel saved successfully')
+  //   }
+  // })
+  // const {mutate, isPending} = useMutation({
+  //   mutationKey: ['reel'],
+  //   mutationFn: uploadReel, // it need reelID
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries({queryKey: ['reel']})
+  //     alert('reel uploaded successfully')
+  //   }
+  // })
+
 
   return (
     <div className=" relative h-full sm:w-[500px] grid sm:grid-cols-[1fr_60px] mx-auto">
@@ -19,19 +66,19 @@ const Reel = ({ video }) => {
       "
       >
         {/* VIDEO */}
-        <div className="h-full w-full rounded-md">
+        <div className="w-full h-full rounded-md">
           <video className="w-full h-full rounded-md" autoPlay muted loop>
             <source src={video} type="video/mp4" />
           </video>
         </div>
         {/* VIDEO INFO */}
-        <div className=" absolute bottom-0 left-0 right-0  ps-4 bg-transparent py-5 space-y-2 pe-5">
+        <div className="absolute bottom-0 left-0 right-0 py-5 space-y-2 bg-transparent ps-4 pe-5">
           <div className="flex items-center gap-x-2.5">
             <Avatar />
             <span className="font-semibold">username</span>
             <Link
               to="#"
-              className="border border-zinc-300 py-1 px-2 rounded-sm bg-transparent"
+              className="px-2 py-1 bg-transparent border rounded-sm border-zinc-300"
             >
               Follow
             </Link>
@@ -90,4 +137,8 @@ const Reel = ({ video }) => {
   );
 };
 
+
+Reel.propTypes = {
+  video: PropTypes.string
+}
 export default Reel;

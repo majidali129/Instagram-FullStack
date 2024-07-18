@@ -8,7 +8,8 @@ import { IoMdHome } from "react-icons/io";
 import UserProfileCard from "./UserProfileCard";
 import { SlLogout } from "react-icons/sl";
 import { Modal, ModalProvider } from "./Modal";
-import CreatePost from "../components/CreatePost";
+// import CreatePost from "../components/CreatePost";
+import CreatePost from "../features/posts/CreatePost";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -19,8 +20,8 @@ const Sidebar = () => {
   }
   return (
     <ModalProvider>
+      <>
       <aside
-        border
         className="hidden px-3.5 py-4 space-y-3 row-span-full bg-zinc-900 sm:block overflow-y-scroll"
       >
         <Logo />
@@ -177,6 +178,7 @@ const Sidebar = () => {
       <Modal.Window name="create-post">
         <CreatePost />
       </Modal.Window>
+      </>
     </ModalProvider>
   );
 };

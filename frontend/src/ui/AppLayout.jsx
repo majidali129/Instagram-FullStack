@@ -1,6 +1,6 @@
-import Header from "../shared/Header";
+import Header from "./Header";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../shared/Sidebar";
+import Sidebar from "./Sidebar";
 
 const AppLayout = () => {
   return (

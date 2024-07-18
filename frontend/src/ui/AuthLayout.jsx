@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-const Auth = () => {
+const AuthLayout = () => {
   return (
     <section className="w-screen h-screen py-2">
       <Outlet />
@@ -8,4 +8,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default AuthLayout;

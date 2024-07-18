@@ -1,17 +1,17 @@
-import Avatar from "../shared/Avatar";
+import Avatar from "../../ui/Avatar";
 import { BsEmojiSmileFill, BsThreeDots } from "react-icons/bs";
 import { FaComment } from "react-icons/fa";
 import { IoIosBookmark, IoMdHeart } from "react-icons/io";
 import { BsFillSendFill } from "react-icons/bs";
-
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types'
 
-const FeedCard = ({ image }) => {
+const FeedItem = ({ image }) => {
   return (
     <Link to="">
       <div className="bg-zinc-900 px-1 py-3.5 space-y-2 border h-fit border-zinc-700 border-t-0  rounded-xl">
         <div className="px-1.5">
-          <div className="flex justify-between items-center">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-x-2">
               <Avatar />
               <div>
@@ -35,7 +35,7 @@ const FeedCard = ({ image }) => {
         </figure>
 
         <div className="px-1.5 space-y-2">
-          <div className="actions flex items-center justify-between">
+          <div className="flex items-center justify-between actions">
             <div className="space-x-1.5 *:cursor-pointer flex items-center">
               <span>
                 <IoMdHeart />
@@ -64,7 +64,7 @@ const FeedCard = ({ image }) => {
               <span className="opacity-50"> view all {40} comments</span>
             </p>
           </div>
-          <form className="flex items-center justify-between gap-x-2 w-full ">
+          <form className="flex items-center justify-between w-full gap-x-2 ">
             <input
               type="text"
               name="comment"
@@ -79,7 +79,10 @@ const FeedCard = ({ image }) => {
         </div>
       </div>
     </Link>
-  );
-};
+  )
+}
 
-export default FeedCard;
+FeedItem.propTypes = {
+    image: PropTypes.string
+}
+export default FeedItem

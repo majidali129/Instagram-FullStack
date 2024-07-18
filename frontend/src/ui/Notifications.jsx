@@ -1,5 +1,5 @@
-import Avatar from "../shared/Avatar";
-import {ModalProvider, useModalContext } from "../shared/Modal";
+import Avatar from "./Avatar";
+import {ModalProvider, useModalContext } from "./Modal";
 
 const Notifications = () => {
   const { close } = useModalContext();
@@ -7,8 +7,8 @@ const Notifications = () => {
     <ModalProvider>
       <>
         <div className="bg-zinc-50 w-[340px] md:w-96 *:py-4  h-[75vh] rounded overflow-hidden">
-          <div className=" border-b border-b-zinc-400 px-4">
-          <h3 className=" text-start text-zinc-950 font-semibold">
+          <div className="px-4 border-b  border-b-zinc-400">
+          <h3 className="font-semibold  text-start text-zinc-950">
             Notifications
           </h3>
           </div>
@@ -22,8 +22,8 @@ const Notifications = () => {
                   </h4>
                   Started following you. Click here to view his profile
                 </div>
-                <p className="w-full flex items-center justify-between">
-                  <span className="opacity-60 text-sm text-zinc-950">2 hours age</span>
+                <p className="flex items-center justify-between w-full">
+                  <span className="text-sm opacity-60 text-zinc-950">2 hours age</span>
                   <span className="text-blue-500 text-[.9rem] cursor-pointer">Mark as read</span>
                 </p>
               </div>

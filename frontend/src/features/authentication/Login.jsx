@@ -1,37 +1,47 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Form from "../shared/Form";
-import Input from "../shared/Input";
-import Button from "../shared/Button";
+import Form from "../../ui/Form";
+import Input from "../../ui/Input";
+import Button from "../../ui/Button";
 import { FaFacebookSquare } from "react-icons/fa";
-import CustomLink from "../shared/Link";
-import { loginUser } from "../api/services/user-service";
+import CustomLink from "../../ui/Link";
+import { loginUser } from "../../api/services/user-service";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false)
+  const queryClient = useQueryClient()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      setLoading(true)
-      const response = await loginUser({email, password})
-      console.log(response)
-      setLoading(false)
-    } catch (error) {
-      console.log(error)
-      setLoading(false)
+  const {mutate, isPending} = useMutation({
+    mutationKey: ['user'],
+    mutationFn: loginUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ['user']})
     }
+  })
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    console.log({email, password})
+    mutate({email, password}, {
+      onSettled: () => {
+        setEmail('')
+        setPassword('')
+      }
+    })
   }
+
+
   return (
-    <section className="h-full flex items-center justify-center">
-      <Form className="md:px-8 px-4 py-12 text-center" onSubmit={onSubmit}>
+    <section className="flex items-center justify-center h-full">
+      <Form className="px-4 py-12 text-center md:px-8" onSubmit={onSubmit}>
         <>
-        <h3 className="italic  font-semibold text-2xl mb-4 md:mb-8">
+        <h3 className="mb-4 text-2xl italic font-semibold md:mb-8">
           Snapgram
         </h3>
-        <div className="space-y-2 py-2">
+        <div className="py-2 space-y-2">
           <Input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -47,7 +57,7 @@ const Login = () => {
             placeholder="Password"
           />
         </div>
-        <Button disabled={loading} type="submit" varient="primary" className="!w-full disabled:cursor-wait">
+        <Button disabled={isPending} type="submit" varient="primary" className="!w-full ">
           Login
         </Button>
         <p className="py-1.5 opacity-60 text-[.9rem">OR</p>

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Form from "../shared/Form";
-import Input from "../shared/Input";
-import Button from "../shared/Button";
-import { registerUser } from "../api/services/user-service";
+import Form from "../../ui/Form";
+import Input from "../../ui/Input";
+import Button from "../../ui/Button";
+import { registerUser } from "../../api/services/user-service";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -11,39 +12,38 @@ const SignUp = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState(null);
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false)
+  const queryClient = useQueryClient()
+
+  const {mutate, isPending} = useMutation({
+    mutationKey: ['user'],
+    mutationFn: registerUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ['user']})
+    }
+  })
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    const payload = {
+      username, fullName, email, password, avatar
+    }
+    console.log(payload)
+    mutate(payload, {
+      onSettled: () => {
+        setEmail('')
+        setFullName('')
+        setUsername('')
+        setPassword('')
+        setAvatar(null)
+      }
+    })
+  }
+
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setAvatar(file);
   };
-
-  const onSubmit = async (e) => {
-    e.preventDefault()
-    const payload = {
-      username, fullName, email, password, avatar
-    }
-
-    try {
-      setLoading(true)
-      setError('')
-      const response = await registerUser(payload)
-      console.log(response)
-      setLoading(false)
-    } catch (error) {
-      console.log(error)
-      setError(error?.message)
-      setLoading(false)
-    }
-
-    // setEmail('')
-    // setFullName('')
-    // setUsername('')
-    // setPassword('')
-    // setAvatar(null)
-
-  }
 
 
 
@@ -117,8 +117,8 @@ const SignUp = () => {
         .
       </p>
 
-      <Button disabled={loading} varient="primary" type="submit" className="!w-full">
-        {loading? 'wait...': 'Sign Up'}
+      <Button disabled={isPending} varient="primary" type="submit" className="!w-full">
+        {isPending? 'wait...': 'Sign Up'}
       </Button>
       <p className="space-x-1">
         <span>Already have an account?</span>
