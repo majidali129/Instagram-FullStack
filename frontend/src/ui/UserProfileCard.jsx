@@ -4,8 +4,8 @@ import Avatar from "./Avatar";
 import Button from "./Button";
 
 const UserProfileCard = () => {
-  const {user: {data}, isLoadingUser} = useUser()
-  console.log(data)
+  const {user, isLoadingUser} = useUser()
+  console.log(user)
   const posts = 10,
   followers = 4,
   following= 10;
@@ -13,9 +13,9 @@ const UserProfileCard = () => {
   if(isLoadingUser) return <span>wait...</span>
   return (
     <div className="flex flex-col items-center justify-center py-3 space-y-3.5 border-b border-b-zinc-700">
-      <Avatar image={data?.avatar} />
+      <Avatar image={user?.avatar} />
       <div className="space-y-2 text-center w-full flex items-center flex-col justify-center">
-          <Link to={`profile/${data?.username}`}><h3>{data?.username}</h3></Link>
+          <Link to={`profile/${user?.username}`}><h3>{user?.username}</h3></Link>
         <Button className="shadow-none !py-1 text-sm">Edit</Button>
       </div>
       <div className="flex items-center justify-between *:flex *:flex-col *:items-center stats gap-x-3">

@@ -15,12 +15,12 @@ const FeedItem = ({data}) => {
   const {caption, mediaUrl, comments, likes,_id: postId, user} = data;
   const {user: currentUser} = useUser()
   const {likeUnlikePost, likingPost} = useLikePost()
-  const totalLikes = likes.length,
-  totalComments = comments.length;
+  const totalLikes = likes?.length,
+  totalComments = comments?.length;
 
 
 
-  const isAlreadyLiked = currentUser?.data.likedPosts.includes(postId)
+  const isAlreadyLiked = currentUser?.likedPosts.includes(postId)
 
   return (
       <div className="bg-zinc-900 px-1 py-0 pt-5 space-y-2.5 border h-[570px] lg:h-[600px] border-zinc-700 border-t-0  rounded-xl">

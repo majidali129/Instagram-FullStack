@@ -35,6 +35,7 @@ const getAllUsers = async () => {
 const getCurrentUser = async () => {
   try {
     const { data } = await api.get(`/users/current-user`);
+    console.log(data);
     return data;
   } catch (error) {
     console.error("Error while fetching user", error);

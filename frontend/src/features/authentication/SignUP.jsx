@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import { registerUser } from "../../api/services/user-service";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation} from "@tanstack/react-query";
+import toast from 'react-hot-toast'
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -12,13 +13,18 @@ const SignUp = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState(null);
-  const queryClient = useQueryClient()
+  const navigate = useNavigate()
 
   const {mutate, isPending} = useMutation({
     mutationKey: ['user'],
     mutationFn: registerUser,
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ['user']})
+      toast.success('User registered successfully')
+      navigate('/accounts/login')
+    },
+    onError: (error) => {
+      console.log(error)
+      toast.error(error)
     }
   })
 

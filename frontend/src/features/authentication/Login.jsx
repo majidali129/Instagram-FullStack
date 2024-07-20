@@ -49,6 +49,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             name="password"
+            disabled={email===''}
             placeholder="Password"
           />
         </div>

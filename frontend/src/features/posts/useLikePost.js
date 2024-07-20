@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { likeUnlikePost as likePost } from "../../api/services/post-service";
+import toast from "react-hot-toast";
 
 export const useLikePost = () => {
   const queryClient = useQueryClient();
@@ -8,6 +9,7 @@ export const useLikePost = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
       queryClient.invalidateQueries({ queryKey: ["posts"] });
+      toast.success("Done ");
     }
   });
 
