@@ -2,20 +2,20 @@ import api from "./api-service";
 
 const registerUser = async (payload) => {
   try {
-    const response = await api.post(`/users`, payload, {
+    const { data } = await api.post(`/users`, payload, {
       headers: { "Content-Type": "multipart/form-data" }
     });
-    return response;
+    return data;
   } catch (error) {
     console.error("Error while creating user", error);
     throw error;
   }
 };
 const loginUser = async (payload) => {
-  console.log(payload);
   try {
-    const response = await api.post(`/users/login`, payload);
-    return response;
+    const { data } = await api.post(`/users/login`, payload);
+    console.log(data);
+    return data;
   } catch (error) {
     console.error("Error while creating user", error);
     throw error;
@@ -24,18 +24,18 @@ const loginUser = async (payload) => {
 
 const getAllUsers = async () => {
   try {
-    const response = await api.get();
-    return response;
+    const { data } = await api.get();
+    return data;
   } catch (error) {
     console.error("Error while fetching users", error);
     throw error;
   }
 };
 
-const getUser = async (param) => {
+const getCurrentUser = async () => {
   try {
-    const response = await api.get(`/users/${param}`);
-    return response;
+    const { data } = await api.get(`/users/current-user`);
+    return data;
   } catch (error) {
     console.error("Error while fetching user", error);
     throw error;
@@ -44,8 +44,8 @@ const getUser = async (param) => {
 
 const logoutUser = async () => {
   try {
-    const response = await api.post(`/users`);
-    return response;
+    const { data } = await api.post(`/users`);
+    return data;
   } catch (error) {
     console.error("Error to logout user", error);
     throw error;
@@ -54,8 +54,8 @@ const logoutUser = async () => {
 
 const removeUser = async (param) => {
   try {
-    const response = await api.delete(`/users/${param}`);
-    return response;
+    const { data } = await api.delete(`/users/${param}`);
+    return data;
   } catch (error) {
     console.error("Error while deleting user", error);
     throw error;
@@ -64,8 +64,8 @@ const removeUser = async (param) => {
 
 const updatePassword = async (payload) => {
   try {
-    const response = await api.patch("/users/change-password", payload);
-    return response;
+    const { data } = await api.patch("/users/change-password", payload);
+    return data;
   } catch (error) {
     console.error("Error while updating password", error);
     throw error;
@@ -74,8 +74,8 @@ const updatePassword = async (payload) => {
 
 const updateProfile = async (payload) => {
   try {
-    const resonse = await api.patch("/users/update-profile", payload);
-    return resonse;
+    const { data } = await api.patch("/users/update-profile", payload);
+    return data;
   } catch (error) {
     console.error("Error while updating profile", error);
     throw error;
@@ -87,7 +87,7 @@ export {
   loginUser,
   logoutUser,
   getAllUsers,
-  getUser,
+  getCurrentUser,
   removeUser,
   updatePassword,
   updateProfile

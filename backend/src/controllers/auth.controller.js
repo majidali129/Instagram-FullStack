@@ -12,7 +12,9 @@ import {
 } from '../utils/mail.js';
 
 const cookieOptions = {
-  httpOnly: true,
+  // httpOnly: true,
+  sameSite: 'Strict',
+  maxAge: 3600000,
   secure: process.env.NODE_ENV === 'production',
 };
 
@@ -173,7 +175,6 @@ const resendEmailVerification = asyncHandler(async (req, res, next) => {
 
 const loginUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
-  console.log(req.body);
   const user = await User.findOne({ email });
   if (!user) return next(new apiError(404, 'user not found. please signup first'));
 

@@ -6,7 +6,7 @@ import { Post } from '../models/posts.model.js';
 
 const addComment = asyncHandler(async (req, res, next) => {
   const { text, postId } = req.body;
-  // const { postId } = req.params;
+  console.log(postId);
 
   const createdComment = await Comment.create({
     text,
@@ -20,7 +20,7 @@ const addComment = asyncHandler(async (req, res, next) => {
       )
     );
 
-  const post = await Post.findById('6683216d95707c803dd4f9ef');
+  const post = await Post.findById(postId);
   post?.comments.push(createdComment._id);
   await post.save({ validateBeforeSave: false });
 

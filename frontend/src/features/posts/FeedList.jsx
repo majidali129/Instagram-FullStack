@@ -12,8 +12,8 @@ const FeedsList = () => {
         queryFn: getAllPosts
       })
 
+      console.log(data)
       if(isLoading) return <Loader />
-      console.log(data?.posts)
       return (
         <section className="h-auto py-1 space-y-4">
           <div className="space-y-5 stories">
@@ -38,11 +38,11 @@ const FeedsList = () => {
               </div>
             </div>
             <ul
-              className="grid h-full grid-cols-1 gap-4 pb-2 sm:grid-cols-2 lg:grid-cols-3 "
+              className="grid h-full gap-4 pb-2 lg:grid-cols-3 md:grid-cols-2"
             >
-              <FeedItem image="https://images.pexels.com/photos/274422/pexels-photo-274422.jpeg?auto=compress&cs=tinysrgb&w=600" />
-              <FeedItem image="https://images.pexels.com/photos/274422/pexels-photo-274422.jpeg?auto=compress&cs=tinysrgb&w=600" />
-              <FeedItem image="https://images.pexels.com/photos/274422/pexels-photo-274422.jpeg?auto=compress&cs=tinysrgb&w=600" />
+              {
+                data?.posts.map(feed => <FeedItem key={feed._id} data={feed} />)
+              }
             </ul>
           </div>
         </section>

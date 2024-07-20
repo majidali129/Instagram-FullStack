@@ -42,6 +42,24 @@ const userSchema = Schema(
         default: [],
       },
     ],
+    bookMarks: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Post',
+      },
+    ],
+    savedPosts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Post',
+      },
+    ],
+    likedPosts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Post',
+      },
+    ],
     refreshToken: String,
     isEmailVerified: {
       type: Boolean,

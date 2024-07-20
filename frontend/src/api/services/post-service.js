@@ -2,8 +2,10 @@ import api from "./api-service";
 
 const createPost = async (payload) => {
   try {
-    const response = await api.post(`/posts`, payload);
-    return response;
+    const { data } = await api.post(`/posts`, payload, {
+      headers: { "Content-Type": "multipart/form-data" }
+    });
+    return data;
   } catch (error) {
     console.error("Error while creating post", error);
     throw error;
@@ -12,8 +14,8 @@ const createPost = async (payload) => {
 
 const getPost = async (param) => {
   try {
-    const response = await api.get(`/posts/${param}`);
-    return response;
+    const { data } = await api.get(`/posts/${param}`);
+    return data;
   } catch (error) {
     console.error("Error while fetching post", error);
     throw error;
@@ -32,8 +34,8 @@ const getAllPosts = async () => {
 
 const updatePost = async (param, payload) => {
   try {
-    const response = await api.patch(`/posts/${param}`, payload);
-    return response;
+    const { data } = await api.patch(`/posts/${param}`, payload);
+    return data;
   } catch (error) {
     console.error("Error while updating post", error);
     throw error;
@@ -42,8 +44,8 @@ const updatePost = async (param, payload) => {
 
 const deletePost = async (param) => {
   try {
-    const response = await api.delete(`/posts/${param}`);
-    return response;
+    const { data } = await api.delete(`/posts/${param}`);
+    return data;
   } catch (error) {
     console.error("Error while deleting post", error);
     throw error;
@@ -52,8 +54,8 @@ const deletePost = async (param) => {
 
 const likeUnlikePost = async (payload) => {
   try {
-    const response = await api.get(`/posts/toggleLike`, payload); // payload is postId, in body
-    return response;
+    const { data } = await api.patch(`/posts/toggleLike`, payload); // payload is postId, in body
+    return data;
   } catch (error) {
     console.error("Error to like unlike post", error);
     throw error;
@@ -62,8 +64,8 @@ const likeUnlikePost = async (payload) => {
 
 const getUserRelatedPosts = async () => {
   try {
-    const response = await api.get(`/posts/user-data`);
-    return response;
+    const { data } = await api.get(`/posts/user-data`);
+    return data;
   } catch (error) {
     console.error("Error while getting user related posts", error);
     throw error;

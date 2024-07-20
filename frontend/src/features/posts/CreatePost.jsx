@@ -3,15 +3,27 @@ import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import { useModalContext } from "../../ui/Modal";
 import { BsCloudUpload } from "react-icons/bs";
+import {useMutation, useQueryClient} from '@tanstack/react-query'
+import { createPost } from "../../api/services/post-service";
+
 
 const CreatePost = () => {
   const [userPost, setUserPost] = useState(null);
   const [caption, setCaption] = useState("");
   const {close} = useModalContext()
-  const [submiting, setSubmiting] = useState(false)
-
   const [isUploaded, setIsUploaded] = useState(false);
-  //   const [showCaption, setShowCaption] = useState(false);
+  const queryClient = useQueryClient()
+
+
+  const {mutate: createNewPost, isPending: creatingPost} = useMutation({
+    mutationKey: ['posts'],
+    mutationFn: createPost,
+    onSuccess: (data) => {
+      console.log(data)
+      queryClient.invalidateQueries({queryKey: ['posts']})
+    }
+  })
+
   const uploaderRef = useRef(null);
   const imageRef = useRef(null);
   const captionRef = useRef(null); // Reference for caption section
@@ -27,33 +39,20 @@ const CreatePost = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log({ userPost, caption });
-    setSubmiting(true)
-    setTimeout(() => {
-        close()
-        setCaption("");
-        setUserPost(null);
-        setSubmiting(false)
-    },3000)
+    createNewPost({image: userPost, caption}, {
+      onSuccess: () => close(),
+      onSettled: () => {
+        setUserPost(null)
+        setCaption('')
+      }
+    })
   };
-
-  //   const handleBack = () => {
-  //     setIsUploaded(false);
-  //     setShowCaption(false); // Reset caption state
-  //     setCaption('')
-  //   };
-
-  //   const handleNext = () => {
-  //     setShowCaption(true);
-  //   };
-
 
   useEffect(() => {
     if (isUploaded && uploaderRef.current && imageRef.current) {
       const uploaderRect = uploaderRef.current.getBoundingClientRect();
       const imageRect = imageRef.current.getBoundingClientRect();
 
-      // Calculate animation styles for a smooth transition
       const animationStyles = {
         transform: `translateX(${uploaderRect.left - imageRect.left}px)`,
         opacity: 0
@@ -106,8 +105,6 @@ const CreatePost = () => {
           }`}
         >
           <div className="w-full  hidden items-center justify-between *:text-blue-400 px-3">
-            {/* <button onClick={handleBack}>Back</button>
-            <button onClick={handleNext}>Next</button> */}
           </div>
           <div ref={imageRef} className="image-preview">
             {userPost && (
@@ -130,7 +127,7 @@ const CreatePost = () => {
           )}
           {caption && (
             <div className="flex justify-end">
-              <Button varient="primary" className="px-10 max-sm:w-full" disabled={submiting} type="submit">{submiting? 'Uploading...': 'Upload'}</Button>
+              <Button varient="primary" className="px-10 max-sm:w-full" disabled={creatingPost} type="submit">{creatingPost? 'Uploading...': 'Upload'}</Button>
             </div>
           )}
         </div>

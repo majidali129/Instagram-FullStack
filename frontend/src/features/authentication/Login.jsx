@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
@@ -7,25 +7,20 @@ import { FaFacebookSquare } from "react-icons/fa";
 import CustomLink from "../../ui/Link";
 import { loginUser } from "../../api/services/user-service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useLogin } from "./useLogin";
 
 
 const Login = () => {
-  const queryClient = useQueryClient()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const {login, loggingIn} = useLogin()
 
-  const {mutate, isPending} = useMutation({
-    mutationKey: ['user'],
-    mutationFn: loginUser,
-    onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ['user']})
-    }
-  })
+
 
   const onSubmit = (e) => {
     e.preventDefault()
     console.log({email, password})
-    mutate({email, password}, {
+    login({email, password}, {
       onSettled: () => {
         setEmail('')
         setPassword('')
@@ -57,7 +52,7 @@ const Login = () => {
             placeholder="Password"
           />
         </div>
-        <Button disabled={isPending} type="submit" varient="primary" className="!w-full ">
+        <Button disabled={loggingIn} type="submit" varient="primary" className="!w-full ">
           Login
         </Button>
         <p className="py-1.5 opacity-60 text-[.9rem">OR</p>

@@ -1,21 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-// import AppLayout from "./shared/AppLayout";
-// import AppLayout from './shared/AppLayout'
-// import Feeds from "./pages/Feeds";
-// import Explore from "./pages/Explore";
-// import Reels from "./pages/Reels";
-// import BookMarks from "./pages/Bookmarks";
-// import AuthLayout from './shared/AuthLayout'
-// import Login from "./features/authentication/Login";
-// import SignUp from "./features/authentication/SignUp";
-// import ResetPassword from "./features/authentication/ResetPassword";
-// import UpdatePassword from "./features/authentication/UpdatePassword";
-// import UpdateProfile from "./features/authentication/UpdateProfile";
-// import About from "./pages/About";
-// import UserSavedPosts from "./features/posts/UserSavedPosts";
-// import UserPosts from "./features/posts/UserPosts";
-// import UserReels from "./features/reels/UserReels";
-// import CreatePost from "./features/posts/CreatePost";
 import AppLayout from './ui/AppLayout'
 import AuthLayout from './ui/AuthLayout'
 import Feeds from './pages/Feeds'

@@ -7,7 +7,7 @@ const PostsSchema = Schema(
       ref: 'User',
       required: true,
     },
-    image: {
+    mediaUrl: {
       type: String,
       required: true,
     },
@@ -15,10 +15,15 @@ const PostsSchema = Schema(
       type: String,
       required: true,
     },
+    mediaType: {
+      type: String,
+      enum: ['image', 'video'],
+      required: true,
+    },
     likes: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Like',
+        ref: 'User',
       },
     ],
     comments: [

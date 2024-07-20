@@ -1,7 +1,14 @@
-const Avatar = () => {
+import PropTypes from 'prop-types'
+
+const Avatar = ({image}) => {
   return (
-    <div className="w-11 h-11 border rounded-full sm:w-14 sm:h-14 border-slate-400"></div>
+    <figure className="w-10 h-10 rounded-full cursor-pointer sm:w-12 sm:h-12 border-slate-400">
+      <img src={image} alt="user profile phote" className='object-cover w-full h-full rounded-full' />
+    </figure>
   );
 };
 
+Avatar.propTypes = {
+  image: PropTypes.string
+}
 export default Avatar;

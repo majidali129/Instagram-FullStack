@@ -22,7 +22,7 @@ import {
 
 const router = express.Router();
 
-// router.use(verifyJWT);
+router.use(verifyJWT);
 router
   .route('/')
   .get(getAllPosts)
@@ -31,7 +31,7 @@ router.route('/user-data').get(getAllPostsByUser);
 
 router
   .route('/toggleLike')
-  .post(mongodbBodyIdValidator('postId'), validate, togglePostLike);
+  .patch(mongodbBodyIdValidator('postId'), validate, togglePostLike);
 
 router
   .route('/:postId')
