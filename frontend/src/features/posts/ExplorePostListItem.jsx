@@ -1,16 +1,19 @@
-
-const ExplorePostListItem = () => {
+import PropTypes from 'prop-types'
+const ExplorePostListItem = ({image}) => {
+  console.log(image)
   return (
-    <li>
-                <figure className="object-cover rounded-md ">
+                <figure className="object-cover rounded-md mb-4 ">
                   <img
-                    src="https://images.pexels.com/photos/274422/pexels-photo-274422.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    src={image}
                     alt=""
-                    className="w-full h-full rounded-md"
+                    className="w-full h-full rounded-md object-cover"
                   />
                 </figure>
-              </li>
   )
+}
+
+ExplorePostListItem.propTypes = {
+  image: PropTypes.string
 }
 
 export default ExplorePostListItem
