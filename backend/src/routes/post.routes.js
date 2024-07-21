@@ -5,6 +5,7 @@ import {
   getAllPosts,
   getAllPostsByUser,
   getPostDetails,
+  savePost,
   togglePostLike,
   updatePost,
 } from '../controllers/post.controller.js';
@@ -30,6 +31,10 @@ router
 router.route('/user-data').get(getAllPostsByUser);
 
 router
+  .route('/save-post')
+  .post(mongodbBodyIdValidator('postId'), validate, savePost);
+
+router
   .route('/toggleLike')
   .patch(mongodbBodyIdValidator('postId'), validate, togglePostLike);
 
@@ -40,7 +45,6 @@ router
   .patch(
     updatePostValidator(),
     mongodbPathIdValidator('postId'),
-    validate,
     validate,
     updatePost
   );

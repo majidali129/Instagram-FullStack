@@ -52,6 +52,16 @@ const deletePost = async (param) => {
   }
 };
 
+const savePost = async (payload) => {
+  try {
+    const { data } = await api.post(`/posts/save-post`, payload);
+    return data?.data;
+  } catch (error) {
+    console.error("Error while saving post", error);
+    throw error;
+  }
+};
+
 const likeUnlikePost = async (payload) => {
   try {
     const { data } = await api.patch(`/posts/toggleLike`, payload); // payload is postId, in body
@@ -79,5 +89,6 @@ export {
   deletePost,
   updatePost,
   likeUnlikePost,
-  getUserRelatedPosts
+  getUserRelatedPosts,
+  savePost
 };

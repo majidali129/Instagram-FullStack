@@ -68,11 +68,16 @@ const deletePost = asyncHandler(async (req, res, next) => {
 });
 
 const getAllPosts = asyncHandler(async (req, res, next) => {
-  const posts = await Post.find().populate({
-    path: 'user',
-    select: '_id username fullName avatar likedPosts bookMarks',
-  });
-
+  const posts = await Post.find()
+    .populate({
+      path: 'user',
+      select: '_id username fullName avatar likedPosts bookMarks',
+    })
+    .populate({
+      path: 'comments',
+      select: 'user text _id',
+    });
+  console.log(posts);
   res
     .status(200)
     .json(
@@ -102,14 +107,7 @@ const togglePostLike = asyncHandler(async (req, res, next) => {
     $or: [{ _id: req.user._id }, { username: req.user.username }],
   });
   const post = await Post.findById(postId);
-  // const alreadyLikedPost = user.likedPosts.find((el) => el.toString() === postId);
-  // const postHaveLike = post.likes.find((el) => el.toString() === user._id);
-  console.log(currentUser.likedPosts);
-  console.log(post.likes);
   const alreadyLikedPost = currentUser.likedPosts.includes(postId);
-  const postHaveLike = post.likes.includes(currentUser._id);
-  console.log('user likes', alreadyLikedPost);
-  console.log('liked posts', postHaveLike);
   if (alreadyLikedPost) {
     // TODO: remove the unlike
     currentUser.likedPosts = currentUser.likedPosts.filter((post) => {
@@ -125,8 +123,6 @@ const togglePostLike = asyncHandler(async (req, res, next) => {
     post.likes.push(currentUser._id);
     message = 'post liked successfully';
   }
-  // console.log(user.likedPosts);
-  console.log(post.likes);
   await currentUser.save();
   await post.save();
 
@@ -167,6 +163,25 @@ const getAllPostsByUser = asyncHandler(async (req, res, next) => {
   );
 });
 
+const savePost = asyncHandler(async (req, res, next) => {
+  const { postId } = req.body;
+  let message;
+  const currentUser = await User.findById(req.user._id);
+  const alreadySavedPost = currentUser.savedPosts.includes(postId);
+  if (alreadySavedPost) {
+    currentUser.savedPosts = currentUser.savedPosts.filter(
+      (post) => post.toString() !== postId
+    );
+    message = 'Post unsaved successfully';
+  } else {
+    currentUser.savedPosts.push(postId);
+    message = 'Post saved successfully';
+  }
+
+  await currentUser.save();
+  res.status(201).json(new apiResponse(201, currentUser, message));
+});
+
 export {
   createPost,
   updatePost,
@@ -175,4 +190,5 @@ export {
   getPostDetails,
   togglePostLike,
   getAllPostsByUser,
+  savePost,
 };

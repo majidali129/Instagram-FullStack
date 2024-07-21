@@ -22,6 +22,7 @@ import {
 import { upload } from '../middlewares/multer.middleware.js';
 import { verifyJWT } from '../middlewares/verifyJWT.middleware.js';
 import { validate } from '../validators/validate.validator.js';
+import { savePost } from '../controllers/post.controller.js';
 
 const router = express.Router();
 

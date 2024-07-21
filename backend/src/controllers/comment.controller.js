@@ -6,12 +6,13 @@ import { Post } from '../models/posts.model.js';
 
 const addComment = asyncHandler(async (req, res, next) => {
   const { text, postId } = req.body;
-  console.log(postId);
 
   const createdComment = await Comment.create({
     text,
     user: req?.user._id,
+    post: postId,
   });
+
   if (!createdComment)
     return next(
       new apiError(
@@ -61,7 +62,11 @@ const deleteComment = asyncHandler(async (req, res, next) => {
 });
 
 const getAllComments = asyncHandler(async (req, res, next) => {
-  const comments = await Comment.find();
+  const { postId } = req.query;
+  const comments = await Comment.find({ post: postId }).populate({
+    path: 'user',
+    select: 'avatar username email _id',
+  });
 
   res
     .status(200)

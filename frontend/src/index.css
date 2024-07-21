@@ -59,13 +59,15 @@ aside::-webkit-scrollbar,
 .content::-webkit-scrollbar,
 .reels::-webkit-scrollbar,
 .results::-webkit-scrollbar,
-.notifications::-webkit-scrollbar {
+.notifications::-webkit-scrollbar,
+.list::-webkit-scrollbar {
   display: none;
 }
 .content,
 .reels,
 .results,
-.notifications {
+.notifications,
+.list {
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;

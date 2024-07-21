@@ -29,7 +29,6 @@ router
     updateCommentValidator(),
     mongodbPathIdValidator('commentId'),
     validate,
-    validate,
     updateComment
   );
 

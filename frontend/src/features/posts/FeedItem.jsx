@@ -1,6 +1,7 @@
 import Avatar from "../../ui/Avatar";
 import { BsEmojiSmileFill, BsThreeDots } from "react-icons/bs";
 import { FaComment, FaBookmark } from "react-icons/fa";
+import { FaRegBookmark } from "react-icons/fa";
 import { IoMdHeart } from "react-icons/io";
 import { BsFillSendFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
@@ -8,22 +9,40 @@ import PropTypes from 'prop-types'
 import { useState } from "react";
 import { useUser } from "../authentication/useGetCurrentUser";
 import { useLikePost } from "./useLikePost";
+import useAddComment from "./useAddComment";
+import useAddBookmark from "./useAddBookmark";
 
 const FeedItem = ({data}) => {
-
   const [showCaption, setShowCaption] = useState(false)
+  const [comment, setComment] = useState('')
   const {caption, mediaUrl, comments, likes,_id: postId, user} = data;
   const {user: currentUser} = useUser()
   const {likeUnlikePost, likingPost} = useLikePost()
+  const {addNewComment, addingComment} = useAddComment()
+  const {savePost, savingPost} = useAddBookmark()
   const totalLikes = likes?.length,
   totalComments = comments?.length;
 
 
 
-  const isAlreadyLiked = currentUser?.likedPosts.includes(postId)
+  const onSubmit = (e) => {
+    e.preventDefault()
+    addNewComment({
+      text: comment,
+      postId,
+    }, {
+      onSettled: () => {
+        setComment('')
+      }
+    })
+  }
+
+
+  const isAlreadyLiked = currentUser?.likedPosts?.includes(postId)
+  const isAlreadySaved = currentUser?.savedPosts?.includes(postId)
 
   return (
-      <div className="bg-zinc-900 px-1 py-0 pt-5 space-y-2.5 border h-[570px] lg:h-[600px] border-zinc-700 border-t-0  rounded-xl">
+      <div className="bg-zinc-900 px-1 py-0 pt-5 space-y-2.5 border h-[685px] lg:h-[700px] border-zinc-700 border-t-0  rounded-xl">
         <div className="px-1.5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-x-2">
@@ -41,7 +60,7 @@ const FeedItem = ({data}) => {
           </div>
         </div>
 
-        <figure className=" rounded-md  sm:rounded-[10px] h-[300px] ">
+        <figure className=" rounded-md  sm:rounded-[10px] h-[430px] ">
           {/* <figure className=" rounded-md h-[320px] max-h-[400px] sm:rounded-[15px] "> */}
           <img
             src={mediaUrl}
@@ -53,7 +72,7 @@ const FeedItem = ({data}) => {
         <div className="px-1.5 py-1 space-y-2">
           <div className="flex items-center justify-between actions">
             <div className="space-x-2.5 *:cursor-pointer flex items-center">
-              <button disabled={likingPost} onClick={() => likeUnlikePost({postId:data?._id})} >
+              <button disabled={likingPost} onClick={() => likeUnlikePost({postId})} >
                 {isAlreadyLiked? <IoMdHeart className="w-5 h-5 fill-red-500" />: <IoMdHeart className="w-5 h-5" />}
 
               </button>
@@ -64,9 +83,10 @@ const FeedItem = ({data}) => {
                 <BsFillSendFill className="w-5 h-5" />
               </button>
             </div>
-            <div className="cursor-pointer">
-              <FaBookmark className="w-5 h-5" />
-            </div>
+            <button disabled={savingPost} className="cursor-pointer" onClick={() => savePost({postId})}>
+              {/* <FaBookmark className="w-5 h-5" /> */}
+              {isAlreadySaved? <FaBookmark className="w-5 h-5" />: <FaRegBookmark className="w-5 h-5" />}
+            </button>
           </div>
           <div className="space-y-1">
             <p className="space-x-1.5">
@@ -82,16 +102,18 @@ const FeedItem = ({data}) => {
               }
             </p>
             <p className="space-x-1.5 ">
-              {totalComments > 0&& <span className="opacity-50"> view all {totalComments} comments</span>}
-              {totalComments === 0 &&  <span className="opacity-50">Add a comment</span>}
-
+              {totalComments === 1 && <span className="opacity-50"> {comments[0].text} </span>}
+              {totalComments > 1 && <span className="opacity-50 cursor-pointer" > view all {totalComments} comments</span>}
+              {!totalComments &&<span className="opacity-50">Add a comment</span>}
             </p>
           </div>
-          <form className="flex items-center justify-between w-full gap-x-2 ">
+          <form onSubmit={onSubmit} disabled={addingComment} className="flex items-center justify-between w-full gap-x-2 ">
             <input
               type="text"
               name="comment"
               id=""
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
               className="bg-inherit w-full py-2 px-1.5 placeholder:opacity-50 outline-none border-none"
               placeholder="Add a comment..."
             />
