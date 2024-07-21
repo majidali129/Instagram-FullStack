@@ -1,4 +1,3 @@
-import Avatar from "../../ui/Avatar";
 import { BsEmojiSmileFill, BsThreeDots } from "react-icons/bs";
 import { FaComment, FaBookmark } from "react-icons/fa";
 import { FaRegBookmark } from "react-icons/fa";
@@ -11,6 +10,7 @@ import { useUser } from "../authentication/useGetCurrentUser";
 import { useLikePost } from "./useLikePost";
 import useAddComment from "./useAddComment";
 import useAddBookmark from "./useAddBookmark";
+import Avatar from "../../ui/Avatar";
 
 const FeedItem = ({data}) => {
   const [showCaption, setShowCaption] = useState(false)
@@ -37,9 +37,8 @@ const FeedItem = ({data}) => {
     })
   }
 
-
-  const isAlreadyLiked = currentUser?.likedPosts?.includes(postId)
-  const isAlreadySaved = currentUser?.savedPosts?.includes(postId)
+const isLiked = currentUser?.likedPosts?.some(post => post._id ===postId );
+const isSaved = currentUser?.savedPosts?.some(post => post._id ===postId);
 
   return (
       <div className="bg-zinc-900 px-1 py-0 pt-5 space-y-2.5 border h-[685px] lg:h-[700px] border-zinc-700 border-t-0  rounded-xl">
@@ -73,7 +72,7 @@ const FeedItem = ({data}) => {
           <div className="flex items-center justify-between actions">
             <div className="space-x-2.5 *:cursor-pointer flex items-center">
               <button disabled={likingPost} onClick={() => likeUnlikePost({postId})} >
-                {isAlreadyLiked? <IoMdHeart className="w-5 h-5 fill-red-500" />: <IoMdHeart className="w-5 h-5" />}
+                {isLiked? <IoMdHeart className="w-5 h-5 fill-red-500" />: <IoMdHeart className="w-5 h-5" />}
 
               </button>
               <button>
@@ -85,7 +84,7 @@ const FeedItem = ({data}) => {
             </div>
             <button disabled={savingPost} className="cursor-pointer" onClick={() => savePost({postId})}>
               {/* <FaBookmark className="w-5 h-5" /> */}
-              {isAlreadySaved? <FaBookmark className="w-5 h-5" />: <FaRegBookmark className="w-5 h-5" />}
+              {isSaved? <FaBookmark className="w-5 h-5" />: <FaRegBookmark className="w-5 h-5" />}
             </button>
           </div>
           <div className="space-y-1">

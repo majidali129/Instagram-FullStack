@@ -10,7 +10,6 @@ const useAddBookmark = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
       toast.success(data?.message);
-      console.log(data);
     },
     onError: (error) => {
       toast.error(error);

@@ -42,10 +42,11 @@ const userSchema = Schema(
         default: [],
       },
     ],
-    bookMarks: [
+    following: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Post',
+        ref: 'User',
+        default: [],
       },
     ],
     savedPosts: [

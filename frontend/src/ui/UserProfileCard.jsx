@@ -5,7 +5,6 @@ import Button from "./Button";
 
 const UserProfileCard = () => {
   const {user, isLoadingUser} = useUser()
-  console.log(user)
   const posts = 10,
   followers = 4,
   following= 10;
@@ -14,7 +13,7 @@ const UserProfileCard = () => {
   return (
     <div className="flex flex-col items-center justify-center py-3 space-y-3.5 border-b border-b-zinc-700">
       <Avatar image={user?.avatar} />
-      <div className="space-y-2 text-center w-full flex items-center flex-col justify-center">
+      <div className="flex flex-col items-center justify-center w-full space-y-2 text-center">
           <Link to={`profile/${user?.username}`}><h3>{user?.username}</h3></Link>
         <Button className="shadow-none !py-1 text-sm">Edit</Button>
       </div>

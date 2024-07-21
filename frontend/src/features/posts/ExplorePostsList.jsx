@@ -18,7 +18,7 @@ const ExplorePostsList = () => {
           <div className="h-full py-2 space-y-5 Feeds">
             <h2>Explore</h2>
             <ul className=" sm:columns-2 md:columns-3 2xl:columns-4 ">
-              {data?.posts?.map(post => <ExplorePostListItem key={post._id} image={post?.mediaUrl} /> ) }
+              {data?.posts?.map(post => <ExplorePostListItem key={post._id} post={post} /> ) }
             </ul>
           </div>
         </section>

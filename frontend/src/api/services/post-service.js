@@ -55,7 +55,7 @@ const deletePost = async (param) => {
 const savePost = async (payload) => {
   try {
     const { data } = await api.post(`/posts/save-post`, payload);
-    return data?.data;
+    return data;
   } catch (error) {
     console.error("Error while saving post", error);
     throw error;

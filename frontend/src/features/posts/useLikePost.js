@@ -6,10 +6,10 @@ export const useLikePost = () => {
   const queryClient = useQueryClient();
   const { mutate: likeUnlikePost, isPending: likingPost } = useMutation({
     mutationFn: (postId) => likePost(postId),
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
       queryClient.invalidateQueries({ queryKey: ["posts"] });
-      toast.success("Done ");
+      toast.success(data?.message);
     }
   });
 

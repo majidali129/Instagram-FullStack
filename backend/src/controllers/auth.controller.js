@@ -316,10 +316,16 @@ const updateProfile = asyncHandler(async (req, res, next) => {
 });
 
 const getCurrentUser = asyncHandler(async (req, res, _) => {
+  const currentUser = await User.findById(req.user._id)
+    .select('-password -refreshToken')
+    .populate('likedPosts')
+    .populate('savedPosts')
+    .populate('followers')
+    .populate('following');
   res
     .status(200)
     .json(
-      new apiResponse(200, req.user, 'current user profile fetched successfully')
+      new apiResponse(200, currentUser, 'current user profile fetched successfully')
     );
 });
 
