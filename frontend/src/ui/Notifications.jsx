@@ -6,9 +6,9 @@ const Notifications = () => {
   return (
     <ModalProvider>
       <>
-        <div className="bg-zinc-50 w-[340px] md:w-96 *:py-4  h-[75vh] rounded overflow-hidden">
-          <div className="px-4 border-b  border-b-zinc-400">
-          <h3 className="font-semibold  text-start text-zinc-950">
+        <div className="bg-zinc-50 w-[340px] md:w-[440px] *:py-4  h-[80vh] rounded overflow-hidden">
+          <div className="px-4 border-b border-b-zinc-400">
+          <h3 className="font-semibold text-start text-zinc-950">
             Notifications
           </h3>
           </div>

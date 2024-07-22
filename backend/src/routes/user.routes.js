@@ -19,16 +19,17 @@ import {
   updateProfile,
   getAccountByUsername,
   verifyEmail,
+  getAllUsers,
 } from '../controllers/auth.controller.js';
 import { upload } from '../middlewares/multer.middleware.js';
 import { verifyJWT } from '../middlewares/verifyJWT.middleware.js';
 import { validate } from '../validators/validate.validator.js';
-import { savePost } from '../controllers/post.controller.js';
 
 const router = express.Router();
 
 router
   .route('/')
+  .get(getAllUsers)
   .post(upload.single('avatar'), registerUserValidator(), validate, registerUser);
 
 router.route('/login').post(loginUserValidator, validate, loginUser);

@@ -96,7 +96,7 @@ export { ModalProvider, useModalContext, Modal };
 //   return (
 //     <div>
 //       {createPortal(
-//         <div className="inset-0 h-screen w-screen fixed flex items-center justify-center z-50">
+//         <div className="fixed inset-0 z-50 flex items-center justify-center w-screen h-screen">
 //           <div
 //             className="absolute inset-0 bg-black opacity-50 backdrop-blur-[1px]"
 //             onClick={onClose}
@@ -105,7 +105,7 @@ export { ModalProvider, useModalContext, Modal };
 //             {children}
 //           </div>
 //           <button
-//             className="absolute top-5 right-5 p-2 rounded-full bg-zinc-800 "
+//             className="absolute p-2 rounded-full top-5 right-5 bg-zinc-800 "
 //             onClick={onClose}
 //           >
 //             <RiCloseLargeLine className="w-7 h-7 " />

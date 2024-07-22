@@ -357,6 +357,17 @@ const logoutUser = asyncHandler(async (req, res, next) => {
     .clearCookie('refreshToken', cookieOptions)
     .json(new apiResponse(200, {}, 'User logged out'));
 });
+
+const getAllUsers = asyncHandler(async (req, res, next) => {
+  const { username } = req.query;
+  const regex = new RegExp(username, 'i');
+  console.log(username, regex);
+  const users = await User.find({
+    username: { $regex: regex },
+  });
+
+  res.status(200).json(new apiResponse(200, users, 'result for search'));
+});
 export {
   registerUser,
   loginUser,
@@ -369,4 +380,5 @@ export {
   getCurrentUser,
   logoutUser,
   getAccountByUsername,
+  getAllUsers,
 };

@@ -11,9 +11,8 @@ const Header = () => {
 
   return (
     <ModalProvider>
-      <>
 
-    <nav className="flex items-center justify-between h-full md:px-5 px-2 bg-zinc-900 rounded-tr-md">
+    <nav className="flex items-center justify-between h-full px-2 md:px-5 bg-zinc-900 rounded-tr-md">
       <Modal.Open opens="search">
       <form
         action=""
@@ -35,18 +34,18 @@ const Header = () => {
       <Modal.Window name="search">
         <Search />
       </Modal.Window>
-      <div className="actions flex items-center gap-x-4">
-        {/* <Button varient="primary" className="!py-1" onClick={() => navigate('/accounts/emailsignup')}>Sign Up</Button>
-        <Button varient="primary" className="!py-1" onClick={() => navigate('/accounts/login')}>Login</Button> */}
+
+      <div className="flex items-center actions gap-x-4">
         <Modal.Open opens="notifications">
         <MdNotifications className="w-6 h-6 hover:cursor-pointer" />
         </Modal.Open>
       </div>
-    </nav>
-          <Modal.Window name="notifications">
+      <Modal.Window name="notifications">
             <Notifications />
-          </Modal.Window>
-          </>
+      </Modal.Window>
+
+    </nav>
+
     </ModalProvider>
   );
 };

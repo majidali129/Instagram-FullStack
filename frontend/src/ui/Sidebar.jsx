@@ -13,7 +13,7 @@ import { useUser } from "../features/authentication/useUser";
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const {user:currentUser, loadingUser} =useUser()
+  const {user:currentUser} =useUser()
   const handleLogout = () => {
     setTimeout(() => {
       navigate('/accounts/login')

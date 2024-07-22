@@ -22,10 +22,15 @@ const loginUser = async (payload) => {
   }
 };
 
-const getAllUsers = async () => {
+const getAllUsers = async (query) => {
+  let url = `/users`;
+  if (typeof query === "string" && query.trim().length > 0) {
+    url += `/?username=${query}`;
+  }
+  console.log(url);
   try {
-    const { data } = await api.get();
-    return data;
+    const { data } = await api.get(url);
+    return data?.data;
   } catch (error) {
     console.error("Error while fetching users", error);
     throw error;
