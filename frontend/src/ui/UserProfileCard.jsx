@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
-import { useUser } from "../features/authentication/useGetCurrentUser";
+import { useUser } from "../features/authentication/useUser";
+import { useFetchPosts } from "../features/posts/useFetchPosts";
 import Avatar from "./Avatar";
 import Button from "./Button";
+import Loader from "./Loader";
 
 const UserProfileCard = () => {
-  const {user, isLoadingUser} = useUser()
-  const posts = 10,
-  followers = 4,
-  following= 10;
+  const {user, loadingUser} = useUser()
+  const {loadingPosts, posts} = useFetchPosts(user?.username);
+  const totalPosts = posts?.length,
+  followers = user?.followers.length,
+  following= user?.following.length
 
-  if(isLoadingUser) return <span>wait...</span>
+  if(loadingUser || loadingPosts) return <Loader />
   return (
     <div className="flex flex-col items-center justify-center py-3 space-y-3.5 border-b border-b-zinc-700">
       <Avatar image={user?.avatar} />
@@ -19,7 +22,7 @@ const UserProfileCard = () => {
       </div>
       <div className="flex items-center justify-between *:flex *:flex-col *:items-center stats gap-x-3">
         <div>
-          <h4>{posts}</h4>
+          <h4>{totalPosts}</h4>
           <span className="opacity-60">{posts===1? 'Post': 'Posts'}</span>
         </div>
         <div>

@@ -7,7 +7,6 @@ import { useModalContext } from "./Modal";
 
 const Search = () => {
     const [query, setQuery] = useState('');
-    // const [results, setResults] = useState([]);
     const {close} = useModalContext()
     const handleQueryChange = (e) => {
         setQuery(e.target.value)
@@ -27,7 +26,7 @@ const Search = () => {
         <h2>Search</h2>
         <form
         onSubmit={handleUserSearch}
-        className="flex items-center border relative rounded-md gap-x-2 border-zinc-800"
+        className="relative flex items-center border rounded-md gap-x-2 border-zinc-800"
       >
         <input
           type="text"
@@ -39,7 +38,7 @@ const Search = () => {
           className="!bg-zinc-900 py-1.5 px-2 focus:outline-none focus:border-none text-[.95rem] w-full"
           />
         {!query && <MdMic className="w-6 h-6 cursor-pointer" />}
-        {query && <MdCancel className="w-5 h-5 absolute right-2 cursor-pointer" onClick={() => setQuery('')} />}
+        {query && <MdCancel className="absolute w-5 h-5 cursor-pointer right-2" onClick={() => setQuery('')} />}
       </form>
 
       <ul className="space-y-2 results h-full *:border-b *:border-b-zinc-700 *:py-1.5 *:grid *:grid-cols-[50px_1fr] *:gap-x-1 md:*:gap-x-5 !overflow-y-scroll">
@@ -47,7 +46,7 @@ const Search = () => {
             <Avatar />
             <div>
                 <h4 >username</h4>
-                <span className="opacity-70 text-sm">Front-End Developer</span>
+                <span className="text-sm opacity-70">Front-End Developer</span>
             </div>
         </Link>
       </ul>

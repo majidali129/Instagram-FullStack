@@ -35,10 +35,19 @@ const getAllUsers = async () => {
 const getCurrentUser = async () => {
   try {
     const { data } = await api.get(`/users/current-user`);
-    console.log(data);
-    return data;
+    return data?.data;
   } catch (error) {
     console.error("Error while fetching user", error);
+    throw error;
+  }
+};
+
+const getAccoutByUsername = async (username) => {
+  try {
+    const { data } = await api.get(`/users/profile/${username}`);
+    return data?.data;
+  } catch (error) {
+    console.error("Error while fetching user info", error);
     throw error;
   }
 };
@@ -55,7 +64,7 @@ const logoutUser = async () => {
 
 const removeUser = async (param) => {
   try {
-    const { data } = await api.delete(`/users/${param}`);
+    const { data } = await api.delete(`/users/profile/${param}`);
     return data;
   } catch (error) {
     console.error("Error while deleting user", error);
@@ -91,5 +100,6 @@ export {
   getCurrentUser,
   removeUser,
   updatePassword,
-  updateProfile
+  updateProfile,
+  getAccoutByUsername
 };

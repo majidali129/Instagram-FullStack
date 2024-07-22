@@ -17,6 +17,7 @@ import {
   resendEmailVerification,
   resetForgottenPassword,
   updateProfile,
+  getAccountByUsername,
   verifyEmail,
 } from '../controllers/auth.controller.js';
 import { upload } from '../middlewares/multer.middleware.js';
@@ -47,6 +48,7 @@ router.use(verifyJWT);
 router.route('/logout').post(logoutUser);
 router.route('/update-profile').patch(updateProfile);
 router.route('/current-user').get(getCurrentUser);
+router.route('/profile/:username').get(getAccountByUsername);
 router
   .route('/change-password')
   .post(userChangeCurrentPasswordValidator(), validate, changeCurrentPassword);

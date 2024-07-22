@@ -6,7 +6,7 @@ import { BsFillSendFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types'
 import { useState } from "react";
-import { useUser } from "../authentication/useGetCurrentUser";
+import { useUser } from "../authentication/useUser";
 import { useLikePost } from "./useLikePost";
 import useAddComment from "./useAddComment";
 import useAddBookmark from "./useAddBookmark";

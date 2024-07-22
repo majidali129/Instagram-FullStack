@@ -40,7 +40,6 @@ const generateAccessRefreshToken = async (userId) => {
 
 const registerUser = asyncHandler(async (req, res, next) => {
   const { email, username } = req.body;
-  console.log(req.body);
 
   const existingUser = await User.findOne({
     $or: [{ email }, { username }],
@@ -266,7 +265,6 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
   const { oldPassword, newPassword } = req.body;
 
   const user = await User.findById(req.user?._id);
-  console.log(user);
 
   // check the old password
   const isPasswordValid = await user.isPasswordCorrect(oldPassword, user.password);
@@ -329,6 +327,19 @@ const getCurrentUser = asyncHandler(async (req, res, _) => {
     );
 });
 
+const getAccountByUsername = asyncHandler(async (req, res, next) => {
+  const { username } = req.params;
+  const user = await User.findOne({ username })
+    .select('-password -refreshToken ')
+    .populate('likedPosts savedPosts following followers');
+  if (!user)
+    return next(new apiError(404, 'user no longer exists for this account'));
+
+  return res
+    .status(200)
+    .json(new apiResponse(200, user, 'user info fetched successfully'));
+});
+
 const logoutUser = asyncHandler(async (req, res, next) => {
   await User.findByIdAndUpdate(
     req.user._id,
@@ -357,4 +368,5 @@ export {
   updateProfile,
   getCurrentUser,
   logoutUser,
+  getAccountByUsername,
 };

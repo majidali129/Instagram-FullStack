@@ -1,19 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
 import Stories from "../../ui/Stories";
 import { FaPlayCircle } from "react-icons/fa";
-import { getAllPosts } from "../../api/services/post-service";
 import Loader from "../../ui/Loader";
 import FeedItem from "./FeedItem";
+import { useFetchPosts } from "./useFetchPosts";
 
 
 const FeedsList = () => {
-    const {isLoading, data} = useQuery({
-        queryKey: ['posts'],
-        queryFn: getAllPosts
-      })
-
-      console.log(data)
-      if(isLoading) return <Loader />
+    const {loadingPosts, posts} = useFetchPosts()
+    if(loadingPosts) return <Loader />
       return (
         <section className="h-auto py-1 space-y-4">
           <div className="space-y-5 stories">
@@ -41,7 +35,7 @@ const FeedsList = () => {
               className="grid h-full gap-4 pb-2 lg:grid-cols-3 md:grid-cols-2"
             >
               {
-                data?.posts.map(feed => <FeedItem key={feed._id} data={feed} />)
+                posts?.map(feed => <FeedItem key={feed._id} data={feed} />)
               }
             </ul>
           </div>

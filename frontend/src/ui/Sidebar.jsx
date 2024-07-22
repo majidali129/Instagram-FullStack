@@ -8,11 +8,12 @@ import { IoMdHome } from "react-icons/io";
 import UserProfileCard from "./UserProfileCard";
 import { SlLogout } from "react-icons/sl";
 import { Modal, ModalProvider } from "./Modal";
-// import CreatePost from "../components/CreatePost";
 import CreatePost from "../features/posts/CreatePost";
+import { useUser } from "../features/authentication/useUser";
 
 const Sidebar = () => {
   const navigate = useNavigate();
+  const {user:currentUser, loadingUser} =useUser()
   const handleLogout = () => {
     setTimeout(() => {
       navigate('/accounts/login')
@@ -88,7 +89,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-              to="/profile/majidali129"
+              to={`/profile/${currentUser?.username}`}
               className="flex items-center py-1.5  gap-x-2 opacity-50 hover:opacity-100 "
             >
               <div className="w-6 h-6 border rounded-full">
@@ -164,7 +165,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-              to="/profile/majidali129"
+              to={`/profile/${currentUser?.username}`}
               className="flex items-center justify-center py-1.5  opacity-50 hover:opacity-100 "
             >
               <div className="w-6 h-6 border rounded-full">

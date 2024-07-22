@@ -1,8 +1,8 @@
-import UserSavedPosts from "../features/posts/UserSavedPosts"
+import BookMarkList from "../features/posts/BookmarksList"
 
 const BookMarks = () => {
   return (
-    <UserSavedPosts />
+    <BookMarkList />
   )
 }
 

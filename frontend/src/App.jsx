@@ -9,13 +9,13 @@ import BookMarks from './pages/Bookmarks'
 import About from './pages/About'
 import CreatePost from './features/posts/CreatePost'
 import UserPosts from './features/posts/UserPosts'
-import UserSavedPosts from './features/posts/UserSavedPosts'
-import UserReels from './features/reels/UserReels'
+import BookmarksList from './features/posts/BookmarksList'
 import SignUp from './features/authentication/SignUP'
 import Login from './features/authentication/Login'
 import ResetPassword from './features/authentication/ResetPassword'
 import UpdatePassword from './features/authentication/UpdatePassword'
 import UpdateProfile from './features/authentication/UpdateProfile'
+import UserLikedPosts from "./features/posts/UserLikedPosts";
 
 export default function App() {
   return (
@@ -29,8 +29,8 @@ export default function App() {
           <Route path="add-post" element={<CreatePost />} />
           <Route path="profile/:username" element={<About />}>
             <Route index element={<UserPosts />} />
-            <Route path="saved" element={<UserSavedPosts />} />
-            <Route path="reels" element={<UserReels />} />
+            <Route path="saved" element={<BookmarksList />} />
+            <Route path="liked-posts" element={<UserLikedPosts />} />
           </Route>
         </Route>
         <Route element={<AuthLayout />}>
@@ -43,7 +43,6 @@ export default function App() {
         </Route>
       </Routes>
       <Toaster
-
       position="top-right"
       reverseOrder="true"
       gutter={10}

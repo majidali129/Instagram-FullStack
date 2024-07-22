@@ -12,40 +12,44 @@ const createPost = async (payload) => {
   }
 };
 
-const getPost = async (param) => {
+const getPost = async (postId) => {
   try {
-    const { data } = await api.get(`/posts/${param}`);
-    return data;
+    const { data } = await api.get(`/posts/${postId}`);
+    return data?.data;
   } catch (error) {
     console.error("Error while fetching post", error);
     throw error;
   }
 };
 
-const getAllPosts = async () => {
+const getAllPosts = async (query) => {
+  let url = `/posts`;
+  if (typeof query === "string" && query.trim().length > 0) {
+    url += `/?username=${query}`;
+  }
   try {
-    const { data } = await api.get("/posts");
-    return data.data;
+    const { data } = await api.get(url);
+    return data?.data;
   } catch (error) {
     console.error("Error while fetching posts", error);
     throw error;
   }
 };
 
-const updatePost = async (param, payload) => {
+const updatePost = async (postId, payload) => {
   try {
-    const { data } = await api.patch(`/posts/${param}`, payload);
-    return data;
+    const { data } = await api.patch(`/posts/${postId}`, payload);
+    return data?.data;
   } catch (error) {
     console.error("Error while updating post", error);
     throw error;
   }
 };
 
-const deletePost = async (param) => {
+const deletePost = async (postId) => {
   try {
-    const { data } = await api.delete(`/posts/${param}`);
-    return data;
+    const { data } = await api.delete(`/posts/${postId}`);
+    return data?.data;
   } catch (error) {
     console.error("Error while deleting post", error);
     throw error;

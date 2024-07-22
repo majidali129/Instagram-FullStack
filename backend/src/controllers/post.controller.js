@@ -68,7 +68,13 @@ const deletePost = asyncHandler(async (req, res, next) => {
 });
 
 const getAllPosts = asyncHandler(async (req, res, next) => {
-  const posts = await Post.find()
+  const { username } = req.query;
+  let query = {};
+  if (username) {
+    const user = await User.findOne({ username });
+    query = { user: user._id };
+  }
+  const posts = await Post.find(query)
     .populate({
       path: 'user',
       select: '_id username fullName avatar likedPosts bookMarks',
@@ -77,7 +83,6 @@ const getAllPosts = asyncHandler(async (req, res, next) => {
       path: 'comments',
       select: 'user text _id',
     });
-  console.log(posts);
   res
     .status(200)
     .json(
