@@ -27,7 +27,6 @@ const getAllUsers = async (query) => {
   if (typeof query === "string" && query.trim().length > 0) {
     url += `/?username=${query}`;
   }
-  console.log(url);
   try {
     const { data } = await api.get(url);
     return data?.data;
@@ -97,6 +96,18 @@ const updateProfile = async (payload) => {
   }
 };
 
+const followAccount = async (payload) => {
+  console.log(payload);
+  try {
+    const response = await api.patch("/users/follow-account", payload);
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log("Error while following account", error);
+    throw error;
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -106,5 +117,6 @@ export {
   removeUser,
   updatePassword,
   updateProfile,
-  getAccoutByUsername
+  getAccoutByUsername,
+  followAccount
 };

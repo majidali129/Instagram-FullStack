@@ -331,7 +331,15 @@ const getAccountByUsername = asyncHandler(async (req, res, next) => {
   const { username } = req.params;
   const user = await User.findOne({ username })
     .select('-password -refreshToken ')
-    .populate('likedPosts savedPosts following followers');
+    .populate('likedPosts savedPosts')
+    .populate({
+      path: 'following',
+      select: '_id username fullName  avatar',
+    })
+    .populate({
+      path: 'followers',
+      select: '_id username fullName  avatar',
+    });
   if (!user)
     return next(new apiError(404, 'user no longer exists for this account'));
 
@@ -358,10 +366,37 @@ const logoutUser = asyncHandler(async (req, res, next) => {
     .json(new apiResponse(200, {}, 'User logged out'));
 });
 
+const followAccount = asyncHandler(async (req, res, next) => {
+  const { targetId, currentId } = req.body;
+  let message;
+  const targetUser = await User.findById(targetId);
+  const currentUser = await User.findById(currentId);
+  if (!targetUser)
+    return next(new apiError(404, 'User no longer exist for this ID'));
+  const isAlreadyFollowed = targetUser.followers.includes(currentId);
+  if (isAlreadyFollowed) {
+    targetUser.followers = targetUser.followers.filter(
+      (followerId) => followerId.toString() !== currentId
+    );
+    currentUser.following = currentUser.following.filter(
+      (followingId) => followingId.toString() !== targetId
+    );
+    message = `Unfollowing to ${targetUser.username} is done`;
+  } else {
+    targetUser.followers.push(currentId);
+    currentUser.following.push(targetId);
+    message = `Following to ${targetUser.username} is done`;
+  }
+
+  await targetUser.save({ validateBeforeSave: false });
+  await currentUser.save({ validateBeforeSave: false });
+
+  res.status(200).json(new apiResponse(200, {}, message));
+});
+
 const getAllUsers = asyncHandler(async (req, res, next) => {
   const { username } = req.query;
   const regex = new RegExp(username, 'i');
-  console.log(username, regex);
   const users = await User.find({
     username: { $regex: regex },
   });
@@ -372,13 +407,14 @@ export {
   registerUser,
   loginUser,
   verifyEmail,
-  resendEmailVerification,
-  forgotPassword,
-  resetForgottenPassword,
   changeCurrentPassword,
   updateProfile,
   getCurrentUser,
   logoutUser,
   getAccountByUsername,
   getAllUsers,
+  followAccount,
+  resendEmailVerification,
+  forgotPassword,
+  resetForgottenPassword,
 };

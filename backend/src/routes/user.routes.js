@@ -20,6 +20,7 @@ import {
   getAccountByUsername,
   verifyEmail,
   getAllUsers,
+  followAccount,
 } from '../controllers/auth.controller.js';
 import { upload } from '../middlewares/multer.middleware.js';
 import { verifyJWT } from '../middlewares/verifyJWT.middleware.js';
@@ -47,6 +48,7 @@ router
 router.use(verifyJWT);
 
 router.route('/logout').post(logoutUser);
+router.route('/follow-account').patch(followAccount);
 router.route('/update-profile').patch(updateProfile);
 router.route('/current-user').get(getCurrentUser);
 router.route('/profile/:username').get(getAccountByUsername);
@@ -54,7 +56,5 @@ router
   .route('/change-password')
   .post(userChangeCurrentPasswordValidator(), validate, changeCurrentPassword);
 router.route('/resend-email-verification').post(resendEmailVerification);
-
-// router.route('/toggle-follow-user').post(toggleFollowUser);
 
 export default router;

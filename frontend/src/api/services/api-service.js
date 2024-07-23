@@ -7,18 +7,8 @@ const api = axios.create({
   headers: { "Content-Type": "application/json" }
 });
 
-// Helper function to get a cookie by name
-// const getCookie = (name) => {
-//   const value = `; ${document.cookie}`;
-//   const parts = value.split(`; ${name}=`);
-//   if (parts.length === 2) return parts.pop().split(";").shift();
-// };
-
-// console.log(getCookie("accessToken"));
-
 api.interceptors.request.use(
   (config) => {
-    // const accessToken = getCookie("accessToken");
     const token = localStorage.getItem("accessToken");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
