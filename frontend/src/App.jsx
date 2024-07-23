@@ -1,21 +1,22 @@
 import { Route, Routes } from "react-router-dom";
-import {Toaster} from 'react-hot-toast'
-import AppLayout from './ui/AppLayout'
-import AuthLayout from './ui/AuthLayout'
-import Feeds from './pages/Feeds'
-import Reels from './pages/Reels'
-import Explore from './pages/Explore'
-import BookMarks from './pages/Bookmarks'
-import About from './pages/About'
-import CreatePost from './features/posts/CreatePost'
-import UserPosts from './features/posts/UserPosts'
-import BookmarksList from './features/posts/BookmarksList'
-import SignUp from './features/authentication/SignUP'
-import Login from './features/authentication/Login'
-import ResetPassword from './features/authentication/ResetPassword'
-import UpdatePassword from './features/authentication/UpdatePassword'
-import UpdateProfile from './features/authentication/UpdateProfile'
+import { Toaster } from "react-hot-toast";
+import AppLayout from "./ui/AppLayout";
+import AuthLayout from "./ui/AuthLayout";
+import Feeds from "./pages/Feeds";
+import Reels from "./pages/Reels";
+import Explore from "./pages/Explore";
+import BookMarks from "./pages/Bookmarks";
+import About from "./pages/About";
+import CreatePost from "./features/posts/CreatePost";
+import UserPosts from "./features/posts/UserPosts";
+import BookmarksList from "./features/posts/BookmarksList";
+import SignUp from "./features/authentication/SignUP";
+import Login from "./features/authentication/Login";
+import ResetPassword from "./features/authentication/ResetPassword";
+import UpdatePassword from "./features/authentication/UpdatePassword";
+import UpdateProfile from "./features/authentication/UpdateProfile";
 import UserLikedPosts from "./features/posts/UserLikedPosts";
+import PostDetails from "./features/posts/PostDetails";
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="saved" element={<BookmarksList />} />
             <Route path="liked-posts" element={<UserLikedPosts />} />
           </Route>
+          <Route path="post/:postId" element={<PostDetails />} />
         </Route>
         <Route element={<AuthLayout />}>
           <Route path="accounts/emailsignup" element={<SignUp />} />
@@ -43,34 +45,34 @@ export default function App() {
         </Route>
       </Routes>
       <Toaster
-      position="top-right"
-      reverseOrder="true"
-      gutter={10}
-      toastOptions={{
-        duration: 5000,
-        style: {
-          fontSize: '1rem',
-            maxWidth: '600px',
-            padding: '15px 18px',
+        position="top-right"
+        reverseOrder="true"
+        gutter={10}
+        toastOptions={{
+          duration: 5000,
+          style: {
+            fontSize: "1rem",
+            maxWidth: "600px",
+            padding: "15px 18px",
             background: "#fff",
-            color: "#09090b",
-        },
-        success: {
-          duration: 5000,
-          theme: {
-            primary: 'green',
-            secondary: 'black'
-          }
-        },
-        error: {
-          duration: 5000,
-          theme: {
-            primary: 'red',
-            secondary: 'black'
+            color: "#09090b"
           },
-        }
-      }}
-/>
+          success: {
+            duration: 5000,
+            theme: {
+              primary: "green",
+              secondary: "black"
+            }
+          },
+          error: {
+            duration: 5000,
+            theme: {
+              primary: "red",
+              secondary: "black"
+            }
+          }
+        }}
+      />
     </>
   );
 }

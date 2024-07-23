@@ -7,10 +7,10 @@ const useAddComment = () => {
   const { mutate: addNewComment, isPending: addingComment } = useMutation({
     mutationKey: ["posts"],
     mutationFn: (newComment) => addComment(newComment),
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["posts"] }),
+        queryClient.invalidateQueries({ queryKey: ["post"] }),
         toast.success("Comment added successfully");
-      console.log(data);
     },
     onError: (error) => {
       toast.error(error);

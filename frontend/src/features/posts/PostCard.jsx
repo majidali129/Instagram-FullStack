@@ -2,17 +2,19 @@ import PropTypes from "prop-types";
 import PostOverlay from "../../ui/PostOverlay";
 import { useNavigate } from "react-router-dom";
 
-const ExplorePostListItem = ({ post }) => {
+const PostCard = ({ post }) => {
   const navigate = useNavigate();
+
   return (
     <figure
-      className="relative object-cover mb-4 rounded-md group"
       onClick={() => navigate(`/post/${post?._id}`)}
+      key={post._id}
+      className=" rounded *:rounded max-h-[345px] h-[345px] relative group"
     >
       <img
         src={post.mediaUrl}
-        alt="post image"
-        className="object-cover w-full h-full rounded-md"
+        alt="saved post image"
+        className="object-cover w-full h-full rounded"
       />
       <PostOverlay
         comments={post?.comments?.length}
@@ -22,8 +24,8 @@ const ExplorePostListItem = ({ post }) => {
   );
 };
 
-ExplorePostListItem.propTypes = {
+PostCard.propTypes = {
   post: PropTypes.object
 };
 
-export default ExplorePostListItem;
+export default PostCard;

@@ -23,7 +23,6 @@ const deleteComment = async (commentId) => {
 const getAllComments = async (query) => {
   let url = "/comments";
   if (query) url = `/comments?postId=${query}`;
-  console.log(url, query);
   try {
     const { data } = await api.get(url);
     return data?.data;

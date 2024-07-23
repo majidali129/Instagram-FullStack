@@ -10,7 +10,6 @@ import { User } from '../models/user.model.js';
 const createPost = asyncHandler(async (req, res, next) => {
   const { caption } = req.body;
   const imageLocalPath = req?.file?.path;
-  console.log('file', req?.file);
   if (!imageLocalPath) return next(new apiError(200, 'image for post is mendatory'));
   const image = await uploadToCloudinary(imageLocalPath);
   const createdPost = await Post.create({
@@ -96,8 +95,18 @@ const getAllPosts = asyncHandler(async (req, res, next) => {
 
 const getPostDetails = asyncHandler(async (req, res, next) => {
   const post = await Post.findById(req.params.postId)
-    .populate('comments')
-    .populate('likes');
+    .populate({
+      path: 'comments',
+      populate: {
+        path: 'user',
+        select: 'avatar username fullName _id',
+      },
+    })
+    .populate('likes')
+    .populate({
+      path: 'user',
+      select: '-password -refreshToken -isEmailVerified',
+    });
   if (!post) return next(new apiError(404, 'Post no longer exist for that ID'));
 
   res.status(200).json(new apiResponse(200, post, 'Post fetched successfully'));

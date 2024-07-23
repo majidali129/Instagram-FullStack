@@ -8,6 +8,7 @@ export const useLikePost = () => {
     mutationFn: (postId) => likePost(postId),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
+      queryClient.invalidateQueries({ queryKey: ["post"] });
       queryClient.invalidateQueries({ queryKey: ["posts"] });
       toast.success(data?.message);
     }

@@ -14,7 +14,6 @@ const registerUser = async (payload) => {
 const loginUser = async (payload) => {
   try {
     const { data } = await api.post(`/users/login`, payload);
-    console.log(data);
     return data;
   } catch (error) {
     console.error("Error while creating user", error);
@@ -97,10 +96,8 @@ const updateProfile = async (payload) => {
 };
 
 const followAccount = async (payload) => {
-  console.log(payload);
   try {
     const response = await api.patch("/users/follow-account", payload);
-    console.log(response);
     return response;
   } catch (error) {
     console.log("Error while following account", error);

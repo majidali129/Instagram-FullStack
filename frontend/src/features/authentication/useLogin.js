@@ -15,7 +15,6 @@ export const useLogin = () => {
       queryClient.setQueryData(["user"], data?.user);
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
-      console.log(data);
     }
   });
 

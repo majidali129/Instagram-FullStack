@@ -75,17 +75,17 @@ const About = () => {
                   <h3>{profile?.username}</h3>
                   {isLoggedInUser && (
                     <Modal.Open opens="edit-profile">
-                      <Button>Edit Profile</Button>
+                      <Button className="max-sm:!py-0.5">Edit Profile</Button>
                     </Modal.Open>
                   )}
                   {isAlreadyFollowed && (
                     <Modal.Open opens="menu-list">
                       <Button>
-                      Following
-                      <span>
-                        <MdKeyboardArrowDown className="w-6 h-6" />
-                      </span>
-                    </Button>
+                        Following
+                        <span>
+                          <MdKeyboardArrowDown className="w-6 h-6" />
+                        </span>
+                      </Button>
                     </Modal.Open>
                   )}
 
@@ -101,7 +101,7 @@ const About = () => {
                   )}
                 </div>
               </div>
-              <div className="flex items-center max-sm:flex-col justify-between *:flex *:items-center *:gap-x-2 stats gap-x-6">
+              <div className="flex max-sm:items-start max-sm:px-3 items-center max-sm:flex-col justify-between *:flex *:items-center *:gap-x-2 stats gap-x-6">
                 <div>
                   <h4>{totalPosts}</h4>
                   <span className="text-gray">Posts</span>
@@ -121,32 +121,26 @@ const About = () => {
 
           {/* user account media */}
           <div className="space-y-4">
-            <ul className="flex items-center *:text-xl *:opacity-50 gap-x-10 md:gap-x-20 justify-center pb-2 w-full">
-              {isLoggedInUser
-                ? personalAccTabs.map((tab) => (
-                    <li key={tab.text}>
-                      <NavLink
-                        to={tab.path}
-                        className={({ isActive }) =>
-                          isActive ? "active-tab" : ""
-                        }
-                      >
-                        {tab.text}
-                      </NavLink>
-                    </li>
-                  ))
-                : randomUserTabs.map((tab) => (
-                    <li key={tab.text}>
-                      <NavLink
-                        to={tab.path}
-                        className={({ isActive }) =>
-                          isActive ? "active-tab" : ""
-                        }
-                      >
-                        {tab.text}
-                      </NavLink>
-                    </li>
-                  ))}
+            <ul className="flex items-center *:text-xl gap-x-10 md:gap-x-20 justify-center pb-2 w-full">
+              {isLoggedInUser ? (
+                personalAccTabs.map((tab) => (
+                  <li key={tab.text}>
+                    <NavLink
+                      to={tab.path}
+                      end
+                      className={({ isActive }) =>
+                        isActive ? "opacity-100 border-b" : "opacity-50"
+                      }
+                    >
+                      {tab.text}
+                    </NavLink>
+                  </li>
+                ))
+              ) : (
+                <li>
+                  <NavLink to="/">Posts</NavLink>
+                </li>
+              )}
             </ul>
             <div>
               <Outlet context={[profileData]} />
@@ -157,7 +151,12 @@ const About = () => {
           <h2>Edit Profile Form</h2>
         </Modal.Window>
         <Modal.Window name="menu-list">
-          <button onClick={() => followAccount(followPayload)} className="text-red-500">Unfollow</button>
+          <button
+            onClick={() => followAccount(followPayload)}
+            className="text-red-500"
+          >
+            Unfollow
+          </button>
         </Modal.Window>
       </>
     </ModalProvider>
@@ -178,11 +177,5 @@ const personalAccTabs = [
   {
     path: "saved",
     text: "Saved"
-  }
-];
-const randomUserTabs = [
-  {
-    path: "",
-    text: "Posts"
   }
 ];

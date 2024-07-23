@@ -21,7 +21,6 @@ export const useFetch = (initialUrl, initialState) => {
       } catch (error) {
         if (!isCancel) {
           setLoading(false);
-          console.log(error);
           setError(error);
         }
       } finally {
@@ -32,7 +31,6 @@ export const useFetch = (initialUrl, initialState) => {
     fetchData();
 
     return () => {
-      console.log("Effect cleaner called");
       isCancel = true;
     };
   }, [url]);

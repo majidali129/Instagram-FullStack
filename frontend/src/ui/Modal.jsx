@@ -86,35 +86,3 @@ Window.propTypes={
 export { ModalProvider, useModalContext, Modal };
 
 
-// import { useState } from "react";
-// import { createPortal } from "react-dom";
-// import { RiCloseLargeLine } from "react-icons/ri";
-
-// const Modal = ({ children, isOpen, onClose }) => {
-//   if (!isOpen) return null;
-
-//   return (
-//     <div>
-//       {createPortal(
-//         <div className="fixed inset-0 z-50 flex items-center justify-center w-screen h-screen">
-//           <div
-//             className="absolute inset-0 bg-black opacity-50 backdrop-blur-[1px]"
-//             onClick={onClose}
-//           ></div>
-//           <div className="bg-transparent relative z-50 p-4 w-[40%]">
-//             {children}
-//           </div>
-//           <button
-//             className="absolute p-2 rounded-full top-5 right-5 bg-zinc-800 "
-//             onClick={onClose}
-//           >
-//             <RiCloseLargeLine className="w-7 h-7 " />
-//           </button>
-//         </div>,
-//         document.body
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Modal;

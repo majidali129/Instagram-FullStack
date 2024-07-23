@@ -20,7 +20,6 @@ export const validate = (req, res, next) => {
   if (errors.isEmpty()) return next();
   const extractedErrors = [];
   errors.array().map((err) => extractedErrors.push({ [err.path]: err.msg }));
-  console.log(extractedErrors);
 
   throw new apiError(420, 'Received data is invalid', extractedErrors);
 };

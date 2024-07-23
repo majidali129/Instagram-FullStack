@@ -1,7 +1,6 @@
 import { body, param } from 'express-validator';
 
 export const mongodbBodyIdValidator = (idName) => {
-  console.log(idName);
   return [
     body(idName)
       .trim()

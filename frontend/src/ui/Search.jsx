@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useModalContext } from "./Modal";
 import { useQuery } from "@tanstack/react-query";
 import { getAllUsers } from "../api/services/user-service";
-import Loader from './Loader'
+import Loader from "./Loader";
 
 const Search = () => {
   const { close } = useModalContext();
@@ -37,6 +37,7 @@ const Search = () => {
           name="query"
           autoComplete="off"
           value={query}
+          autoFocus
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search..."
           className="!bg-zinc-900 py-1.5 px-2 focus:outline-none focus:border-none text-[.95rem] w-full"
@@ -49,27 +50,29 @@ const Search = () => {
           />
         )}
       </form>
-      {
-        gettingUsers && <Loader />
-      }
-        {users?.length > 0 && <ul className="space-y-2 results h-[70%] *:border-b *:border-b-zinc-700 *:py-1.5 *:grid *:grid-cols-[50px_1fr] *:gap-x-1 md:*:gap-x-5 !overflow-y-scroll">
-            {users?.map((user) => (
-                <Link
-                  key={user?._id}
-                  to={`profile/${user?.username}`}
-                  onClick={() => close()}
-                >
-                  <Avatar image={user?.avatar} />
-                  <div>
-                    <h4>{user?.username}</h4>
-                    <span className="text-sm opacity-70">
-                      Front-End Developer
-                    </span>
-                  </div>
-                </Link>
-              ))}
-          </ul>}
-      {!gettingUsers && <div className="  h-[70%] flex items-center justify-center">No Results Found</div>}
+      {gettingUsers && <Loader />}
+      {users?.length > 0 && (
+        <ul className="space-y-2 results h-[70%] *:border-b *:border-b-zinc-700 *:py-1.5 *:grid *:grid-cols-[50px_1fr] *:gap-x-1 md:*:gap-x-5 !overflow-y-scroll">
+          {users?.map((user) => (
+            <Link
+              key={user?._id}
+              to={`profile/${user?.username}`}
+              onClick={() => close()}
+            >
+              <Avatar image={user?.avatar} />
+              <div>
+                <h4>{user?.username}</h4>
+                <span className="text-sm opacity-70">Front-End Developer</span>
+              </div>
+            </Link>
+          ))}
+        </ul>
+      )}
+      {!gettingUsers && (
+        <div className="  h-[70%] flex items-center justify-center">
+          No Results Found
+        </div>
+      )}
     </div>
   );
 };

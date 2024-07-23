@@ -5,10 +5,12 @@ import toast from "react-hot-toast";
 const useAddBookmark = () => {
   const queryClient = useQueryClient();
   const { mutate: savePost, isPending: savingPost } = useMutation({
-    mutationKey: ["user"],
     mutationFn: (postId) => addPostToBookmark(postId),
     onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["user-profile"] });
       queryClient.invalidateQueries({ queryKey: ["user"] });
+      queryClient.invalidateQueries({ queryKey: ["post"] });
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
       toast.success(data?.message);
     },
     onError: (error) => {

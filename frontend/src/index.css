@@ -19,7 +19,10 @@
     @apply text-xl;
   }
   h4 {
-    @apply text-[.9rem] md:text-[1.1rem];
+    @apply text-[1.1rem] md:text-lg;
+  }
+  p {
+    @apply text-sm md:text-[1rem];
   }
 }
 
@@ -33,9 +36,8 @@
   .text-link {
     @apply text-blue-400;
   }
-
-  .active-tab {
-    @apply opacity-100  !border-b-2;
+  .nav-link {
+    @apply flex items-center py-2 hover:bg-zinc-700 px-1.5 md:text-[1.2rem] transition-all duration-300 ease-in-out   gap-x-2 opacity-50 hover:opacity-100 rounded;
   }
 }
 

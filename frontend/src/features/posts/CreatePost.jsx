@@ -3,26 +3,23 @@ import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import { useModalContext } from "../../ui/Modal";
 import { BsCloudUpload } from "react-icons/bs";
-import {useMutation, useQueryClient} from '@tanstack/react-query'
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPost } from "../../api/services/post-service";
-
 
 const CreatePost = () => {
   const [userPost, setUserPost] = useState(null);
   const [caption, setCaption] = useState("");
-  const {close} = useModalContext()
+  const { close } = useModalContext();
   const [isUploaded, setIsUploaded] = useState(false);
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
-
-  const {mutate: createNewPost, isPending: creatingPost} = useMutation({
-    mutationKey: ['posts'],
+  const { mutate: createNewPost, isPending: creatingPost } = useMutation({
+    mutationKey: ["posts"],
     mutationFn: createPost,
-    onSuccess: (data) => {
-      console.log(data)
-      queryClient.invalidateQueries({queryKey: ['posts']})
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
     }
-  })
+  });
 
   const uploaderRef = useRef(null);
   const imageRef = useRef(null);
@@ -39,13 +36,16 @@ const CreatePost = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    createNewPost({image: userPost, caption}, {
-      onSuccess: () => close(),
-      onSettled: () => {
-        setUserPost(null)
-        setCaption('')
+    createNewPost(
+      { image: userPost, caption },
+      {
+        onSuccess: () => close(),
+        onSettled: () => {
+          setUserPost(null);
+          setCaption("");
+        }
       }
-    })
+    );
   };
 
   useEffect(() => {
@@ -70,67 +70,75 @@ const CreatePost = () => {
       {/* Upload file */}
       <Form className="shadow-none" onSubmit={onSubmit}>
         <>
-        <div
-          ref={uploaderRef}
-          className={`file-uploader ${isUploaded ? "hidden" : ""}`}
-        >
-          <header className="border-b  border-b-zinc-700 h-12 flex items-center justify-center">
-            <h4>Create Post</h4>
-          </header>
-          <div className=" h-[calc((384px-48px)-50px)] w-full bg-inherit flex flex-col items-center justify-evenly">
-            <span><BsCloudUpload className="w-20 h-20 opacity-50"/></span>
-            <div className="flex gap-x-10 w-full overflow-hidden">
-              <>
-                <label
-                  htmlFor="file-upload"
-                  className="inline-block bg-gradient-to-r from-indigo-500 to-cyan-500 w-full py-3 px-2 rounded-md cursor-pointer text-center"
-                >
-                  <i className="fa fa-cloud-upload"></i> Custom Upload
-                </label>
-                <input
-                  id="file-upload"
-                  onChange={handleFileChange}
-                  type="file"
-                  className="hidden"
-                />
-              </>
+          <div
+            ref={uploaderRef}
+            className={`file-uploader ${isUploaded ? "hidden" : ""}`}
+          >
+            <header className="flex items-center justify-center h-12 border-b border-b-zinc-700">
+              <h4>Create Post</h4>
+            </header>
+            <div className=" h-[calc((384px-48px)-50px)] w-full bg-inherit flex flex-col items-center justify-evenly">
+              <span>
+                <BsCloudUpload className="w-20 h-20 opacity-50" />
+              </span>
+              <div className="flex w-full overflow-hidden gap-x-10">
+                <>
+                  <label
+                    htmlFor="file-upload"
+                    className="inline-block w-full px-2 py-3 text-center rounded-md cursor-pointer bg-gradient-to-r from-indigo-500 to-cyan-500"
+                  >
+                    <i className="fa fa-cloud-upload"></i> Custom Upload
+                  </label>
+                  <input
+                    id="file-upload"
+                    onChange={handleFileChange}
+                    type="file"
+                    className="hidden"
+                  />
+                </>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Image preview and caption section */}
-        <div
-          className={`image-preview-container py-5 px-2  space-y-3 ${
-            isUploaded ? "" : "hidden"
-          }`}
-        >
-          <div className="w-full  hidden items-center justify-between *:text-blue-400 px-3">
-          </div>
-          <div ref={imageRef} className="image-preview">
+          {/* Image preview and caption section */}
+          <div
+            className={`image-preview-container py-5 px-2  space-y-3 ${
+              isUploaded ? "" : "hidden"
+            }`}
+          >
+            <div className="w-full  hidden items-center justify-between *:text-blue-400 px-3"></div>
+            <div ref={imageRef} className="image-preview">
+              {userPost && (
+                <img
+                  src={URL.createObjectURL(userPost)}
+                  alt="Uploaded preview"
+                  className="object-cover mx-auto mb-4 rounded max-h-60"
+                />
+              )}
+            </div>
             {userPost && (
-              <img
-                src={URL.createObjectURL(userPost)}
-                alt="Uploaded preview"
-                className="mb-4 max-h-60 rounded  mx-auto object-cover"
-              />
+              <div ref={captionRef}>
+                <textarea
+                  value={caption}
+                  onChange={handleCaptionChange}
+                  placeholder="Write your caption..."
+                  className="w-full px-2 py-2 mt-2 border-none rounded-sm outline-none bg-zinc-800"
+                ></textarea>
+              </div>
+            )}
+            {caption && (
+              <div className="flex justify-end">
+                <Button
+                  varient="primary"
+                  className="px-10 max-sm:w-full"
+                  disabled={creatingPost}
+                  type="submit"
+                >
+                  {creatingPost ? "Uploading..." : "Upload"}
+                </Button>
+              </div>
             )}
           </div>
-          {userPost && (
-            <div ref={captionRef}>
-              <textarea
-                value={caption}
-                onChange={handleCaptionChange}
-                placeholder="Write your caption..."
-                className="w-full rounded-sm bg-zinc-800 outline-none border-none mt-2 px-2 py-2"
-              ></textarea>
-            </div>
-          )}
-          {caption && (
-            <div className="flex justify-end">
-              <Button varient="primary" className="px-10 max-sm:w-full" disabled={creatingPost} type="submit">{creatingPost? 'Uploading...': 'Upload'}</Button>
-            </div>
-          )}
-        </div>
         </>
       </Form>
     </section>
