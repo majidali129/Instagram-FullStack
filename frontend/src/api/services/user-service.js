@@ -65,16 +65,6 @@ const logoutUser = async () => {
   }
 };
 
-const removeUser = async (param) => {
-  try {
-    const { data } = await api.delete(`/users/profile/${param}`);
-    return data;
-  } catch (error) {
-    console.error("Error while deleting user", error);
-    throw error;
-  }
-};
-
 const updatePassword = async (payload) => {
   try {
     const { data } = await api.patch("/users/change-password", payload);
@@ -101,6 +91,16 @@ const followAccount = async (payload) => {
     return response;
   } catch (error) {
     console.log("Error while following account", error);
+    throw error;
+  }
+};
+
+const removeUser = async (param) => {
+  try {
+    const { data } = await api.delete(`/users/profile/${param}`);
+    return data;
+  } catch (error) {
+    console.error("Error while deleting user", error);
     throw error;
   }
 };

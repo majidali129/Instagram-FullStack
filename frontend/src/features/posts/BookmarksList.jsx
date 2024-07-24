@@ -1,12 +1,14 @@
-import { useOutletContext } from "react-router-dom";
 import PostCard from "./PostCard";
+import { useUser } from "../authentication/useUser";
+import Loader from "../../ui/Loader";
 
 const BookMarkList = () => {
-  const [{ savedPosts }] = useOutletContext();
+  const { user, loadingUser } = useUser();
+  if (loadingUser) return <Loader />;
   return (
     <ul className="grid gap-2 py-2 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 max-sm:gap-y-2">
-      {savedPosts &&
-        savedPosts?.map((post) => <PostCard key={post._id} post={post}  />)}
+      {user &&
+        user?.savedPosts.map((post) => <PostCard key={post._id} post={post} />)}
     </ul>
   );
 };

@@ -36,26 +36,6 @@ const getAllPosts = async (query) => {
   }
 };
 
-const updatePost = async (postId, payload) => {
-  try {
-    const { data } = await api.patch(`/posts/${postId}`, payload);
-    return data?.data;
-  } catch (error) {
-    console.error("Error while updating post", error);
-    throw error;
-  }
-};
-
-const deletePost = async (postId) => {
-  try {
-    const { data } = await api.delete(`/posts/${postId}`);
-    return data?.data;
-  } catch (error) {
-    console.error("Error while deleting post", error);
-    throw error;
-  }
-};
-
 const savePost = async (payload) => {
   try {
     const { data } = await api.post(`/posts/save-post`, payload);
@@ -82,6 +62,26 @@ const getUserRelatedPosts = async () => {
     return data;
   } catch (error) {
     console.error("Error while getting user related posts", error);
+    throw error;
+  }
+};
+
+const updatePost = async (postId, payload) => {
+  try {
+    const { data } = await api.patch(`/posts/${postId}`, payload);
+    return data?.data;
+  } catch (error) {
+    console.error("Error while updating post", error);
+    throw error;
+  }
+};
+
+const deletePost = async (postId) => {
+  try {
+    const { data } = await api.delete(`/posts/${postId}`);
+    return data?.data;
+  } catch (error) {
+    console.error("Error while deleting post", error);
     throw error;
   }
 };
