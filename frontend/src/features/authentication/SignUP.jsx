@@ -53,93 +53,102 @@ const SignUp = () => {
   };
 
   return (
-    <Form className="h-full px-4 py-4 text-center md:px-8 " onSubmit={onSubmit}>
-      <>
-        <h3 className="mb-4 text-2xl italic font-semibold md:mb-8">Snapgram</h3>
-        <p className="font-semibold text-zinc-400">
-          Sign up to see photos and videos from your friends.
-        </p>
-        <div className="py-2 space-y-2">
-          <Input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type="email"
-            name="email"
-            placeholder="Email Address"
-          />
-          <Input
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            type="text"
-            name="fullName"
-            placeholder="Full Name"
-          />
-          <Input
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            type="text"
-            name="username"
-            placeholder="Username"
-          />
-          <Input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            name="password"
-            placeholder="Password"
-          />
-          <div className="flex w-full overflow-hidden gap-x-10">
-            <>
-              <label
-                htmlFor="file-upload"
-                className="inline-block w-full px-2 py-2 text-center rounded-md cursor-pointer bg-zinc-800"
-              >
-                <i className="fa fa-cloud-upload"></i>{" "}
-                {avatar ? avatar?.name : "Upload File"}
-              </label>
-              <input
-                id="file-upload"
-                onChange={handleFileChange}
-                type="file"
-                className="hidden"
-              />
-            </>
+    <div className="flex items-center justify-center w-screen h-screen">
+      <Form
+        className="px-4 py-8 h-[95%] text-center md:px-8"
+        onSubmit={onSubmit}
+      >
+        <>
+          <h3 className="mb-4 text-2xl italic font-semibold md:mb-5">
+            Snapgram
+          </h3>
+          <p className="font-semibold text-zinc-400">
+            Sign up to see photos and videos from your friends.
+          </p>
+          <div className="py-2 space-y-2">
+            <Input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              name="email"
+              placeholder="Email Address"
+            />
+            <Input
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              type="text"
+              name="fullName"
+              placeholder="Full Name"
+            />
+            <Input
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              type="text"
+              name="username"
+              placeholder="Username"
+            />
+            <Input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
+            <div className="flex w-full overflow-hidden gap-x-10">
+              <>
+                <label
+                  htmlFor="file-upload"
+                  className="inline-block w-full px-2 py-2 text-center rounded-md cursor-pointer bg-zinc-800"
+                >
+                  <i className="fa fa-cloud-upload"></i>{" "}
+                  {avatar ? avatar?.name : "Upload File"}
+                </label>
+                <input
+                  id="file-upload"
+                  onChange={handleFileChange}
+                  type="file"
+                  className="hidden"
+                />
+              </>
+            </div>
           </div>
-        </div>
-        <p className="py-1.5 opacity-60 text-[.9rem]">
-          People who use our service may have uploaded your contact information
-          to Instagram
-        </p>
-        <p className="py-1.5 opacity-60 text-[.9rem">
-          By signing up, you agree to our{" "}
-          <span className="border-b opacity-100 border-b-zinc-400">Terms</span>{" "}
-          ,{" "}
-          <span className="border-b opacity-100 border-b-zinc-400">
-            Privacy Policy
-          </span>{" "}
-          and{" "}
-          <span className="border-b opacity-100 border-b-zinc-400">
-            Cookies Policy
-          </span>{" "}
-          .
-        </p>
+          <p className="py-1.5 opacity-60 text-[.9rem]">
+            People who use our service may have uploaded your contact
+            information to Instagram
+          </p>
+          <p className="py-1.5 opacity-60 text-[.9rem">
+            By signing up, you agree to our{" "}
+            <span className="border-b opacity-100 border-b-zinc-400">
+              Terms
+            </span>{" "}
+            ,{" "}
+            <span className="border-b opacity-100 border-b-zinc-400">
+              Privacy Policy
+            </span>{" "}
+            and{" "}
+            <span className="border-b opacity-100 border-b-zinc-400">
+              Cookies Policy
+            </span>{" "}
+            .
+          </p>
 
-        <Button
-          disabled={isPending}
-          varient="primary"
-          type="submit"
-          className="!w-full"
-        >
-          {isPending ? "wait..." : "Sign Up"}
-        </Button>
-        <p className="space-x-1">
-          <span>Already have an account?</span>
-          <Link to="/accounts/login" className="text-blue-400">
-            Login
-          </Link>
-        </p>
-      </>
-    </Form>
+          <Button
+            disabled={isPending}
+            varient="primary"
+            type="submit"
+            className="!w-full"
+          >
+            {isPending ? "wait..." : "Sign Up"}
+          </Button>
+          <p className="space-x-1">
+            <span>Already have an account?</span>
+            <Link to="/accounts/login" className="text-blue-400">
+              Login
+            </Link>
+          </p>
+        </>
+      </Form>
+    </div>
   );
 };
 

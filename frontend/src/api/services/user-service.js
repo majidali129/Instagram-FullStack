@@ -57,7 +57,7 @@ const getAccoutByUsername = async (username) => {
 
 const logoutUser = async () => {
   try {
-    const { data } = await api.post(`/users`);
+    const { data } = await api.post(`/users/logout`);
     return data;
   } catch (error) {
     console.error("Error to logout user", error);
@@ -68,6 +68,15 @@ const logoutUser = async () => {
 const updatePassword = async (payload) => {
   try {
     const { data } = await api.patch("/users/change-password", payload);
+    return data;
+  } catch (error) {
+    console.error("Error while updating password", error);
+    throw error;
+  }
+};
+const ForgotPasswrod = async (payload) => {
+  try {
+    const { data } = await api.patch("/users/forgot-password", payload);
     return data;
   } catch (error) {
     console.error("Error while updating password", error);
@@ -115,5 +124,6 @@ export {
   updatePassword,
   updateProfile,
   getAccoutByUsername,
-  followAccount
+  followAccount,
+  ForgotPasswrod
 };

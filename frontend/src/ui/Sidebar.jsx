@@ -1,5 +1,5 @@
 import Logo from "./Logo";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { MdOutlineExplore } from "react-icons/md";
 import { BiSolidMoviePlay } from "react-icons/bi";
 import { RiAddBoxFill } from "react-icons/ri";
@@ -10,15 +10,11 @@ import { Modal, ModalProvider } from "./Modal";
 import CreatePost from "../features/posts/CreatePost";
 import { useUser } from "../features/authentication/useUser";
 import { CgProfile } from "react-icons/cg";
+import useLogout from "../features/authentication/useLogout";
 
 const Sidebar = () => {
-  const navigate = useNavigate();
   const { user: currentUser } = useUser();
-  const handleLogout = () => {
-    setTimeout(() => {
-      navigate("/accounts/login");
-    }, 1200);
-  };
+  const { logout, loggingOut } = useLogout();
 
   const activeStyle = {
     opacity: "100"
@@ -65,7 +61,7 @@ const Sidebar = () => {
               </NavLink>
             </li>
           </ul>
-          <button onClick={handleLogout}>
+          <button onClick={logout} disabled={loggingOut}>
             <div className="flex items-center py-1.5 mx-1.5  gap-x-2 opacity-50 hover:opacity-100">
               <SlLogout className="w-5 h-5 rotate-180" />
               <span>Log Out</span>
@@ -166,10 +162,5 @@ const navLinks = [
     path: "/reels",
     text: "Reels",
     icon: <BiSolidMoviePlay className="w-6 h-6" />
-  },
-  {
-    path: "/bookmarks",
-    text: "Saved",
-    icon: <BsBookmarkStarFill className="w-6 h-6" />
   }
 ];

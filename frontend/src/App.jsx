@@ -1,4 +1,3 @@
-import { Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import AppLayout from "./ui/AppLayout";
 import AuthLayout from "./ui/AuthLayout";
@@ -14,35 +13,53 @@ import SignUp from "./features/authentication/SignUP";
 import Login from "./features/authentication/Login";
 import ResetPassword from "./features/authentication/ResetPassword";
 import UpdatePassword from "./features/authentication/UpdatePassword";
+import ForgotPassword from "./features/authentication/ForgotPassword";
 import UpdateProfile from "./features/authentication/UpdateProfile";
 import UserLikedPosts from "./features/posts/UserLikedPosts";
 import PostDetails from "./features/posts/PostDetails";
+import ProtectedRoutes from "./ui/ProtectedRoutes";
+import { Route, Routes } from "react-router-dom";
 
 export default function App() {
   return (
     <>
       <Routes>
-        <Route element={<AppLayout />}>
-          <Route index element={<Feeds />} />
+        <Route
+          element={
+            <ProtectedRoutes>
+              <AppLayout />
+            </ProtectedRoutes>
+          }
+        >
+          <Route path="/" element={<Feeds />} />
           <Route path="explore" element={<Explore />} />
           <Route path="reels" element={<Reels />} />
           <Route path="bookmarks" element={<BookMarks />} />
           <Route path="add-post" element={<CreatePost />} />
-          <Route path="profile/:username" element={<About />}>
+          <Route path="/profile/:username" element={<About />}>
             <Route index element={<UserPosts />} />
             <Route path="saved" element={<BookmarksList />} />
             <Route path="liked-posts" element={<UserLikedPosts />} />
           </Route>
           <Route path="post/:postId" element={<PostDetails />} />
         </Route>
-        <Route element={<AuthLayout />}>
-          <Route path="accounts/emailsignup" element={<SignUp />} />
-          <Route path="accounts/login" element={<Login />} />
-          <Route path="accounts/password/reset/" element={<ResetPassword />} />
-          {/* user well provide email, get password reset mail from server */}
+
+        <Route
+          element={
+            <ProtectedRoutes>
+              <AuthLayout />
+            </ProtectedRoutes>
+          }
+        >
+          <Route path="accounts/reset-password" element={<ResetPassword />} />
+          <Route path="accounts/forgot-password" element={<ForgotPassword />} />
           <Route path="accounts/update-password" element={<UpdatePassword />} />
           <Route path="accounts/update-profile" element={<UpdateProfile />} />
         </Route>
+        {/* <Route element={<AuthLayout />}> */}
+        <Route path="accounts/emailsignup" element={<SignUp />} />
+        <Route path="accounts/login" element={<Login />} />
+        {/* </Route> */}
       </Routes>
       <Toaster
         position="top-right"

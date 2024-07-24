@@ -8,12 +8,10 @@ const UpdateProfile = () => {
   const [userName, setUserName] = useState("");
   const [fullName, setFullName] = useState("");
   return (
-    <section className="h-full flex items-center justify-center">
-      <Form className="md:px-8 px-4 py-12 text-center">
-        <h3 className="italic  font-semibold text-2xl mb-4 md:mb-8">
-          Snapgram
-        </h3>
-        <div className="space-y-2 py-2">
+    <section className="flex items-center justify-center h-full">
+      <Form className="px-4 py-8 text-center md:px-8">
+        <h3 className="mb-4 text-2xl italic font-semibold md:mb-8">Snapgram</h3>
+        <div className="py-2 space-y-2">
           <Input
             value={email}
             onChange={(e) => setEmail(e.target.value)}

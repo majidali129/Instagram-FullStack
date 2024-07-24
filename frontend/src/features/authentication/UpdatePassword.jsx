@@ -33,7 +33,7 @@ const UpdatePassword = () => {
 
   return (
     <section className="flex items-center justify-center h-full">
-      <Form className="px-4 py-12 text-center md:px-8" onSubmit={onSubmit}>
+      <Form className="px-4 py-8 text-center md:px-8" onSubmit={onSubmit}>
         <h3 className="mb-4 text-2xl italic font-semibold md:mb-8">Snapgram</h3>
         <div className="py-2 space-y-2">
           <Input

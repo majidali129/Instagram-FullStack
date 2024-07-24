@@ -9,7 +9,7 @@ const PostCard = ({ post }) => {
     <figure
       onClick={() => navigate(`/post/${post?._id}`)}
       key={post._id}
-      className=" rounded *:rounded max-h-[345px] h-[345px] relative group"
+      className=" rounded *:rounded max-h-[345px] h-[345px] relative group cursor-pointer"
     >
       <img
         src={post.mediaUrl}

@@ -12,6 +12,7 @@ import {
 import Loader from "../ui/Loader";
 import { useFetchPosts } from "../features/posts/useFetchPosts";
 import { useUser } from "../features/authentication/useUser";
+import UpdateProfile from "../features/authentication/UpdateProfile";
 
 const About = () => {
   const { username } = useParams();
@@ -148,7 +149,7 @@ const About = () => {
           </div>
         </section>
         <Modal.Window name="edit-profile">
-          <h2>Edit Profile Form</h2>
+          <UpdateProfile />
         </Modal.Window>
         <Modal.Window name="menu-list">
           <button

@@ -26,8 +26,8 @@ const Login = () => {
   };
 
   return (
-    <section className="flex items-center justify-center h-full">
-      <Form className="px-4 py-12 text-center md:px-8" onSubmit={onSubmit}>
+    <section className="flex items-center justify-center w-screen h-screen">
+      <Form className="px-4 py-8 text-center md:px-8" onSubmit={onSubmit}>
         <>
           <h3 className="mb-4 text-2xl italic font-semibold md:mb-8">
             Snapgram
@@ -66,8 +66,8 @@ const Login = () => {
               <span className="-mt-1">Log in with Facebook</span>
             </>
           </Button>
-          <CustomLink>
-            <Link to="/accounts/password/reset/">Forgot Password</Link>
+          <CustomLink type="primary">
+            <Link to="/accounts/reset-password">Forgot Password</Link>
           </CustomLink>
 
           <p className="space-x-1">
