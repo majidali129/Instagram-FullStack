@@ -1,7 +1,6 @@
 import Logo from "./Logo";
 import { NavLink } from "react-router-dom";
 import { MdOutlineExplore } from "react-icons/md";
-import { BiSolidMoviePlay } from "react-icons/bi";
 import { RiAddBoxFill } from "react-icons/ri";
 import { BsBookmarkStarFill } from "react-icons/bs";
 import { IoMdHome } from "react-icons/io";
@@ -103,16 +102,6 @@ const Sidebar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/reels"
-                className="flex items-center justify-center py-1.5  opacity-50 hover:opacity-100 "
-              >
-                <span>
-                  <BiSolidMoviePlay className="w-6 h-6" />
-                </span>
-              </NavLink>
-            </li>
-            <li>
               <Modal.Open opens="create-post">
                 <NavLink
                   to="#"
@@ -157,10 +146,5 @@ const navLinks = [
     path: "/bookmarks",
     text: "Saved",
     icon: <BsBookmarkStarFill className="w-6 h-6" />
-  },
-  {
-    path: "/reels",
-    text: "Reels",
-    icon: <BiSolidMoviePlay className="w-6 h-6" />
   }
 ];

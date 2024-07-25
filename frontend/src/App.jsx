@@ -7,7 +7,6 @@ import Loader from "./ui/Loader";
 const AppLayout = lazy(() => import("./ui/AppLayout"));
 const AuthLayout = lazy(() => import("./ui/AuthLayout"));
 const Feeds = lazy(() => import("./pages/Feeds"));
-const Reels = lazy(() => import("./pages/Reels"));
 const Explore = lazy(() => import("./pages/Explore"));
 const BookMarks = lazy(() => import("./pages/Bookmarks"));
 const About = lazy(() => import("./pages/About"));
@@ -63,14 +62,6 @@ export default function App() {
             element={
               <SuspenseWrapper>
                 <Explore />
-              </SuspenseWrapper>
-            }
-          />
-          <Route
-            path="reels"
-            element={
-              <SuspenseWrapper>
-                <Reels />
               </SuspenseWrapper>
             }
           />
