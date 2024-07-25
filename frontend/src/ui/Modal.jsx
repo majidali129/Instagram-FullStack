@@ -13,7 +13,6 @@ const ModalProvider = ({ children, onClose, onOpen }) => {
     onClose?.();
   };
   const open = (name) => {
-    console.log("open");
     setOpenName(name);
     onOpen?.();
   };

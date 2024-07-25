@@ -10,7 +10,6 @@ const ProtectedRoutes = ({ children }) => {
   const isSignedIn = user?.isEmailVerified === true;
   const navigate = useNavigate();
 
-  console.log(isSignedIn);
   useEffect(() => {
     if (!user && !loadingUser && !isSignedIn) {
       navigate("/accounts/login", { replace: true });

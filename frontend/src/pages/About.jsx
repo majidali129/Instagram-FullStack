@@ -45,7 +45,6 @@ const About = () => {
   const isLoggedInUser = currentUser?.username === username;
 
   const profileData = {
-    savedPosts: profile?.savedPosts,
     ownPosts: posts,
     likedPosts: currentUser?.likedPosts
   };

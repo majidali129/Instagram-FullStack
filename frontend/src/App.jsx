@@ -1,25 +1,41 @@
-import { Toaster } from "react-hot-toast";
-import AppLayout from "./ui/AppLayout";
-import AuthLayout from "./ui/AuthLayout";
-import Feeds from "./pages/Feeds";
-import Reels from "./pages/Reels";
-import Explore from "./pages/Explore";
-import BookMarks from "./pages/Bookmarks";
-import About from "./pages/About";
-import CreatePost from "./features/posts/CreatePost";
-import UserPosts from "./features/posts/UserPosts";
-import BookmarksList from "./features/posts/BookmarksList";
-import SignUp from "./features/authentication/SignUP";
-import Login from "./features/authentication/Login";
-import ResetPassword from "./features/authentication/ResetPassword";
-import UpdatePassword from "./features/authentication/UpdatePassword";
-import ForgotPassword from "./features/authentication/ForgotPassword";
-import UpdateProfile from "./features/authentication/UpdateProfile";
-import UserLikedPosts from "./features/posts/UserLikedPosts";
-import PostDetails from "./features/posts/PostDetails";
-import ProtectedRoutes from "./ui/ProtectedRoutes";
 import { Route, Routes } from "react-router-dom";
-import PageNotFound from "./ui/PageNotFound";
+import { Toaster } from "react-hot-toast";
+import { lazy, Suspense } from "react";
+import PropTypes from "prop-types";
+
+import Loader from "./ui/Loader";
+const AppLayout = lazy(() => import("./ui/AppLayout"));
+const AuthLayout = lazy(() => import("./ui/AuthLayout"));
+const Feeds = lazy(() => import("./pages/Feeds"));
+const Reels = lazy(() => import("./pages/Reels"));
+const Explore = lazy(() => import("./pages/Explore"));
+const BookMarks = lazy(() => import("./pages/Bookmarks"));
+const About = lazy(() => import("./pages/About"));
+const CreatePost = lazy(() => import("./features/posts/CreatePost"));
+const UserPosts = lazy(() => import("./features/posts/UserPosts"));
+const BookmarksList = lazy(() => import("./features/posts/BookmarksList"));
+const UserLikedPosts = lazy(() => import("./features/posts/UserLikedPosts"));
+const PostDetails = lazy(() => import("./features/posts/PostDetails"));
+const ProtectedRoutes = lazy(() => import("./ui/ProtectedRoutes"));
+const PageNotFound = lazy(() => import("./ui/PageNotFound"));
+const SignUp = lazy(() => import("./features/authentication/SignUP"));
+const Login = lazy(() => import("./features/authentication/Login"));
+const ResetPassword = lazy(() =>
+  import("./features/authentication/ResetPassword")
+);
+const UpdatePassword = lazy(() =>
+  import("./features/authentication/UpdatePassword")
+);
+const ForgotPassword = lazy(() =>
+  import("./features/authentication/ForgotPassword")
+);
+const UpdateProfile = lazy(() =>
+  import("./features/authentication/UpdateProfile")
+);
+
+const SuspenseWrapper = ({ children }) => (
+  <Suspense fallback={<Loader />}>{children}</Suspense>
+);
 
 export default function App() {
   return (
@@ -28,21 +44,93 @@ export default function App() {
         <Route
           element={
             <ProtectedRoutes>
-              <AppLayout />
+              <SuspenseWrapper>
+                <AppLayout />
+              </SuspenseWrapper>
             </ProtectedRoutes>
           }
         >
-          <Route path="/" element={<Feeds />} />
-          <Route path="explore" element={<Explore />} />
-          <Route path="reels" element={<Reels />} />
-          <Route path="bookmarks" element={<BookMarks />} />
-          <Route path="add-post" element={<CreatePost />} />
-          <Route path="/profile/:username" element={<About />}>
-            <Route index element={<UserPosts />} />
-            <Route path="saved" element={<BookmarksList />} />
-            <Route path="liked-posts" element={<UserLikedPosts />} />
+          <Route
+            path="/"
+            element={
+              <SuspenseWrapper>
+                <Feeds />
+              </SuspenseWrapper>
+            }
+          />
+          <Route
+            path="explore"
+            element={
+              <SuspenseWrapper>
+                <Explore />
+              </SuspenseWrapper>
+            }
+          />
+          <Route
+            path="reels"
+            element={
+              <SuspenseWrapper>
+                <Reels />
+              </SuspenseWrapper>
+            }
+          />
+          <Route
+            path="bookmarks"
+            element={
+              <SuspenseWrapper>
+                <BookMarks />
+              </SuspenseWrapper>
+            }
+          />
+          <Route
+            path="add-post"
+            element={
+              <SuspenseWrapper>
+                <CreatePost />
+              </SuspenseWrapper>
+            }
+          />
+          <Route
+            path="/profile/:username"
+            element={
+              <SuspenseWrapper>
+                <About />
+              </SuspenseWrapper>
+            }
+          >
+            <Route
+              index
+              element={
+                <SuspenseWrapper>
+                  <UserPosts />
+                </SuspenseWrapper>
+              }
+            />
+            <Route
+              path="saved"
+              element={
+                <SuspenseWrapper>
+                  <BookmarksList />
+                </SuspenseWrapper>
+              }
+            />
+            <Route
+              path="liked-posts"
+              element={
+                <SuspenseWrapper>
+                  <UserLikedPosts />
+                </SuspenseWrapper>
+              }
+            />
           </Route>
-          <Route path="post/:postId" element={<PostDetails />} />
+          <Route
+            path="post/:postId"
+            element={
+              <SuspenseWrapper>
+                <PostDetails />
+              </SuspenseWrapper>
+            }
+          />
         </Route>
 
         <Route
@@ -52,17 +140,66 @@ export default function App() {
             </ProtectedRoutes>
           }
         >
-          <Route path="accounts/update-profile" element={<UpdateProfile />} />
-          <Route path="accounts/update-password" element={<UpdatePassword />} />
+          <Route
+            path="accounts/update-profile"
+            element={
+              <SuspenseWrapper>
+                <UpdateProfile />
+              </SuspenseWrapper>
+            }
+          />
+          <Route
+            path="accounts/update-password"
+            element={
+              <SuspenseWrapper>
+                <UpdatePassword />
+              </SuspenseWrapper>
+            }
+          />
         </Route>
 
         <Route element={<AuthLayout />}>
-          <Route path="accounts/reset-password" element={<ResetPassword />} />
-          <Route path="accounts/forgot-password" element={<ForgotPassword />} />
+          <Route
+            path="accounts/reset-password"
+            element={
+              <SuspenseWrapper>
+                <ResetPassword />
+              </SuspenseWrapper>
+            }
+          />
+          <Route
+            path="accounts/forgot-password"
+            element={
+              <SuspenseWrapper>
+                <ForgotPassword />
+              </SuspenseWrapper>
+            }
+          />
         </Route>
-        <Route path="accounts/emailsignup" element={<SignUp />} />
-        <Route path="accounts/login" element={<Login />} />
-        <Route path="*" element={<PageNotFound />} />
+        <Route
+          path="accounts/emailsignup"
+          element={
+            <SuspenseWrapper>
+              <SignUp />
+            </SuspenseWrapper>
+          }
+        />
+        <Route
+          path="accounts/login"
+          element={
+            <SuspenseWrapper>
+              <Login />
+            </SuspenseWrapper>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <SuspenseWrapper>
+              <PageNotFound />
+            </SuspenseWrapper>
+          }
+        />
       </Routes>
       <Toaster
         position="top-right"
@@ -96,3 +233,7 @@ export default function App() {
     </>
   );
 }
+
+SuspenseWrapper.propTypes = {
+  children: PropTypes.node.isRequired
+};

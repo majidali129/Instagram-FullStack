@@ -14,17 +14,22 @@ import { useUser } from "../authentication/useUser";
 import useAddBookmark from "./useAddBookmark";
 import useAddComment from "./useAddComment";
 import { getPost } from "../../api/services/post-service";
+import Empty from "../../ui/Empty";
 
 const PostDetails = () => {
   const [comment, setComment] = useState("");
   const { user: currentUser } = useUser();
-  const { addNewComment, addingComment } = useAddComment();
   const { postId } = useParams();
+  const { addNewComment, addingComment } = useAddComment();
   const { likeUnlikePost, likingPost } = useLikePost();
   const { savePost, savingPost } = useAddBookmark();
   const navigate = useNavigate();
   const inputRef = useRef(null);
-  const { data: post, isLoading: loadingPost } = useQuery({
+  const {
+    data: post,
+    isLoading: loadingPost,
+    error
+  } = useQuery({
     queryKey: [`post`, postId],
     queryFn: () => getPost(postId)
   });
@@ -47,21 +52,22 @@ const PostDetails = () => {
     );
   };
 
-  const totalLikes = post?.likes?.length ?? 10;
+  if (loadingPost) return <Loader />;
+
+  const totalLikes = post?.likes?.length;
   const isLiked = currentUser?.likedPosts?.some(
     (lPost) => lPost._id === post?._id
   );
   const isSaved = currentUser?.savedPosts?.some(
     (sPost) => sPost._id === post?._id
   );
-
-  if (loadingPost) return <Loader />;
+  if (error || !post) return <Empty resourceName="Post Not Found" />;
   return (
     // <section className="grid  w-[85vw] md:w-[75vw] h-[93vh]  bg-zinc-950 grid-cols-[42%_1fr] *:w-full *:h-full">
     <section className="lg:grid  w-[100%] md:w-[95%] md:mx-auto md:h-[550px] 2xl:h-[700px] mt-3 top-4  shadow shadow-zinc-500  bg-zinc-950 lg:grid-cols-[42%_1fr]">
       <figure className="w-full h-[500px] md:h-[550px] 2xl:h-[700px] border-r border-r-zinc-800">
         <img
-          src={post.mediaUrl}
+          src={post?.mediaUrl}
           alt=""
           className="object-cover w-full h-full "
         />
@@ -71,15 +77,15 @@ const PostDetails = () => {
         <div className=" lg:h-20">
           <div className="flex items-center justify-between">
             <div className="grid grid-cols-[40px_1fr] md:grid-cols-[60px_1fr] py-2 gap-x-3">
-              <Avatar image={post.user.avatar} />
+              <Avatar image={post?.user.avatar} />
               <div>
                 <h4
-                  onClick={() => navigate(`/profile/${post.user.username}`)}
+                  onClick={() => navigate(`/profile/${post?.user.username}`)}
                   className="cursor-pointer"
                 >
-                  {post?.user.username}
+                  {post?.user?.username}
                 </h4>
-                <p>{post.caption}</p>
+                <p>{post?.caption}</p>
               </div>
             </div>
           </div>
@@ -119,7 +125,7 @@ const PostDetails = () => {
               <button
                 disabled={likingPost}
                 className="cursor-pointer"
-                onClick={() => likeUnlikePost({ postId: post._id })}
+                onClick={() => likeUnlikePost({ postId: post?._id })}
               >
                 {isLiked ? (
                   <IoMdHeart className="w-7 h-7 fill-red-500" />
@@ -137,7 +143,7 @@ const PostDetails = () => {
             <button
               disabled={savingPost}
               className="cursor-pointer"
-              onClick={() => savePost({ postId: post._id })}
+              onClick={() => savePost({ postId: post?._id })}
             >
               {/* <FaBookmark className="w-5 h-5 md:w-7 md:h-7" /> */}
               {isSaved ? (

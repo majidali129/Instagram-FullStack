@@ -7,6 +7,7 @@ import { useModalContext } from "./Modal";
 import { useQuery } from "@tanstack/react-query";
 import { getAllUsers } from "../api/services/user-service";
 import Loader from "./Loader";
+import Empty from "./Empty";
 
 const Search = () => {
   const { close } = useModalContext();
@@ -29,7 +30,7 @@ const Search = () => {
   }, [query]);
 
   return (
-    <div className=" bg-zinc-800 overflow-hidden h-[70vh] md:-left-60 max-w-md w-[22rem] md:w-[30rem] py-4 md:py-7 space-y-3 md:space-y-5 px-4 rounded">
+    <div className=" bg-zinc-800 overflow-hidden h-[70vh] md:-left-60 max-w-md w-[22rem]  py-4 md:py-7 space-y-3 md:space-y-5 px-4 rounded">
       <h2>Search</h2>
       <form className="relative flex items-center border rounded-md gap-x-2 border-zinc-800">
         <input
@@ -68,9 +69,12 @@ const Search = () => {
           ))}
         </ul>
       )}
-      {!gettingUsers && (
+      {users && !users?.length && (
+        <Empty message="No results found for user query" />
+      )}
+      {!query && !gettingUsers && (
         <div className="  h-[70%] flex items-center justify-center">
-          No Results Found
+          No recent results.
         </div>
       )}
     </div>
