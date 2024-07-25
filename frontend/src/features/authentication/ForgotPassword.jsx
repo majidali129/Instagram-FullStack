@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { TbProgressHelp } from "react-icons/tb";
+
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import { ForgotPasswrod } from "../../api/services/user-service";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -33,8 +35,11 @@ const ForgotPassword = () => {
 
   return (
     <section className="flex items-center justify-center h-screen">
-      <Form className="px-4 py-8 text-center md:px-4" onSubmit={onSubmit}>
-        <h3 className="mb-4 text-2xl italic font-semibold md:mb-8">Snapgram</h3>
+      <Form className="py-8" onSubmit={onSubmit}>
+        <h3 className="md:mb-5">
+          <TbProgressHelp className="w-[26px] h-[26px]" />
+          Forgot Password
+        </h3>
         <div className="py-2 space-y-2">
           <Input
             value={email}

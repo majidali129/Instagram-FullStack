@@ -12,7 +12,7 @@ const Logo = ({ className }) => {
         <h3
           className={`hidden text-3xl italic font-extrabold tracking-wider logo-text sm:block ${className}`}
         >
-          Snapgram
+          InstaVerse
         </h3>
       </div>
     </Link>

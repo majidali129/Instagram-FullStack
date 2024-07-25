@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { TbExchange } from "react-icons/tb";
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
@@ -9,8 +10,11 @@ const UpdateProfile = () => {
   const [fullName, setFullName] = useState("");
   return (
     <section className="flex items-center justify-center h-full">
-      <Form className="px-4 py-8 text-center md:px-8">
-        <h3 className="mb-4 text-2xl italic font-semibold md:mb-8">Snapgram</h3>
+      <Form className="py-9">
+        <h3>
+          <TbExchange />
+          Update Profile
+        </h3>
         <div className="py-2 space-y-2">
           <Input
             value={email}

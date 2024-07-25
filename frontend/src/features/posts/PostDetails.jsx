@@ -58,8 +58,8 @@ const PostDetails = () => {
   if (loadingPost) return <Loader />;
   return (
     // <section className="grid  w-[85vw] md:w-[75vw] h-[93vh]  bg-zinc-950 grid-cols-[42%_1fr] *:w-full *:h-full">
-    <section className="lg:grid  w-[100%] md:w-[95%] md:mx-auto md:h-[620px] 2xl:h-[900px] mt-3 top-4  shadow shadow-zinc-500  bg-zinc-950 lg:grid-cols-[42%_1fr]">
-      <figure className="w-full h-[500px] md:h-[620px] 2xl:h-[900px] border-r border-r-zinc-800">
+    <section className="lg:grid  w-[100%] md:w-[95%] md:mx-auto md:h-[550px] 2xl:h-[700px] mt-3 top-4  shadow shadow-zinc-500  bg-zinc-950 lg:grid-cols-[42%_1fr]">
+      <figure className="w-full h-[500px] md:h-[550px] 2xl:h-[700px] border-r border-r-zinc-800">
         <img
           src={post.mediaUrl}
           alt=""

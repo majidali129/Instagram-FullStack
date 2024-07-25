@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import { SiGnuprivacyguard } from "react-icons/si";
+
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import { registerUser } from "../../api/services/user-service";
-import { useMutation } from "@tanstack/react-query";
-import toast from "react-hot-toast";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -54,13 +56,10 @@ const SignUp = () => {
 
   return (
     <div className="flex items-center justify-center w-screen h-screen">
-      <Form
-        className="px-4 py-8 h-[95%] text-center md:px-8"
-        onSubmit={onSubmit}
-      >
+      <Form className="!py-9 h-[94%] md:h-[90%]  " onSubmit={onSubmit}>
         <>
-          <h3 className="mb-4 text-2xl italic font-semibold md:mb-5">
-            Snapgram
+          <h3 className="flex items-center justify-center mb-4 text-2xl italic font-semibold gap-x-2.5 md:mb-5">
+            <SiGnuprivacyguard className="w-6 h-6" /> Create Account
           </h3>
           <p className="font-semibold text-zinc-400">
             Sign up to see photos and videos from your friends.

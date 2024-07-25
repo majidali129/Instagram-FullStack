@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaFacebookSquare } from "react-icons/fa";
+import { IoMdLogIn } from "react-icons/io";
+
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
-import { FaFacebookSquare } from "react-icons/fa";
 import CustomLink from "../../ui/Link";
 import { useLogin } from "./useLogin";
 
@@ -27,10 +29,11 @@ const Login = () => {
 
   return (
     <section className="flex items-center justify-center w-screen h-screen">
-      <Form className="px-4 py-8 text-center md:px-8" onSubmit={onSubmit}>
+      <Form className="!py-8" onSubmit={onSubmit}>
         <>
-          <h3 className="mb-4 text-2xl italic font-semibold md:mb-8">
-            Snapgram
+          <h3>
+            <IoMdLogIn className="w-[26px] h-[26px]" />
+            Sign In
           </h3>
           <div className="py-2 space-y-2">
             <Input

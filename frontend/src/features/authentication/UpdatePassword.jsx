@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { MdOutlineChangeCircle } from "react-icons/md";
+
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import { updatePassword } from "../../api/services/user-service";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const UpdatePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -34,7 +36,10 @@ const UpdatePassword = () => {
   return (
     <section className="flex items-center justify-center h-full">
       <Form className="px-4 py-8 text-center md:px-8" onSubmit={onSubmit}>
-        <h3 className="mb-4 text-2xl italic font-semibold md:mb-8">Snapgram</h3>
+        <h3>
+          <MdOutlineChangeCircle className="w-[26] h-[26]" />
+          Update Password
+        </h3>
         <div className="py-2 space-y-2">
           <Input
             value={oldPassword}
