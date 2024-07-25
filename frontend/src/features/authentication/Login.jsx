@@ -70,7 +70,7 @@ const Login = () => {
             </>
           </Button>
           <CustomLink type="primary">
-            <Link to="/accounts/reset-password">Forgot Password</Link>
+            <Link to="/accounts/forgot-password">Forgot Password</Link>
           </CustomLink>
 
           <p className="space-x-1">

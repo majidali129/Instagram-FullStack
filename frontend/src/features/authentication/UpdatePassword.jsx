@@ -35,7 +35,7 @@ const UpdatePassword = () => {
 
   return (
     <section className="flex items-center justify-center h-full">
-      <Form className="px-4 py-8 text-center md:px-8" onSubmit={onSubmit}>
+      <Form className="pt-8 pb-10" onSubmit={onSubmit}>
         <h3>
           <MdOutlineChangeCircle className="w-[26] h-[26]" />
           Update Password

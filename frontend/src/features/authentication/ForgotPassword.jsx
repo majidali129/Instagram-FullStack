@@ -35,7 +35,7 @@ const ForgotPassword = () => {
 
   return (
     <section className="flex items-center justify-center h-screen">
-      <Form className="py-8" onSubmit={onSubmit}>
+      <Form className="py-8 pb-9" onSubmit={onSubmit}>
         <h3 className="md:mb-5">
           <TbProgressHelp className="w-[26px] h-[26px]" />
           Forgot Password

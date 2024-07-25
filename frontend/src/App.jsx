@@ -19,6 +19,7 @@ import UserLikedPosts from "./features/posts/UserLikedPosts";
 import PostDetails from "./features/posts/PostDetails";
 import ProtectedRoutes from "./ui/ProtectedRoutes";
 import { Route, Routes } from "react-router-dom";
+import PageNotFound from "./ui/PageNotFound";
 
 export default function App() {
   return (
@@ -51,15 +52,17 @@ export default function App() {
             </ProtectedRoutes>
           }
         >
+          <Route path="accounts/update-profile" element={<UpdateProfile />} />
+          <Route path="accounts/update-password" element={<UpdatePassword />} />
+        </Route>
+
+        <Route element={<AuthLayout />}>
           <Route path="accounts/reset-password" element={<ResetPassword />} />
           <Route path="accounts/forgot-password" element={<ForgotPassword />} />
-          <Route path="accounts/update-password" element={<UpdatePassword />} />
-          <Route path="accounts/update-profile" element={<UpdateProfile />} />
         </Route>
-        {/* <Route element={<AuthLayout />}> */}
         <Route path="accounts/emailsignup" element={<SignUp />} />
         <Route path="accounts/login" element={<Login />} />
-        {/* </Route> */}
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Toaster
         position="top-right"

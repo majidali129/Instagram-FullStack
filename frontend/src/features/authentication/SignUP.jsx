@@ -56,7 +56,7 @@ const SignUp = () => {
 
   return (
     <div className="flex items-center justify-center w-screen h-screen">
-      <Form className="!py-9 h-[94%] md:h-[90%]  " onSubmit={onSubmit}>
+      <Form className="!py-8 h-[94%] md:h-[98%]  " onSubmit={onSubmit}>
         <>
           <h3 className="flex items-center justify-center mb-4 text-2xl italic font-semibold gap-x-2.5 md:mb-5">
             <SiGnuprivacyguard className="w-6 h-6" /> Create Account

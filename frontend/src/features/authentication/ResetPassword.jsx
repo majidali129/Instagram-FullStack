@@ -35,7 +35,7 @@ const ResetPassword = () => {
 
   return (
     <section className="flex items-center justify-center h-full">
-      <Form className="py-12 text-center" onSubmit={onSubmit}>
+      <Form className="py-14" onSubmit={onSubmit}>
         <h3 className="md:mb-5">
           <MdLockReset className="w-7 h-7" />
           Reset Password

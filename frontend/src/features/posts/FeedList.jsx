@@ -9,7 +9,7 @@ const FeedsList = () => {
   if (loadingPosts) return <Loader />;
   return (
     <section className="h-auto py-1 space-y-4">
-      <div className="space-y-5 stories">
+      <div className="hidden space-y-5 stories">
         <div className="flex items-center justify-between">
           <h2>Stories</h2>
           <div className="flex items-center opacity-50 gap-x-2">

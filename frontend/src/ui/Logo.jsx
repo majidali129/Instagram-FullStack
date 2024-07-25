@@ -1,16 +1,14 @@
 import { Link } from "react-router-dom";
-import logo from "../../public/images/logo.png";
 import PropTypes from "prop-types";
+import { CgInstagram } from "react-icons/cg";
 
 const Logo = ({ className }) => {
   return (
     <Link to="/">
       <div className="flex items-center px-2 max-sm:justify-center gap-x-2">
-        <figure className="w-8 h-8 ">
-          <img src={logo} alt="Snapgram's logo" className="w-full h-full" />
-        </figure>
+        <CgInstagram className="md:-mt-6 w-7 h-7" />
         <h3
-          className={`hidden text-3xl italic font-extrabold tracking-wider logo-text sm:block ${className}`}
+          className={`hidden text-2xl italic !font-extrabold logo-text md:block ${className}`}
         >
           InstaVerse
         </h3>

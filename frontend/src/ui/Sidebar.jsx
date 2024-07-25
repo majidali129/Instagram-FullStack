@@ -22,7 +22,7 @@ const Sidebar = () => {
   return (
     <ModalProvider>
       <>
-        <aside className="hidden px-4 py-10 space-y-10 overflow-y-scroll row-span-full bg-zinc-900 sm:block">
+        <aside className="hidden px-4 py-10 space-y-5 overflow-y-scroll row-span-full bg-zinc-900 sm:block">
           <Logo />
           {/* Links */}
           <ul className="space-y-2 border-b border-b-zinc-700 py-3  md:*:text-[1.2rem]  link-list">

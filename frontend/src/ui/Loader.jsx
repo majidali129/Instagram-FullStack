@@ -1,16 +1,10 @@
-import {HashLoader} from 'react-spinners'
+import { FadeLoader } from "react-spinners";
 const Loader = () => {
   return (
-    <div className='h-full w-full flex items-center justify-center'>
-        <HashLoader
-  color="#15abc5"
-  loading
-  size={30}
-  speedMultiplier={1}
-
-/>
+    <div className="flex items-center justify-center w-screen h-screen">
+      <FadeLoader color="#15abc5" loading size={30} speedMultiplier={1} />
     </div>
-  )
-}
+  );
+};
 
-export default Loader
+export default Loader;
